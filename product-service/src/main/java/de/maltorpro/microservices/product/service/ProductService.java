@@ -36,6 +36,8 @@ public class ProductService {
     
     @RequestMapping("/message")
     String getMessage() {
+    	
+    	LOG.info("/product called, message: {}", message);
         return this.message;
     }
     

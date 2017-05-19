@@ -24,7 +24,6 @@
     </triggeringPolicy>
   </appender>
 
-  <logger name="de.maltorpro" level="INFO"/>
 
   <root level="INFO">
 <!--

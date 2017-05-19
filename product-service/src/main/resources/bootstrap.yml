@@ -14,8 +14,6 @@ spring:
         enabled: false
       uri: http://localhost:8888
 
-#eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
-
 ---
 # For deployment in Docker containers
 spring:
@@ -25,5 +23,3 @@ spring:
       discovery:
         enabled: false
       uri: http://config:8888
-
-#eureka.client.serviceUrl.defaultZone: http://discovery:8761/eureka/
