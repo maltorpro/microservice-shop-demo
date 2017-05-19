@@ -1,0 +1,13 @@
+jar {
+    baseName = 'product-service'
+    version = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+	
+	
+	compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
+	compile("org.springframework.cloud:spring-cloud-starter-config")
+	
+	compile project(':util')
+}
