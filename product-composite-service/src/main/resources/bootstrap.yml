@@ -1,6 +1,6 @@
 spring:
   application:
-    name: productcomposite
+    name: product-composite-service
   cloud:
     config:
       failFast: true

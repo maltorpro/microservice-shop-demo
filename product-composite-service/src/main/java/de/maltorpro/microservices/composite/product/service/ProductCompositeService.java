@@ -27,9 +27,7 @@ import javax.ws.rs.Produces;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-/**
- * Created by magnus on 04/03/15.
- */
+
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 @RestController
@@ -52,6 +50,8 @@ public class ProductCompositeService {
     @PreAuthorize("hasAuthority('ROLE_DEVELOPERS')")
     @RequestMapping("/{productId}")
     public ResponseEntity<ProductAggregated> getProduct(@PathVariable int productId,Principal currentUser) {
+    	
+    	LOG.info("/product called");
     	
         // 1. First get mandatory product information
         ResponseEntity<Product> productResult = integration.getProduct(productId);

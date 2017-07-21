@@ -1,6 +1,6 @@
 jar {
-    baseName = 'product-composite-service'
-    version = '0.0.1-SNAPSHOT'
+    baseName = "product-composite-service"
+    version = "0.0.1-SNAPSHOT"
 }
 
 
@@ -11,11 +11,15 @@ dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-oauth2")
     compile("org.springframework.cloud:spring-cloud-starter-security")
     
-	compile('org.springframework.cloud:spring-cloud-starter-hystrix')
-	compile('org.springframework.cloud:spring-cloud-netflix-hystrix-stream')
-	compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+    
+    compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+    compile ("org.springframework.cloud:spring-cloud-sleuth-stream")
+    
+	compile("org.springframework.cloud:spring-cloud-starter-hystrix")
+	compile("org.springframework.cloud:spring-cloud-netflix-hystrix-stream")
+	compile("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
 	
 
 	
-	compile project(':util')
+	compile project(":util")
 }

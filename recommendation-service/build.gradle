@@ -1,6 +1,6 @@
 jar {
-    baseName = 'recommendation-service'
-    version = '0.0.1-SNAPSHOT'
+    baseName = "recommendation-service"
+    version = "0.0.1-SNAPSHOT"
 }
 
 dependencies {
@@ -8,5 +8,9 @@ dependencies {
 	
 	compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
 	
-	compile project(':util')
+	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+ 	compile ("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
+    compile ("org.springframework.cloud:spring-cloud-sleuth-stream")
+	
+	compile project(":util")
 }

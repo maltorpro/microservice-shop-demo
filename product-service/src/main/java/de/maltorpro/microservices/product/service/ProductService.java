@@ -13,15 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import de.maltorpro.microservices.product.model.Product;
 import de.maltorpro.microservices.util.SetProcTimeBean;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-/**
- * Created by magnus on 04/03/15.
- */
-@Produces(APPLICATION_JSON)
-@Consumes(APPLICATION_JSON)
+
 @RestController
 @RefreshScope
 public class ProductService {

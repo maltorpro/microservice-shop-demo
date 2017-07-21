@@ -1,10 +1,10 @@
 jar {
-    baseName = 'util'
-    version = '0.0.1-SNAPSHOT'
+    baseName = "util"
+    version = "0.0.1-SNAPSHOT"
 }
 
 springBoot {
-	layout = 'NONE'
+	layout = "NONE"
 }
 
 dependencies {
