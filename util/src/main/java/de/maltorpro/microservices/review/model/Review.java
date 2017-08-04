@@ -1,8 +1,6 @@
 package de.maltorpro.microservices.review.model;
 
-/**
- * Created by magnus on 04/03/15.
- */
+
 public class Review {
     private int productId;
     private int reviewId;

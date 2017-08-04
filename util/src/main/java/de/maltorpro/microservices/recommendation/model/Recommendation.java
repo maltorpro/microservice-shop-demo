@@ -1,8 +1,6 @@
 package de.maltorpro.microservices.recommendation.model;
 
-/**
- * Created by magnus on 04/03/15.
- */
+
 public class Recommendation {
     private int productId;
     private int recommendationId;

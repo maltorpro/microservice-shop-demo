@@ -1,9 +1,9 @@
 package de.maltorpro.microservices.product.model;
+import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.core.Relation;
 
-/**
- * Created by magnus on 04/03/15.
- */
-public class Product {
+//@Relation()
+public class Product extends ResourceSupport  {
     private int productId;
     private String name;
     private int weight;
@@ -11,7 +11,7 @@ public class Product {
     public Product() {
 
     }
-
+    
     public Product(int productId, String name, int weight) {
         this.productId = productId;
         this.name = name;

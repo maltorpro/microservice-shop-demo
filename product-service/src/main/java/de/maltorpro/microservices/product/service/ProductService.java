@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.hateoas.Link;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +16,9 @@ import de.maltorpro.microservices.product.model.Product;
 import de.maltorpro.microservices.util.SetProcTimeBean;
 
 import static net.logstash.logback.marker.Markers.*;
+
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 
 
@@ -47,7 +52,7 @@ public class ProductService {
      * @param productId
      * @return
      */
-    @RequestMapping("/product/{productId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/product/{productId}")
     public Product getProduct(@PathVariable int productId) {
 
         int pt = setProcTimeBean.calculateProcessingTime();
@@ -58,10 +63,13 @@ public class ProductService {
         LOG.debug("/product return the found product");
         
         Product product = new Product(productId, "name", 123);
+        product.add(linkTo(methodOn(ProductService.class).getProduct(2)).withRel("weiter"));
+
+        
         
         LOG.info(append("dataobject", product), "Die daten meines tollen produktes");
         
-        return new Product(productId, "name", 123);
+        return product;
     }
 
     private void sleep(int pt) {

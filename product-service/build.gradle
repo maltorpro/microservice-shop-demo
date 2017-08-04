@@ -10,7 +10,12 @@ dependencies {
 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
  	compile ("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
     compile ("org.springframework.cloud:spring-cloud-sleuth-stream")
-
+	
+	compile("org.springframework.boot:spring-boot-starter-hateoas")
+	
+	compile("io.springfox:springfox-swagger2:2.7.0")
+	compile("io.springfox:springfox-swagger-ui:2.7.0")
+	
 	
 	compile project(":util")
 }
