@@ -38,7 +38,7 @@
 	</appender>
 	​
 	<!-- Appender to log to file in a JSON format -->
-	<appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="logstash-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_FILE}.json</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_FILE}.json.%d{yyyy-MM-dd}.gz</fileNamePattern>
@@ -46,9 +46,6 @@
 		</rollingPolicy>
 		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 			<providers>
-				<timestamp>
-					<timeZone>UTC</timeZone>
-				</timestamp>
 				<pattern>
 					<pattern>
 						{
@@ -68,11 +65,36 @@
 			</providers>
 		</encoder>
 	</appender>
+	
+	<appender name="logstash-tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+	<destination>127.0.0.1:5000</destination>
+	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+		<providers>
+				<mdc />
+				<context />
+				<logLevel />
+				<loggerName />
+				<pattern>
+					<pattern>
+		          		{
+		         			 "service": "${springAppName:-}"
+		          		}
+		       		 </pattern>
+				</pattern>
+				<threadName />
+				<message />
+				<logstashMarkers />
+				<stackTrace />
+		</providers>
+			
+		</encoder>
+	</appender>
+	
 	​
 	<root level="INFO">
 		<appender-ref ref="console"/>
-		<!-- uncomment this to have also JSON logs -->
-		<appender-ref ref="logstash"/>
+		<appender-ref ref="logstash-file"/>
+		<appender-ref ref="logstash-tcp"/>
 		<appender-ref ref="flatfile"/>
 	</root>
 </included>

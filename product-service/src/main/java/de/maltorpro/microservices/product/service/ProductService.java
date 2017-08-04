@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import de.maltorpro.microservices.product.model.Product;
 import de.maltorpro.microservices.util.SetProcTimeBean;
 
+import static net.logstash.logback.marker.Markers.*;
+
+
 
 
 @RestController
@@ -31,6 +34,9 @@ public class ProductService {
     String getMessage() {
     	
     	LOG.info("/product called, message: {}", message);
+    	
+    	
+    	
         return this.message;
     }
     
@@ -50,6 +56,11 @@ public class ProductService {
         sleep(pt);
 
         LOG.debug("/product return the found product");
+        
+        Product product = new Product(productId, "name", 123);
+        
+        LOG.info(append("dataobject", product), "Die daten meines tollen produktes");
+        
         return new Product(productId, "name", 123);
     }
 
