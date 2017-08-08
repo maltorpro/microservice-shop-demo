@@ -1,4 +1,4 @@
-package de.maltorpro.microservices.review.model;
+package de.maltorpro.microservices.model;
 
 
 public class Review {

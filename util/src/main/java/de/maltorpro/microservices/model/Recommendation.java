@@ -1,4 +1,4 @@
-package de.maltorpro.microservices.recommendation.model;
+package de.maltorpro.microservices.model;
 
 
 public class Recommendation {

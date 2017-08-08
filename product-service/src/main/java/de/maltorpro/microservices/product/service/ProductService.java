@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.maltorpro.microservices.product.model.Product;
+import de.maltorpro.microservices.model.Product;
 import de.maltorpro.microservices.util.SetProcTimeBean;
 
 import static net.logstash.logback.marker.Markers.*;

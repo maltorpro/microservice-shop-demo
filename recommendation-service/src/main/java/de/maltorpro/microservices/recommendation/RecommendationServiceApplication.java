@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan({"de.maltorpro.microservices.util", "de.maltorpro.microservices.recommendation"})
+@ComponentScan({"de.maltorpro.microservices.util", "de.maltorpro.microservices.model"})
 public class RecommendationServiceApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(RecommendationServiceApplication.class);

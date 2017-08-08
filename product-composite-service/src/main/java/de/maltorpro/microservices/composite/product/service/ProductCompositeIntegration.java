@@ -14,9 +14,9 @@ import org.springframework.web.client.RestOperations;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-import de.maltorpro.microservices.product.model.Product;
-import de.maltorpro.microservices.recommendation.model.Recommendation;
-import de.maltorpro.microservices.review.model.Review;
+import de.maltorpro.microservices.model.Product;
+import de.maltorpro.microservices.model.Recommendation;
+import de.maltorpro.microservices.model.Review;
 import de.maltorpro.microservices.util.ServiceUtils;
 
 /**

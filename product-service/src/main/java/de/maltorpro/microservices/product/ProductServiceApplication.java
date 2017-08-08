@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableDiscoveryClient
-@ComponentScan({ "de.maltorpro.microservices.util", "de.maltorpro.microservices.product" })
+@ComponentScan({ "de.maltorpro.microservices.util", "de.maltorpro.microservices.model" })
 public class ProductServiceApplication {
 
 	@Bean

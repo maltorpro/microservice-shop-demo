@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.maltorpro.microservices.composite.product.model.ProductAggregated;
-import de.maltorpro.microservices.product.model.Product;
-import de.maltorpro.microservices.recommendation.model.Recommendation;
-import de.maltorpro.microservices.review.model.Review;
+import de.maltorpro.microservices.model.Product;
+import de.maltorpro.microservices.model.Recommendation;
+import de.maltorpro.microservices.model.Review;
 import de.maltorpro.microservices.util.ServiceUtils;
 
 import java.security.Principal;

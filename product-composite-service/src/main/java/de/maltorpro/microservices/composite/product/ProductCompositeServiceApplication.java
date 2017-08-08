@@ -22,9 +22,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan({"de.maltorpro.microservices.composite.product",
 				"de.maltorpro.microservices.util",
-				"de.maltorpro.microservices.product",
-				"de.maltorpro.microservices.recommendation",
-				"de.maltorpro.microservices.review"
+				"de.maltorpro.microservices.model"
 				})
 public class ProductCompositeServiceApplication {
 

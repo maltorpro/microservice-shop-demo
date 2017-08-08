@@ -1,4 +1,4 @@
-package de.maltorpro.microservices.product.model;
+package de.maltorpro.microservices.model;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 

@@ -3,9 +3,9 @@ package de.maltorpro.microservices.composite.product.model;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.maltorpro.microservices.product.model.Product;
-import de.maltorpro.microservices.recommendation.model.Recommendation;
-import de.maltorpro.microservices.review.model.Review;
+import de.maltorpro.microservices.model.Product;
+import de.maltorpro.microservices.model.Recommendation;
+import de.maltorpro.microservices.model.Review;
 
 /**
  * Created by magnus on 04/03/15.
