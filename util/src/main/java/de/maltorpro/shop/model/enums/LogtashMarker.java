@@ -2,5 +2,9 @@ package de.maltorpro.shop.model.enums;
 
 public enum LogtashMarker {
 	EVENT,
-	PROCESSING_TIME
+	API_NAME,
+	SPAN_ID,
+	TRACE_ID,
+	RESPONSE_OBJECT,
+	EXECUTION_TIME
 }

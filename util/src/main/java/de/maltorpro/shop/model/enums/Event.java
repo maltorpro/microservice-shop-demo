@@ -1,5 +1,6 @@
 package de.maltorpro.shop.model.enums;
 
-public class Event {
-
+public enum Event {
+	
+	SERVICE_CALL
 }

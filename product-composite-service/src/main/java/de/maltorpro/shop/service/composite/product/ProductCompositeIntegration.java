@@ -78,7 +78,7 @@ public class ProductCompositeIntegration {
 	        try {
 	            LOG.debug("Will call getRecommendations with Hystrix protection");
 	            
-	            String url = "http://recommendation-service/recommendation?productId=" + productId;
+	            String url = "http://recommendation-service/recommendation/" + productId;
 	            
 	            LOG.debug("GetRecommendations from URL: {}", url);
 
@@ -119,7 +119,7 @@ public class ProductCompositeIntegration {
 	    public ResponseEntity<Review[]> getReviews(int productId) {
 	        LOG.debug("Will call getReviews with Hystrix protection");
 	        
-	        String url = "http://review-service/review?productId=" + productId;
+	        String url = "http://review-service/review/" + productId;
 	       
 	        LOG.debug("GetReviews from URL: {}", url);
 	        

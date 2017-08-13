@@ -20,26 +20,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
-@EnableSwagger2
 @EnableAspectJAutoProxy
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan({
-	"de.maltorpro.microservices.composite.product",
+	"de.maltorpro.shop.service.composite.product",
 	"de.maltorpro.shop.config",
-	"de.maltorpro.microservices.util",
-	"de.maltorpro.microservices.model"
+	"de.maltorpro.shop.util",
+	"de.maltorpro.shop.model"
 	})
 public class ProductCompositeServiceApplication {
 
-
-    @Bean
-	public Docket productCompositeApi() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-				.paths(regex("/.*")).build();
-	}
 
     @Bean
     @LoadBalanced
