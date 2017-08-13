@@ -12,6 +12,8 @@
 	<property name="CONSOLE_LOG_PATTERN"
 			  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
+	<springProperty scope="context" name="logstashHost" source="logstash.host" defaultValue="localhost:5000"/>
+
 	<!-- Appender to log to console -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -67,7 +69,7 @@
 	</appender>
 	
 	<appender name="logstash-tcp" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-	<destination>127.0.0.1:5000</destination>
+	<destination>${logstashHost}</destination>
 	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
 		<providers>
 				<mdc />
