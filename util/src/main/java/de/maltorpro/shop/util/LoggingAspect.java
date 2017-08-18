@@ -45,27 +45,35 @@ public class LoggingAspect {
 		Span currentSpan = tracer.getCurrentSpan();
 		
 		if (requestAttributes != null && currentSpan != null) {
+
+			Object result = joinPoint.proceed();
 			
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
 			String traceId = Long.toHexString(currentSpan.getTraceId());
 			String spanId = Long.toHexString(currentSpan.getSpanId());
 			
-			LOG.info(append(LogtashMarker.EVENT.name(), Event.SERVICE_CALL.name()),
-					"----->>>>>\nHOST: {} HttpMethod: {}\nURI: {}\nAPI: {}\nArguments: {}\n----->>>>>",
-					request.getHeader("host"), request.getMethod(), request.getRequestURI(), apiName,
-					Arrays.toString(joinPoint.getArgs()));
-		
-
-			Object result = joinPoint.proceed();
-			
-			LOG.info(append(LogtashMarker.RESPONSE_OBJECT.name(),result.toString()), "Response object: {}", result);
-			
 			long elapsedTime = System.currentTimeMillis() - start;
-			LOG.info(append(LogtashMarker.EXECUTION_TIME.name(),elapsedTime), "Execution time: {}", elapsedTime);
-			LOG.info(append(LogtashMarker.TRACE_ID.name(),traceId), "Trace id: {}", traceId);
-			LOG.info(append(LogtashMarker.SPAN_ID.name(),spanId), "Span id: {}", spanId);
-			LOG.info(append(LogtashMarker.API_NAME.name(),apiName), "Api name: {}", apiName);
+			
+			LOG.info(append(LogtashMarker.EVENT.name(), Event.SERVICE_CALL.name())
+					.and(append(LogtashMarker.EXECUTION_TIME.name(),elapsedTime))
+					.and(append(LogtashMarker.API_NAME.name(),apiName))
+					.and(append(LogtashMarker.TRACE_ID.name(),traceId))
+					.and(append(LogtashMarker.SPAN_ID.name(),spanId))
+					.and(append(LogtashMarker.RESPONSE_OBJECT.name(),result.toString())),
+					"----->>>>>\n"
+					+ "HOST: {} HttpMethod: {}\n"
+					+ "URI: {}\nAPI: {}\n"
+					+ "Arguments: {}\n"
+					+ "Response object: {}\n"
+					+ "Execution time: {}\n"
+					+ "----->>>>>",
+					request.getHeader("host"),
+					request.getMethod(),
+					request.getRequestURI(),
+					apiName,
+					Arrays.toString(joinPoint.getArgs()),
+					elapsedTime);
 			
 			return result;
 		} else {
