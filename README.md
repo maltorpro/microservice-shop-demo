@@ -7,6 +7,7 @@ This is a sample microservice shop application implemented with spring. It shoul
 *  [Deployment](#deployment)
 
 
+
 ## Preconditions
 Before starting please install the following software.
 
