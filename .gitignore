@@ -1,0 +1,59 @@
+### OS specific git ignore ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### build specific git ignore ###
+*target*
+*.jar
+*.war
+*.ear
+*.class
+*/logs/*
+
+### Gradle ###
+.gradle
+/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+# End of https://www.gitignore.io/api/java,gradle
+
+
+### Eclipse specific git ignore ###
+*.pydevproject
+.project
+.metadata
+bin/**
+*/bin/**
+*/build/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+### External tool builders ###
+.externalToolBuilders/
+
+### Locally stored "Eclipse launch configurations" ###
+*.launch
