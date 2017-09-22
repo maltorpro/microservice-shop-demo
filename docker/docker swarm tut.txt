@@ -1,0 +1,84 @@
+
+
+docker-machine create --driver virtualbox  --virtualbox-memory "1024" manager1
+docker-machine create --driver virtualbox  --virtualbox-memory "6144" infrastructure1
+docker-machine create --driver virtualbox  --virtualbox-memory "2048" services1
+docker-machine create --driver virtualbox  --virtualbox-memory "4096" monitoring1
+
+#Bash from docker container
+docker exec -it "ec6299d1fd92" /bin/sh
+
+#create swarm
+docker swarm leave -f
+docker-machine ls
+
+
+docker-machine ssh manager1
+docker swarm init --advertise-addr 192.168.178.65
+
+ docker swarm join --token SWMTKN-1-1pmfqr6j25i61y8oxl4miaf7vjkzikx5u3ocyl1ryt676971hl-52f606fltwh91x93uhaosm6m9 192.168.178.65:2377
+
+ 
+#rebuild certs
+docker-machine regenerate-certs manager1 infrastructure1 services1
+ 
+##Docker swarm stack ##### 
+ 
+#copy file to docker-machine
+docker-machine scp docker-swarm.yml manager1:~ 
+
+docker stack deploy -c docker-swarm.yml shopdemo
+visualizer
+confi
+
+####virtualbox
+show vms
+vboxmanage list vms
+
+#increate memory
+VBoxManage modifyvm infrastructure1 --memory 4096
+
+#start stop vm
+VBoxManage startvm "manager1" --type headless
+VBoxManage controlvm "manager1" savestate
+
+VBoxManage modifyvm testvm --nic1 bridged --bridgeadapter1 eth0
+
+docker-machine regenerate-certs
+
+
+VBoxManage modifyvm testvm --nic2 bridged --bridgeadapter2 eth0
+
+  [--nic<1-N> none|null|nat|bridged|intnet|hostonly|
+                                        generic|natnetwork]
+   [--nictype<1-N> Am79C970A|Am79C973|
+                                            82540EM|82543GC|82545EM|
+                                            virtio]
+
+
+											
+											
+AMD PCNet PCI II (Am79C970A);
+
+AMD PCNet FAST III (Am79C973, the default);
+
+Intel PRO/1000 MT Desktop (82540EM);
+
+Intel PRO/1000 T Server (82543GC);
+
+Intel PRO/1000 MT Server (82545EM);
+
+Paravirtualized network adapter (virtio-net										
+											
+											
+											
+ VBoxManage controlvm "testvm" poweroff
+
+
+docker swarm leave
+
+docker node ls
+docker node rm
+
+
+
