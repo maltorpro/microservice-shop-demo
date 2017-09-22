@@ -38,7 +38,8 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
         
-      # run tests!
+        
+      # run gradle buil
       - run: gradle build
       
       # store build jar files
