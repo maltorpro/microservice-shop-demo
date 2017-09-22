@@ -1,0 +1,50 @@
+version: "3"
+services:
+
+  product-composite-service:
+    image: maltor/product-composite-service
+    deploy:
+      placement:
+        constraints: [node.hostname == services1] 
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      - shopnet
+  
+  product-service:
+    image: maltor/product-service
+    deploy:
+      placement:
+        constraints: [node.hostname == services1] 
+      resources:
+        limits:
+          memory: 128M
+    networks:
+    - shopnet   
+   
+  recommendation-service:
+    image: maltor/recommendation-service
+    deploy:
+      placement:
+        constraints: [node.hostname == services1] 
+      resources:
+        limits:
+          memory: 128M
+    networks:
+     - shopnet
+
+  review-service:
+    image: maltor/review-service
+    deploy:
+      placement:
+        constraints: [node.hostname == services1] 
+      resources:
+        limits:
+          memory: 128M
+    networks:
+     - shopnet
+      
+      
+networks:
+  shopnet:
