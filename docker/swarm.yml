@@ -42,7 +42,6 @@ services:
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]
-    restart: always
     ports:
      - "15672:15672"
     networks:
@@ -126,7 +125,7 @@ services:
         constraints: [node.hostname == services1] 
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     networks:
       - shopnet
   
@@ -137,7 +136,7 @@ services:
         constraints: [node.hostname == services1] 
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     networks:
     - shopnet   
    
@@ -148,7 +147,7 @@ services:
         constraints: [node.hostname == services1] 
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     networks:
      - shopnet
 
@@ -159,7 +158,7 @@ services:
         constraints: [node.hostname == services1] 
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     networks:
      - shopnet
      
@@ -224,7 +223,7 @@ services:
         constraints: [node.hostname == monitoring1]    
       resources:
         limits:
-         memory: 256M
+         memory: 128M
     ports:
      - "9411:9411" 
     networks:
