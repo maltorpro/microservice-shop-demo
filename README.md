@@ -72,9 +72,9 @@ The docker images are pushed to my docker hub repository. <br />
 [docker repository](https://hub.docker.com/u/maltor/)
 
 You can use this images for creation a docker swarm.
-For more information, please see the following notes:
-[docker swarm notes](https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt)
-[access URLs](https://github.com/maltorpro/microservice-shop-demo/blob/shop/notes)
+For more information, please see the following notes:<br />
+[docker swarm notes](https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt)<br />
+[access URLs](https://github.com/maltorpro/microservice-shop-demo/blob/shop/notes)<br />
 [apache2 config](https://github.com/maltorpro/microservice-shop-demo/blob/shop/000-default.conf)
 
 Of course, you can also build your own docker images. Therefore, the required docker file is available in each project.
