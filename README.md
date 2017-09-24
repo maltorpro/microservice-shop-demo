@@ -7,7 +7,7 @@ It should be serve as framework for further implementations.
 *  [Preconditions](#preconditions)
 *  [Deployment](#deployment)
 *  [Run the Application](#run-the-application)
-
+*  [Run the Application in Docker-Swarm](#run-the-application-in-docker-swarm)
 
 
 ## Preconditions
@@ -65,7 +65,7 @@ Open the "Boot Dashboard" view and start the applications the the following orde
 4. product-composite-service
 
 <b>Monitoring</b><br />
-see 
+Run in docker swarm 
 
 ## Run the Application in Docker-Swarm
 The docker images are pushed to my docker hub repository. <br />
@@ -74,5 +74,10 @@ The docker images are pushed to my docker hub repository. <br />
 You can use this images for creation a docker swarm.
 For more information, please see the following notes:
 [docker swarm notes](https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt)
+[access URLs](https://github.com/maltorpro/microservice-shop-demo/blob/shop/notes)
+[apache2 config](https://github.com/maltorpro/microservice-shop-demo/blob/shop/000-default.conf)
 
 Of course, you can also build your own docker images. Therefore, the required docker file is available in each project.
+Since further docker images are required for the monitoring, docker swarm is preferred for execution.
+
+
