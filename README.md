@@ -47,10 +47,10 @@ $ ./gradlew build
 
 <b>Setup the Eclipse workspace.</b><br />
 Import the projects using the import "Existing Gradle Project" provided by the Eclipse-Buildship plugin.
-You can then build the projects by clicking on "Refresh Gradle Project" in the context menu of the project. 
+You can build the projects by clicking on "Refresh Gradle Project" in the context menu of the project. 
 
 ## Run the Application in Eclipse
-Open the "Boot Dashboard" view and start the applications the the following order:<br />
+Open the "Boot Dashboard" view and start the applications in the the following order:<br />
 <b>Infrastructure</b>
 1. config-server
 2. discover-server
@@ -65,7 +65,7 @@ Open the "Boot Dashboard" view and start the applications the the following orde
 4. product-composite-service
 
 <b>Monitoring</b><br />
-Run in docker swarm 
+Since further docker images are required for the monitoring, docker swarm is preferred for execution.
 
 ## Run the Application in Docker-Swarm
 The docker images are pushed to my docker hub repository. <br />
@@ -77,7 +77,5 @@ For more information, please see the following notes:<br />
 [access URLs](https://github.com/maltorpro/microservice-shop-demo/blob/shop/notes)<br />
 [apache2 config](https://github.com/maltorpro/microservice-shop-demo/blob/shop/000-default.conf)
 
-Of course, you can also build your own docker images. Therefore, the required docker file is available in each project.
-Since further docker images are required for the monitoring, docker swarm is preferred for execution.
-
+Of course, you can also build your own docker images. Therefore, the required docker files are available in each project.
 
