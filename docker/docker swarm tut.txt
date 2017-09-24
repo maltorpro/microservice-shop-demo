@@ -1,12 +1,12 @@
 
-
+#create vms
 docker-machine create --driver virtualbox  --virtualbox-memory "1024" manager1
 docker-machine create --driver virtualbox  --virtualbox-memory "6144" infrastructure1
 docker-machine create --driver virtualbox  --virtualbox-memory "2048" services1
 docker-machine create --driver virtualbox  --virtualbox-memory "4096" monitoring1
 
 #Bash from docker container
-docker exec -it "ec6299d1fd92" /bin/sh
+docker exec -it "9be2bdeba6ec" /bin/sh
 
 #create swarm
 docker swarm leave -f
@@ -25,11 +25,11 @@ docker-machine regenerate-certs manager1 infrastructure1 services1
 ##Docker swarm stack ##### 
  
 #copy file to docker-machine
-docker-machine scp docker-swarm.yml manager1:~ 
+docker-machine scp swarm.yml manager1:~ 
 
-docker stack deploy -c docker-swarm.yml shopdemo
-visualizer
-confi
+#deploy docker container
+docker stack deploy -c swarm.yml shopdemo
+
 
 ####virtualbox
 show vms
@@ -72,7 +72,7 @@ Paravirtualized network adapter (virtio-net
 											
 											
 											
- VBoxManage controlvm "testvm" poweroff
+VBoxManage controlvm "testvm" poweroff
 
 
 docker swarm leave
