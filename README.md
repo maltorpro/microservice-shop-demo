@@ -1,10 +1,12 @@
 # Microservice Shop Demo
-This is a sample microservice shop application implemented with spring. It should be serve as a base frame for further implementations.
+This is a sample microservice shop application implemented with spring boot.
+It should be serve as framework for further implementations.
 
 ## Table of contents
 
 *  [Preconditions](#preconditions)
 *  [Deployment](#deployment)
+*  [Run the Application](#run-the-application)
 
 
 
@@ -12,22 +14,65 @@ This is a sample microservice shop application implemented with spring. It shoul
 Before starting please install the following software.
 
  * Jave JDK 1.8
- * Git 
+ * [Git](https://git-scm.com/downloads)
  * [Gradle](https://gradle.org/install/)
  * [Docker](https://www.docker.com/community-edition#/download)
- * Eclipse
- 	* dd
+ * Eclipse with the following plugins
+ 	* Spring IDE
+ 	* Eclipse Buildship
  
 
 ## Deployment
-In order to build the application gradle is required. After the gradle installation you can execute the following command in the console. 
+<b>Clone the the required git repositories.</b><br />
 
 ```bash
-$ cd microservice-shop-demo
-$ gradle build
+$ git clone https://github.com/maltorpro/microservice-infrastructure.git
+$ git clone https://github.com/maltorpro/microservice-monitoring.git
+$ git clone https://github.com/maltorpro/config-shop-demo.git
+$ git clone https://github.com/maltorpro/microservice-shop-demo.git
 ```
-dsdsf
 
-## Application Components
+<b>Build the projects using gradle over the console.</b>
 
-### Eureka Server 
+```bash
+$ cd microservice-infrastructure
+$ ./gradlew build
+
+$ cd microservice-monitoring
+$ ./gradlew build
+
+$ cd /microservice-shop-demo
+$ ./gradlew build
+```
+
+<b>Setup the Eclipse workspace.</b><br />
+Import the projects using the import "Existing Gradle Project" provided by the Eclipse-Buildship plugin.
+You can then build the projects by clicking on "Refresh Gradle Project" in the context menu of the project. 
+
+## Run the Application in Eclipse
+Open the "Boot Dashboard" view and start the applications the the following order:<br />
+<b>Infrastructure</b>
+1. config-server
+2. discover-server
+3. edge-server
+4. auth-server
+5. resource-server
+
+<b>Services</b><br />
+1. product-service
+2. recommendation-service
+3. review-service
+4. product-composite-service
+
+<b>Monitoring</b><br />
+see 
+
+## Run the Application in Docker-Swarm
+The docker images are pushed to my docker hub repository. <br />
+[docker repository](https://hub.docker.com/u/maltor/)
+
+You can use this images for creation a docker swarm.
+For more information, please see the following notes:
+[docker swarm notes](https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt)
+
+Of course, you can also build your own docker images. Therefore, the required docker file is available in each project.
