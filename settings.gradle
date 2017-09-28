@@ -2,4 +2,5 @@ include 	"util",
  		"product-composite-service",
   		"product-service",
    		"recommendation-service",
-   		"review-service"
+   		"review-service",
+   		"shop-gui"

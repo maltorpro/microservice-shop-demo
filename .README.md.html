@@ -646,6 +646,7 @@ function setDocumentScrollTop(ypos)
  <li><a href="#preconditions">Preconditions</a></li> 
  <li><a href="#deployment">Deployment</a></li> 
  <li><a href="#run-the-application">Run the Application</a></li> 
+ <li><a href="#run-the-application-in-docker-swarm">Run the Application in Docker-Swarm</a></li> 
 </ul> 
 <h2> <a id="preconditions" class="anchor" href="#preconditions" aria-hidden="true"><span>{:&quot;aria-hidden&quot;=&gt;&quot;true&quot;, :class=&gt;&quot;octicon octicon-link&quot;}</span></a>Preconditions</h2> 
 <p>Before starting please install the following software.</p> 
@@ -679,9 +680,9 @@ $ ./gradlew build
 $ <span class="pl-c1">cd</span> /microservice-shop-demo
 $ ./gradlew build</pre>
 </div> 
-<p><b>Setup the Eclipse workspace.</b><br /> Import the projects using the import &quot;Existing Gradle Project&quot; provided by the Eclipse-Buildship plugin. You can then build the projects by clicking on &quot;Refresh Gradle Project&quot; in the context menu of the project.</p> 
+<p><b>Setup the Eclipse workspace.</b><br /> Import the projects using the import &quot;Existing Gradle Project&quot; provided by the Eclipse-Buildship plugin. You can build the projects by clicking on &quot;Refresh Gradle Project&quot; in the context menu of the project.</p> 
 <h2> <a id="run-the-application-in-eclipse" class="anchor" href="#run-the-application-in-eclipse" aria-hidden="true"><span>{:&quot;aria-hidden&quot;=&gt;&quot;true&quot;, :class=&gt;&quot;octicon octicon-link&quot;}</span></a>Run the Application in Eclipse</h2> 
-<p>Open the &quot;Boot Dashboard&quot; view and start the applications the the following order:<br /> <b>Infrastructure</b></p> 
+<p>Open the &quot;Boot Dashboard&quot; view and start the applications in the the following order:<br /> <b>Infrastructure</b></p> 
 <ol> 
  <li>config-server</li> 
  <li>discover-server</li> 
@@ -696,10 +697,10 @@ $ ./gradlew build</pre>
  <li>review-service</li> 
  <li>product-composite-service</li> 
 </ol> 
-<p><b>Monitoring</b><br /> see</p> 
+<p><b>Monitoring</b><br /> Since further docker images are required for the monitoring, docker swarm is preferred for execution.</p> 
 <h2> <a id="run-the-application-in-docker-swarm" class="anchor" href="#run-the-application-in-docker-swarm" aria-hidden="true"><span>{:&quot;aria-hidden&quot;=&gt;&quot;true&quot;, :class=&gt;&quot;octicon octicon-link&quot;}</span></a>Run the Application in Docker-Swarm</h2> 
 <p>The docker images are pushed to my docker hub repository. <br /> <a href="https://hub.docker.com/u/maltor/">docker repository</a></p> 
-<p>You can use this images for creation a docker swarm. For more information, please see the following notes: <a href="https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt">docker swarm notes</a></p> 
-<p>Of course, you can also build your own docker images. Therefore, the required docker file is available in each project.</p>
+<p>You can use this images for creation a docker swarm. For more information, please see the following notes:<br /> <a href="https://github.com/maltorpro/microservice-shop-demo/blob/shop/docker/docker%20swarm%20tut.txt">docker swarm notes</a><br /> <a href="https://github.com/maltorpro/microservice-shop-demo/blob/shop/notes">access URLs</a><br /> <a href="https://github.com/maltorpro/microservice-shop-demo/blob/shop/000-default.conf">apache2 config</a></p> 
+<p>Of course, you can also build your own docker images. Therefore, the required docker files are available in each project.</p>
 </body>
 </html>

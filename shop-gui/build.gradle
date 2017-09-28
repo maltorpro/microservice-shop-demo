@@ -1,0 +1,9 @@
+jar {
+    baseName = "shop-gui"
+    version = "0.0.1-SNAPSHOT"
+}
+
+dependencies {	
+	
+	compile project(":util")
+}
