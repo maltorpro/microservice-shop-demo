@@ -168,13 +168,13 @@ services:
   #######################################
   
   elasticsearch:
-    image: elasticsearch:5.4.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.2
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
     deploy:
       placement:
-        constraints: [node.hostname == monitoring1]
-      #resources:
-        #limits:
-          #memory: 256M
+        constraints: [node.hostname == monitoring1]  
     ports:
      - 9200:9200
      - 9300:9300
@@ -182,24 +182,19 @@ services:
       - shopnet
   
   kibana:
-    image: kibana:5.4.2
+    image: docker.elastic.co/kibana/kibana:5.6.2
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]
-      resources:
-        limits:
-          memory: 256M
     ports:
      - 5601:5601
     environment:
      - ELASTICSEARCH_URL=http://elasticsearch:9200
-    depends_on:
-     - elasticsearch
     networks:
       - shopnet
   
   logstash:
-    image: logstash:5.4.2
+    image: docker.elastic.co/logstash/logstash:5.6.2
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]
