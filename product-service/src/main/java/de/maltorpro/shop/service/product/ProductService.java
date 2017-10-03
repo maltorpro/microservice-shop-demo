@@ -16,8 +16,6 @@ import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.enums.LogtashMarker;
 
 
-
-
 @RestController
 @RefreshScope
 public class ProductService {
@@ -45,14 +43,11 @@ public class ProductService {
     @RequestMapping(method = RequestMethod.GET, value = "/product/{productId}")
     public Product getProduct(@PathVariable int productId) {
 
-    	LOG.info(append(LogtashMarker.EVENT.name(), "dd"), "Call product service");
-    	
+    	LOG.info(append(LogtashMarker.EVENT.name(), "dd"), "Call product service");  	
         
         Product product = new Product(productId, "name", 123);
         product.add(linkTo(methodOn(ProductService.class).getProduct(2)).withRel("weiter"));
 
-        
-        
         LOG.info(append("dataobject", product), "Die daten meines tollen produktes");
         
         return product;

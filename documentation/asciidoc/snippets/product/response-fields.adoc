@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`productId`
+|`Number`
+|The unique identifier of the product
+
+|`weight`
+|`Number`
+|bla
+
+|`name`
+|`String`
+|Name of the Product
+
+|`_links.weiter.href`
+|`String`
+|bla
+
+|===

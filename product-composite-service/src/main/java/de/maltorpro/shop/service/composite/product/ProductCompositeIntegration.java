@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
-
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import de.maltorpro.shop.model.Product;

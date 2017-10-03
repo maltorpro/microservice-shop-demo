@@ -12,11 +12,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @ComponentScan({
 	"de.maltorpro.shop.service.product",
 	"de.maltorpro.shop.util",
-	"de.maltorpro.shop.config",
 	"de.maltorpro.shop.model" })
 public class ProductServiceApplication {
-
-	
 
 	public static void main(String[] args) {
 

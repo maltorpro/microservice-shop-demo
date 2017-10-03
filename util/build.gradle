@@ -10,12 +10,9 @@ springBoot {
 dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-hystrix")
 
-    // TODO: Should be changed to provided to minimize class load conflicts over time???
     compile("org.springframework.security:spring-security-core")
     compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
     
-    compile("io.springfox:springfox-swagger2:2.7.0")
-	compile("io.springfox:springfox-swagger-ui:2.7.0")
-    
 	compile("org.springframework.boot:spring-boot-starter-hateoas")
+	
 }

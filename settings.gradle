@@ -1,6 +1,6 @@
 include 	"util",
- 		"product-composite-service",
-  		"product-service",
-   		"recommendation-service",
-   		"review-service",
-   		"shop-gui"
+ 			"product-composite-service",
+  			"product-service",
+   			"recommendation-service",
+   			"review-service",
+   			"shop-gui"

@@ -12,7 +12,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @ComponentScan({
 	"de.maltorpro.shop.service.review",
-	"de.maltorpro.shop.config",
 	"de.maltorpro.shop.util",
 	"de.maltorpro.shop.model"})
 public class ReviewServiceApplication {

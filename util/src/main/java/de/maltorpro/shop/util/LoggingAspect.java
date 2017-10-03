@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Tracer;
+import org.springframework.context.annotation.Scope;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
@@ -30,8 +31,7 @@ public class LoggingAspect {
 
 	static Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 	
-	@Autowired
-	private Tracer tracer;
+
 	
 	@Around("execution(* de.maltorpro.shop.service..*(..))")
 	public Object profileExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -42,24 +42,21 @@ public class LoggingAspect {
 		String apiName = className + "." + methodName;
 
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-		Span currentSpan = tracer.getCurrentSpan();
 		
-		if (requestAttributes != null && currentSpan != null) {
+		
+		if (requestAttributes != null ) {
 
 			Object result = joinPoint.proceed();
 			
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
-			String traceId = Long.toHexString(currentSpan.getTraceId());
-			String spanId = Long.toHexString(currentSpan.getSpanId());
+	
 			
 			long elapsedTime = System.currentTimeMillis() - start;
 			
 			LOG.info(append(LogtashMarker.EVENT.name(), Event.SERVICE_CALL.name())
 					.and(append(LogtashMarker.EXECUTION_TIME.name(),elapsedTime))
 					.and(append(LogtashMarker.API_NAME.name(),apiName))
-					.and(append(LogtashMarker.TRACE_ID.name(),traceId))
-					.and(append(LogtashMarker.SPAN_ID.name(),spanId))
 					.and(append(LogtashMarker.RESPONSE_OBJECT.name(),result.toString())),
 					"----->>>>>\n"
 					+ "HOST: {} HttpMethod: {}\n"
