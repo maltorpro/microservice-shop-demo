@@ -57,7 +57,7 @@ jobs:
              docker-compose -f test-environment.yml up -d
       
       # run gradle buil
-      - run: gradle build
+      - run: gradle build --debug
       
        
       # store build jar files
