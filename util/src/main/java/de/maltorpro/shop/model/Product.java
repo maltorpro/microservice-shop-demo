@@ -1,44 +1,93 @@
 package de.maltorpro.shop.model;
-import org.springframework.hateoas.ResourceSupport;
-import org.springframework.hateoas.core.Relation;
 
-//@Relation()
-public class Product extends ResourceSupport  {
-    private int productId;
-    private String name;
-    private int weight;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
-    public Product() {
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
-    }
-    
-    public Product(int productId, String name, int weight) {
-        this.productId = productId;
-        this.name = name;
-        this.weight = weight;
-    }
+@Entity
+@Table(indexes = { @Index(name = "IDX_PRODUCT_IDS", columnList = "productId,productUuid") })
+public class Product {
+	// @formatter:off
+	
+	@Id
+	@GenericGenerator(
+	        name = "productSequenceGenerator",
+	        strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+	        parameters = {
+	                @Parameter(name = "sequence_name", value = "PRODUCT_SEQUENCE"),
+	                @Parameter(name = "initial_value", value = "1000"),
+	                @Parameter(name = "increment_size", value = "1")
+	        }
+	)
+	@GeneratedValue(generator = "productSequenceGenerator")
+	private Long productId;
 
-    public int getProductId() {
-        return productId;
-    }
+	@Column(columnDefinition = "char(36)", nullable = false)
+	private String productUuid;
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
+	@Column(nullable = false)
+	private String name;
 
-    public String getName() {
-        return name;
-    }
+	private String shortDescription;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@Column(length = 1024)
+	private String longDescription;
 
-    public int getWeight() {
-        return weight;
-    }
+	// @formatter:on
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
+	public Product() {
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public String getLongDescription() {
+		return longDescription;
+	}
+
+	public void setLongDescription(String longDescription) {
+		this.longDescription = longDescription;
+	}
+
+	public String getProductUuid() {
+		return productUuid;
+	}
+
+	public void setProductUuid(String productUuid) {
+		this.productUuid = productUuid;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productUuid=" + productUuid + ", name=" + name
+				+ ", shortDescription=" + shortDescription + ", longDescription=" + longDescription + "]";
+	}
+
 }

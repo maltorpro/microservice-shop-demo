@@ -38,23 +38,32 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
         
-        
-      # run gradle buil
-      - run: gradle build
-      
-      # store build jar files
-      - store_artifacts:
-          path: ~/repo/auth-server
        
       - setup_remote_docker
-
+      
+      # install docker compose
       - run:
           name: Install Docker Compose
           command: | 
             set -x
             sudo curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
-
+      
+      # start test infrastructure
+      - run: 
+          name: Start test infrastructure
+          command:  |
+             cd ~/repo/docker
+             docker-compose -f test-environment.yml up -d
+      
+      # run gradle buil
+      - run: gradle build
+      
+       
+      # store build jar files
+      - store_artifacts:
+          path: ~/repo/auth-server
+      
       - deploy:
           name: Build and push Docker image
           command: |

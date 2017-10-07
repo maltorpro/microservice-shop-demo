@@ -1,0 +1,8 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 166
+
+{"productUuid":"d9b3be71-6963-4516-b82f-ddd146ba33c3","name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description"}
+----

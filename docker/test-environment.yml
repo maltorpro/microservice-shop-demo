@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+    
+  config-server:
+    image: maltor/config-server
+    restart: always
+    ports:
+    - "8888:8888"
+ 
+  rabbitmq:
+    image: rabbitmq:3.6-management
+    ports:
+     - "5672:5672"
+ 
+  discovery-server:
+    image: maltor/discovery-server
+    restart: always
+    ports:
+    - "8761:8761"
+    
+  db:
+    image: postgres:10
+    restart: always
+    environment:
+        POSTGRES_USER: shop
+        POSTGRES_PASSWORD: shop
+        POSTGRES_DB: shop-db
+    ports:
+    - "5432:5432"
+    

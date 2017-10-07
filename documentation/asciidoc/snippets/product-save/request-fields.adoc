@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`productId`
+|`Null`
+|The unique prodcut identifier of the database
+
+|`productUuid`
+|`Null`
+|The unique prodcut identifier
+
+|`name`
+|`String`
+|Name of the product
+
+|`shortDescription`
+|`String`
+|Short product description
+
+|`longDescription`
+|`String`
+|Long product description
+
+|===

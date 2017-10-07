@@ -9,7 +9,7 @@ import de.maltorpro.shop.model.Review;
 
 
 public class ProductAggregated {
-    private int productId;
+    private long productId;
     private String name;
     private int weight;
     private List<RecommendationSummary> recommendations;
@@ -20,7 +20,7 @@ public class ProductAggregated {
         // 1. Setup product info
         this.productId = product.getProductId();
         this.name = product.getName();
-        this.weight = product.getWeight();
+ 
 
         // 2. Copy summary recommendation info, if available
         if (recommendations != null)
@@ -35,7 +35,7 @@ public class ProductAggregated {
                 .collect(Collectors.toList());
     }
 
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 

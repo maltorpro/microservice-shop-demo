@@ -31,7 +31,9 @@ public class LoggingAspect {
 
 	static Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 	
-
+	
+	@Autowired
+	private Tracer tracer;
 	
 	@Around("execution(* de.maltorpro.shop.service..*(..))")
 	public Object profileExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -42,22 +44,30 @@ public class LoggingAspect {
 		String apiName = className + "." + methodName;
 
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		Span currentSpan = tracer.getCurrentSpan();
 		
-		
-		if (requestAttributes != null ) {
+		if (requestAttributes != null  && currentSpan != null) {
 
 			Object result = joinPoint.proceed();
+			String resultStr = "NO RESUALT";
+			if(result != null) {
+				resultStr = result.toString();
+			}
 			
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
-	
+			
+			String traceId = Long.toHexString(currentSpan.getTraceId());
+			String spanId = Long.toHexString(currentSpan.getSpanId());
 			
 			long elapsedTime = System.currentTimeMillis() - start;
 			
 			LOG.info(append(LogtashMarker.EVENT.name(), Event.SERVICE_CALL.name())
 					.and(append(LogtashMarker.EXECUTION_TIME.name(),elapsedTime))
 					.and(append(LogtashMarker.API_NAME.name(),apiName))
-					.and(append(LogtashMarker.RESPONSE_OBJECT.name(),result.toString())),
+					.and(append(LogtashMarker.TRACE_ID.name(),traceId))
+					.and(append(LogtashMarker.SPAN_ID.name(),spanId))
+					.and(append(LogtashMarker.RESPONSE_OBJECT.name(),resultStr)),
 					"----->>>>>\n"
 					+ "HOST: {} HttpMethod: {}\n"
 					+ "URI: {}\nAPI: {}\n"
@@ -70,6 +80,7 @@ public class LoggingAspect {
 					request.getRequestURI(),
 					apiName,
 					Arrays.toString(joinPoint.getArgs()),
+					resultStr,
 					elapsedTime);
 			
 			return result;

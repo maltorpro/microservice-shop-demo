@@ -1,8 +1,0 @@
-[source,http,options="nowrap"]
-----
-HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 105
-
-{"productId":1,"name":"name","weight":123,"_links":{"weiter":{"href":"http://localhost:8080/product/2"}}}
-----
