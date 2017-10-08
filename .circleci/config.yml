@@ -41,18 +41,7 @@ jobs:
       # store build  files
       - store_artifacts:
           path: ~/repo
-       
-      - setup_remote_docker
-      
-      # install docker client
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin 
+
       
       # install docker compose
       - run:
@@ -61,6 +50,8 @@ jobs:
             set -x
             sudo curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
+      
+      - setup_remote_docker
       
       # start test infrastructure
       - run: 
