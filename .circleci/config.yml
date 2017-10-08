@@ -38,8 +38,21 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
         
+      # store build  files
+      - store_artifacts:
+          path: ~/repo
        
       - setup_remote_docker
+      
+      # install docker client
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin 
       
       # install docker compose
       - run:
@@ -53,17 +66,14 @@ jobs:
       - run: 
           name: Start test infrastructure
           command:  |
+             set -x
              cd ~/repo/docker
              docker-compose -f test-environment.yml up -d
       
-      # run gradle buil
+      # run gradle build
       - run: gradle build --debug
       
-       
-      # store build jar files
-      - store_artifacts:
-          path: ~/repo/auth-server
-      
+
       - deploy:
           name: Build and push Docker image
           command: |
