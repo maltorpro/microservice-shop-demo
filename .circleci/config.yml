@@ -43,7 +43,6 @@ jobs:
           path: ~/repo
 
       - setup_remote_docker
-
       
       # This should go into custom primary image, here's only for the sake of explanation
       - run:
@@ -61,7 +60,7 @@ jobs:
              cd ~/repo/docker
              docker-compose -f test-environment.yml up -d
              docker run --network container:config-server \
-              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8888/product-service/default
+              appropriate/curl --retry 5 --retry-delay 30 --retry-connrefused http://localhost:8888/product-service/default
       
       # run gradle build
       - run: gradle build --debug
