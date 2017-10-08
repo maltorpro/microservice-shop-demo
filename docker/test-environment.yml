@@ -4,23 +4,27 @@ services:
     
   config-server:
     image: maltor/config-server
+    container_name: config-server
     restart: always
     ports:
     - "8888:8888"
  
   rabbitmq:
     image: rabbitmq:3.6-management
+    container_name: rabbitmq
     ports:
      - "5672:5672"
  
   discovery-server:
     image: maltor/discovery-server
+    container_name: discovery-server
     restart: always
     ports:
     - "8761:8761"
     
   db:
     image: postgres:10
+    container_name: postgres
     restart: always
     environment:
         POSTGRES_USER: shop
