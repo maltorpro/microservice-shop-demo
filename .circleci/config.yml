@@ -75,6 +75,11 @@ jobs:
           name: Docker ps
           command: |
             docker ps
+     
+      - run:
+          name: Sleep 
+          command: |
+            sleep 120
             
       
       - run:
