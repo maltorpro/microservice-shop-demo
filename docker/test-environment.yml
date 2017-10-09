@@ -2,18 +2,22 @@ version: '3.1'
 
 services:
     
+
+    
   config-server:
     image: maltor/config-server
     container_name: config-server
     restart: always
     ports:
     - "8888:8888"
+    network_mode: "host"  
  
   rabbitmq:
     image: rabbitmq:3.6-management
     container_name: rabbitmq
     ports:
      - "5672:5672"
+    network_mode: "host"  
  
   discovery-server:
     image: maltor/discovery-server
@@ -21,6 +25,7 @@ services:
     restart: always
     ports:
     - "8761:8761"
+    network_mode: "host"  
     
   db:
     image: postgres:10
@@ -32,4 +37,5 @@ services:
         POSTGRES_DB: shop-db
     ports:
     - "5432:5432"
+    network_mode: "host"  
     

@@ -72,9 +72,14 @@ jobs:
              docker-compose -f test-environment.yml up -d
       
       - run:
-          name: Connect config server
+          name: Docker ps
           command: |
             docker ps
+      
+      - run:
+          name: Connect config server
+          command: |
+            curl --retry 30 --retry-delay 10 --retry-connrefused http://localhost:8888/product-service/default
       
       # run gradle build
 #      - run: gradle build --debug
