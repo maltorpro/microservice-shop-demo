@@ -11,6 +11,15 @@ jobs:
       - image: maltor/config-server
         ports:
         - "8888:8888"
+      - image: rabbitmq:3.6-management
+        ports:
+        - "5672:5672"
+      - image: maltor/discovery-server
+        ports:
+        - "8761:8761"
+      - image: postgres:10
+        ports:
+        - "5432:5432"
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -25,6 +34,7 @@ jobs:
       TERM: dumb
     
     steps:
+      
       - checkout
 
       # Download and cache dependencies
@@ -40,79 +50,43 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
-        
-      # store build  files
-      - store_artifacts:
-          path: ~/repo
 
-      
-    #  - setup_remote_docker
-      
-       # install docker client
-      #- run:
-      #    name: Install Docker client
-      #    command: |
-      #      set -x
-      #      VER="17.03.0-ce"
-      #      curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-      #      tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-      #      sudo mv /tmp/docker/* /usr/bin
-      
-      # install docker compose
-      #- run:
-       #   name: Install Docker Compose
-        #  command: | 
-         #   set -x
-         #   sudo curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-         #   sudo chmod +x /usr/local/bin/docker-compose
-      
-      # start test infrastructure
-     # - run: 
-      #    name: Start test infrastructure
-       #   command:  |
-        #     set -x
-         #    cd ~/repo/docker
-          #   docker-compose -f test-environment.yml up -d
-      
-     # - run:
-      #    name: Docker ps
-       #   command: |
-        #    docker ps
-     
-      #- run:
-       #   name: Sleep 
-        #  command: |
-         #   sleep 120
-            
-      
+                  
       - run:
           name: Connect config server
           command: |
             curl --retry 30 --retry-delay 10 --retry-connrefused http://127.0.0.1:8888/product-service/default
       
+     
+      
       # run gradle build
-#      - run: gradle build --debug
-#      
-#
-#      - deploy:
-#          name: Build and push Docker image
-#          command: |
-#            #TAG="0.1.${CIRCLE_BUILD_NUM}"
-#            TAG="latest"
-#            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-#            
-#            cd ~/repo/product-composite-service
-#            docker build -t maltor/product-composite-service:$TAG .
-#            docker push maltor/product-composite-service:$TAG
-#            
-#            cd ~/repo/product-service
-#            docker build -t maltor/product-service:$TAG .
-#            docker push maltor/product-service:$TAG
-#            
-#            cd ~/repo/recommendation-service
-#            docker build -t maltor/recommendation-service:$TAG .
-#            docker push maltor/recommendation-service:$TAG 
-#            
-#            cd ~/repo/review-service
-#            docker build -t maltor/review-service:$TAG .
-#            docker push maltor/review-service:$TAG 
+      - run: gradle build --debug
+      
+      # store build  files
+      - store_artifacts:
+          path: ~/repo
+      
+      - setup_remote_docker
+
+      - deploy:
+          name: Build and push Docker image
+          command: |
+            #TAG="0.1.${CIRCLE_BUILD_NUM}"
+            TAG="latest"
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            
+            cd ~/repo/product-composite-service
+            docker build -t maltor/product-composite-service:$TAG .
+            docker push maltor/product-composite-service:$TAG
+            
+            cd ~/repo/product-service
+            docker build -t maltor/product-service:$TAG .
+            docker push maltor/product-service:$TAG
+            
+            cd ~/repo/recommendation-service
+            docker build -t maltor/recommendation-service:$TAG .
+            docker push maltor/recommendation-service:$TAG 
+            
+            cd ~/repo/review-service
+            docker build -t maltor/review-service:$TAG .
+            docker push maltor/review-service:$TAG 
