@@ -8,6 +8,9 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
+      - image: maltor/config-server
+        ports:
+        - "8888:8888"
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -43,43 +46,43 @@ jobs:
           path: ~/repo
 
       
-      - setup_remote_docker
+    #  - setup_remote_docker
       
        # install docker client
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            sudo mv /tmp/docker/* /usr/bin
+      #- run:
+      #    name: Install Docker client
+      #    command: |
+      #      set -x
+      #      VER="17.03.0-ce"
+      #      curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+      #      tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+      #      sudo mv /tmp/docker/* /usr/bin
       
       # install docker compose
-      - run:
-          name: Install Docker Compose
-          command: | 
-            set -x
-            sudo curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
+      #- run:
+       #   name: Install Docker Compose
+        #  command: | 
+         #   set -x
+         #   sudo curl -L https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+         #   sudo chmod +x /usr/local/bin/docker-compose
       
       # start test infrastructure
-      - run: 
-          name: Start test infrastructure
-          command:  |
-             set -x
-             cd ~/repo/docker
-             docker-compose -f test-environment.yml up -d
+     # - run: 
+      #    name: Start test infrastructure
+       #   command:  |
+        #     set -x
+         #    cd ~/repo/docker
+          #   docker-compose -f test-environment.yml up -d
       
-      - run:
-          name: Docker ps
-          command: |
-            docker ps
+     # - run:
+      #    name: Docker ps
+       #   command: |
+        #    docker ps
      
-      - run:
-          name: Sleep 
-          command: |
-            sleep 120
+      #- run:
+       #   name: Sleep 
+        #  command: |
+         #   sleep 120
             
       
       - run:
