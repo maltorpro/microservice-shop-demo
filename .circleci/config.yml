@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Connect config server
           command: |
-            curl --retry 30 --retry-delay 10 --retry-connrefused http://config-server:8888/product-service/default
+            docker ps
       
       # run gradle build
 #      - run: gradle build --debug
