@@ -75,6 +75,11 @@ jobs:
           name: Docker ps
           command: |
             docker ps
+            
+      - run:
+          name: Docker ip
+          command: |
+            docker-machine ip
       
       - run:
           name: Connect config server
