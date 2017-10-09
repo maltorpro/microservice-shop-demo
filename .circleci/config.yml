@@ -70,8 +70,6 @@ jobs:
              set -x
              cd ~/repo/docker
              docker-compose -f test-environment.yml up -d
-             docker run --network container:config-server \
-              appropriate/curl --retry 5 --retry-delay 30 --retry-connrefused http://localhost:8888/product-service/default
       
       - run:
           name: Connect config server
