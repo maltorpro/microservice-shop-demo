@@ -73,29 +73,34 @@ jobs:
              docker run --network container:config-server \
               appropriate/curl --retry 5 --retry-delay 30 --retry-connrefused http://localhost:8888/product-service/default
       
-      # run gradle build
-      - run: gradle build --debug
-      
-
-      - deploy:
-          name: Build and push Docker image
+      - run:
+          name: Connect config server
           command: |
-            #TAG="0.1.${CIRCLE_BUILD_NUM}"
-            TAG="latest"
-            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            
-            cd ~/repo/product-composite-service
-            docker build -t maltor/product-composite-service:$TAG .
-            docker push maltor/product-composite-service:$TAG
-            
-            cd ~/repo/product-service
-            docker build -t maltor/product-service:$TAG .
-            docker push maltor/product-service:$TAG
-            
-            cd ~/repo/recommendation-service
-            docker build -t maltor/recommendation-service:$TAG .
-            docker push maltor/recommendation-service:$TAG 
-            
-            cd ~/repo/review-service
-            docker build -t maltor/review-service:$TAG .
-            docker push maltor/review-service:$TAG 
+            curl --retry 30 --retry-delay 10 --retry-connrefused http://localhost:8888/product-service/default
+      
+      # run gradle build
+#      - run: gradle build --debug
+#      
+#
+#      - deploy:
+#          name: Build and push Docker image
+#          command: |
+#            #TAG="0.1.${CIRCLE_BUILD_NUM}"
+#            TAG="latest"
+#            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+#            
+#            cd ~/repo/product-composite-service
+#            docker build -t maltor/product-composite-service:$TAG .
+#            docker push maltor/product-composite-service:$TAG
+#            
+#            cd ~/repo/product-service
+#            docker build -t maltor/product-service:$TAG .
+#            docker push maltor/product-service:$TAG
+#            
+#            cd ~/repo/recommendation-service
+#            docker build -t maltor/recommendation-service:$TAG .
+#            docker push maltor/recommendation-service:$TAG 
+#            
+#            cd ~/repo/review-service
+#            docker build -t maltor/review-service:$TAG .
+#            docker push maltor/review-service:$TAG 
