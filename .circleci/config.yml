@@ -5,9 +5,9 @@
 version: 2
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+    machine:
+      java:
+        version: openjdk8
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -43,7 +43,7 @@ jobs:
           path: ~/repo
 
       
-      - setup_remote_docker
+      #- setup_remote_docker
       
        # install docker client
       - run:
