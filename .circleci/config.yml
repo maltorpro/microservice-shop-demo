@@ -9,20 +9,25 @@ jobs:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       - image: rabbitmq:3.6-management
+        environment:
+          MAX_HEAP_SIZE: 256m
         ports:
         - "5672:5672"
       - image: maltor/config-server
         environment:
           SPRING_PROFILES_ACTIVE: test
+          MAX_HEAP_SIZE: 256m
         ports:
         - "8888:8888"      
       - image: maltor/discovery-server
         environment:
           SPRING_PROFILES_ACTIVE: default
+          MAX_HEAP_SIZE: 256m
         ports:
         - "8761:8761"
       - image: postgres:10
         environment:
+          MAX_HEAP_SIZE: 256m
           POSTGRES_USER: shop
           POSTGRES_PASSWORD: shop
           POSTGRES_DB: shop-db
