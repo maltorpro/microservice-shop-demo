@@ -13,12 +13,12 @@ jobs:
         - "5672:5672"
       - image: maltor/config-server
         environment:
-          PROFILE: test
+          SPRING_PROFILES_ACTIVE: test
         ports:
         - "8888:8888"      
       - image: maltor/discovery-server
         environment:
-          PROFILE: default
+          SPRING_PROFILES_ACTIVE: docker
         ports:
         - "8761:8761"
       - image: postgres:10
