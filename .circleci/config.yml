@@ -8,23 +8,27 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-      - image: maltor/config-server
-        ports:
-        - "8888:8888"
       - image: rabbitmq:3.6-management
         ports:
         - "5672:5672"
+      - image: maltor/config-server
+        environment:
+          PROFILE:default
+        ports:
+        - "8888:8888"      
       - image: maltor/discovery-server
+        environment:
+          PROFILE:default
         ports:
         - "8761:8761"
       - image: postgres:10
+        environment:
+          POSTGRES_USER: shop
+          POSTGRES_PASSWORD: shop
+          POSTGRES_DB: shop-db
         ports:
         - "5432:5432"
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+     
 
     working_directory: ~/repo
 
@@ -50,14 +54,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
-
-                  
-      - run:
-          name: Connect config server
-          command: |
-            curl --retry 30 --retry-delay 10 --retry-connrefused http://127.0.0.1:8888/product-service/default
-      
-     
       
       # run gradle build
       - run: gradle build --debug
