@@ -18,7 +18,7 @@ jobs:
         - "8888:8888"      
       - image: maltor/discovery-server
         environment:
-          SPRING_PROFILES_ACTIVE: docker
+          SPRING_PROFILES_ACTIVE: default
         ports:
         - "8761:8761"
       - image: postgres:10
