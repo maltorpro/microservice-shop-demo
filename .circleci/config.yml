@@ -60,11 +60,14 @@ jobs:
       # run gradle build
       - run: gradle build
       
-       # store build files
+      # generate documentation
+      - run: gradle asciidoctor
+      
+      # store build files
       - store_artifacts:
           path: ~/repo
       
-      # store test resualt
+      # store test results
       - run:
           name: Save test results 
           command: |

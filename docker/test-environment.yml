@@ -2,8 +2,6 @@ version: '3.1'
 
 services:
     
-
-    
   config-server:
     image: maltor/config-server
     container_name: config-server
