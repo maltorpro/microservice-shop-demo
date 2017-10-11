@@ -58,11 +58,25 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
       
       # run gradle build
-      - run: gradle build --debug
+      - run: gradle build
       
-      # store build  files
+       # store build files
       - store_artifacts:
           path: ~/repo
+      
+      # store test resualt
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit   
+      
+     
       
       - setup_remote_docker
 
