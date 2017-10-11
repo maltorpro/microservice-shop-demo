@@ -22,20 +22,15 @@ services:
   #####    infrastructure1           ####
   #######################################
   
-#  shop-db:
-#    image: mysql:5.7
-#    deploy:
-#      placement:
-#        constraints: [node.hostname == infrastructure1]
-#    ports:
-#     - "4001:3306"
-#    networks:
-#     - shopnet 
-#    environment:
-#      MYSQL_ROOT_PASSWORD: root
-#      MYSQL_DATABASE: shop
-#      MYSQL_USER: shop
-#      MYSQL_PASSWORD: shop
+  shop-db:
+    image: postgres:10
+    restart: always
+    environment:
+        POSTGRES_USER: shop
+        POSTGRES_PASSWORD: shop
+        POSTGRES_DB: shop-db
+    ports:
+    - "5432:5432"
   
   rabbitmq:
     image: rabbitmq:3.6-management
@@ -50,6 +45,8 @@ services:
   #server 
   config-server:
     image: maltor/config-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]
@@ -63,6 +60,8 @@ services:
   
   discovery-server:
     image: maltor/discovery-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker    
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -76,6 +75,8 @@ services:
       
   auth-server:
     image: maltor/auth-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -89,6 +90,8 @@ services:
        
   resource-server:
     image: maltor/resource-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -102,6 +105,8 @@ services:
 
   edge-server:
     image: maltor/edge-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -120,6 +125,8 @@ services:
   
   product-composite-service:
     image: maltor/product-composite-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -131,6 +138,8 @@ services:
   
   product-service:
     image: maltor/product-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -142,6 +151,8 @@ services:
    
   recommendation-service:
     image: maltor/recommendation-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -153,6 +164,8 @@ services:
 
   review-service:
     image: maltor/review-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -213,6 +226,8 @@ services:
   #monitoring
   zipkin-server:
     image: maltor/zipkin-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]    
@@ -226,6 +241,8 @@ services:
 
   turbine-server:
     image: maltor/turbine-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]    
@@ -239,6 +256,8 @@ services:
 
   monitor-dashboard:
     image: maltor/monitor-dashboard
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]    
