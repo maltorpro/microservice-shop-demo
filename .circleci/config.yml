@@ -80,10 +80,7 @@ jobs:
           path: ~/junit   
       
       #sonarqube
-      - run: gradle sonarqube \
-             -Dsonar.host.url=https://sonarcloud.io \
-             -Dsonar.organization=$SONAR_ORGANIZATION \
-             -Dsonar.login=$SONAR_LOGIN
+      - run: gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
       
       - setup_remote_docker
 
