@@ -79,7 +79,11 @@ jobs:
       - store_artifacts:
           path: ~/junit   
       
-     
+      #sonarqube
+      - run: gradle radlew sonarqube \
+             -Dsonar.host.url=https://sonarcloud.io \
+             -Dsonar.organization=$SONAR_ORGANIZATION \
+             -Dsonar.login=$SONAR_LOGIN
       
       - setup_remote_docker
 

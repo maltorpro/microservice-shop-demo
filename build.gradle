@@ -8,13 +8,16 @@ buildscript {
 	        jcenter()
 	    }
 	    dependencies {
-	        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	        classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
-	        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16'
+	        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+	        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.3"
+	        classpath "org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16"
+	        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
 	    }
 }
 
 apply plugin: "org.asciidoctor.convert"
+apply plugin: "org.sonarqube"
+
 
 asciidoctor {
     	sourceDir "documentation/asciidoc"
@@ -76,8 +79,6 @@ subprojects {
 	    }
 	}
 	
-	
-
 	task wrapper(type: Wrapper) {
 		gradleVersion = "4.2"
 	}
