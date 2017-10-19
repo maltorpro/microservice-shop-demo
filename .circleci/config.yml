@@ -57,18 +57,20 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "build.gradle" }}
       
+      
+      
       # run gradle build
       - run: gradle build
       
       # generate documentation
       - run: gradle asciidoctor
       
-       #sonarqube
+      #sonarqube
       - run:
           name: push to sonarcloud
           command: | 
             cd ~/repo/
-            gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb -Dsonar.verbose=true
+            ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb -Dsonar.verbose=true 
       
       # store build files
       - store_artifacts:
