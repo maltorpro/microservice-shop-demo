@@ -32,7 +32,7 @@ jobs:
         - "5432:5432"
      
 
-    working_directory: ~/repo
+    working_directory: ~/microservice-shop-demo
 
     environment:
       # Customize the JVM maximum heap limit
@@ -73,7 +73,7 @@ jobs:
       
       # store build files
       - store_artifacts:
-          path: ~/repo
+          path: ~/microservice-shop-demo
       
       # store test results
       - run:
@@ -96,18 +96,18 @@ jobs:
             TAG="latest"
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             
-            cd ~/repo/product-composite-service
+            cd ~/microservice-shop-demo/product-composite-service
             docker build -t maltor/product-composite-service:$TAG .
             docker push maltor/product-composite-service:$TAG
             
-            cd ~/repo/product-service
+            cd ~/microservice-shop-demo/product-service
             docker build -t maltor/product-service:$TAG .
             docker push maltor/product-service:$TAG
             
-            cd ~/repo/recommendation-service
+            cd ~/microservice-shop-demo/recommendation-service
             docker build -t maltor/recommendation-service:$TAG .
             docker push maltor/recommendation-service:$TAG 
             
-            cd ~/repo/review-service
+            cd ~/microservice-shop-demo/review-service
             docker build -t maltor/review-service:$TAG .
             docker push maltor/review-service:$TAG 
