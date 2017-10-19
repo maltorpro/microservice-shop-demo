@@ -85,7 +85,7 @@ jobs:
       - run:
           name: push to sonarcloud
           command: | 
-            gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb
+            gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb -Dsonar.verbose=true
       
       - deploy:
           name: Build and push Docker image
