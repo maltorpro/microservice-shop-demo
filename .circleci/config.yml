@@ -63,6 +63,13 @@ jobs:
       # generate documentation
       - run: gradle asciidoctor
       
+       #sonarqube
+      - run:
+          name: push to sonarcloud
+          command: | 
+            cd ~/repo/
+            gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb -Dsonar.verbose=true
+      
       # store build files
       - store_artifacts:
           path: ~/repo
@@ -78,14 +85,7 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit   
-      
-      #sonarqube
-      - run:
-          name: push to sonarcloud
-          command: | 
-            cd ~/repo/
-            gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=maltorpro-github -Dsonar.login=e0b80d1c399fc186b8f7a5cab7a404ab8e7452cb -Dsonar.verbose=true
-      
+    
       - setup_remote_docker
       
       - deploy:
