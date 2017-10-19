@@ -9,9 +9,6 @@ public class ProductResourceDto extends ResourceSupport {
 	private String shortDescription;
 	private String longDescription;
 
-	public ProductResourceDto() {
-	}
-
 	public String getProductUuid() {
 		return productUuid;
 	}

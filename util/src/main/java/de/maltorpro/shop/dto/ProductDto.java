@@ -7,9 +7,6 @@ public class ProductDto {
 	private String shortDescription;
 	private String longDescription;
 
-	public ProductDto() {
-	}
-
 	public String getProductUuid() {
 		return productUuid;
 	}

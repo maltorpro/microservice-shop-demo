@@ -45,16 +45,14 @@ public class ProductServiceImpl implements ProductService {
 
 		product = productRepository.save(product);
 
-		ProductDto poductResult = modelMapper.map(product, ProductDto.class);
-		return poductResult;
+		return modelMapper.map(product, ProductDto.class);
 	}
 
 	@Override
 	public ProductDto findByUuid(String uuid) {
 
 		Product product = productRepository.findFirstByProductUuid(uuid);
-		ProductDto productDto = modelMapper.map(product, ProductDto.class);
-		return productDto;
+		return modelMapper.map(product, ProductDto.class);
 	}
 
 }

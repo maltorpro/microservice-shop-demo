@@ -41,9 +41,6 @@ public class Product {
 
 	// @formatter:on
 
-	public Product() {
-	}
-
 	public Long getProductId() {
 		return productId;
 	}
