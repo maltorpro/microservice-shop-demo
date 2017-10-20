@@ -91,4 +91,53 @@ public class Product extends ResourceSupport {
 				+ ", shortDescription=" + shortDescription + ", longDescription=" + longDescription + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((longDescription == null) ? 0 : longDescription.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((productUuid == null) ? 0 : productUuid.hashCode());
+		result = prime * result + ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (longDescription == null) {
+			if (other.longDescription != null)
+				return false;
+		} else if (!longDescription.equals(other.longDescription))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
+			return false;
+		if (productUuid == null) {
+			if (other.productUuid != null)
+				return false;
+		} else if (!productUuid.equals(other.productUuid))
+			return false;
+		if (shortDescription == null) {
+			if (other.shortDescription != null)
+				return false;
+		} else if (!shortDescription.equals(other.shortDescription))
+			return false;
+		return true;
+	}
+
 }
