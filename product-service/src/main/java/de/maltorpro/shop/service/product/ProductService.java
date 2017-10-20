@@ -1,10 +1,10 @@
 package de.maltorpro.shop.service.product;
 
-import de.maltorpro.shop.dto.ProductDto;
+import de.maltorpro.shop.model.Product;
 
 public interface ProductService {
 
-	ProductDto saveProduct(ProductDto productDto);
+	Product saveProduct(Product productDto);
 
-	ProductDto findByUuid(String uuid);
+	Product findByUuid(String uuid);
 }

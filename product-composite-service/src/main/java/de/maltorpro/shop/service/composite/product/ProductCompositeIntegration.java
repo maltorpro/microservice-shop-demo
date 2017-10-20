@@ -22,7 +22,7 @@ import de.maltorpro.shop.util.ServiceUtils;
 @Component
 public class ProductCompositeIntegration {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ProductCompositeIntegration.class);
+	private static final Logger log = LoggerFactory.getLogger(ProductCompositeIntegration.class);
 
 	@Inject
 	private ServiceUtils util;
@@ -38,17 +38,17 @@ public class ProductCompositeIntegration {
 	@HystrixCommand(fallbackMethod = "defaultProduct")
 	public ResponseEntity<Product> getProduct(int productId) {
 
-		LOG.debug("Will call getProduct with Hystrix protection");
+		log.debug("Will call getProduct with Hystrix protection");
 
 		String url = "http://product-service/product/" + productId;
 
-		LOG.debug("GetProduct from URL: {}", url);
+		log.debug("GetProduct from URL: {}", url);
 
 		ResponseEntity<Product> product = restTemplate.getForEntity(url, Product.class);
-		LOG.debug("GetProduct http-status: {}", product.getStatusCode());
-		LOG.debug("GetProduct body: {}", product.getBody());
+		log.debug("GetProduct http-status: {}", product.getStatusCode());
+		log.debug("GetProduct body: {}", product.getBody());
 
-		LOG.debug("GetProduct.id: {}", product.getBody().getProductId());
+		log.debug("GetProduct.id: {}", product.getBody().getProductId());
 
 		return util.createOkResponse(product.getBody());
 	}
@@ -60,7 +60,7 @@ public class ProductCompositeIntegration {
 	 * @return
 	 */
 	public ResponseEntity<Product> defaultProduct(int productId) {
-		LOG.warn("Using fallback method for product-service");
+		log.warn("Using fallback method for product-service");
 		// If we can't get basic product info we better fail!
 		return util.createResponse(null, HttpStatus.BAD_GATEWAY);
 	}
@@ -72,21 +72,24 @@ public class ProductCompositeIntegration {
 	@HystrixCommand(fallbackMethod = "defaultRecommendations")
 	public ResponseEntity<Recommendation[]> getRecommendations(int productId) {
 		try {
-			LOG.debug("Will call getRecommendations with Hystrix protection");
+			log.debug("Will call getRecommendations with Hystrix protection");
 
 			String url = "http://recommendation-service/recommendation/" + productId;
 
-			LOG.debug("GetRecommendations from URL: {}", url);
+			log.debug("GetRecommendations from URL: {}", url);
 
 			ResponseEntity<Recommendation[]> recommendations = restTemplate.getForEntity(url, Recommendation[].class);
-			LOG.debug("GetRecommendations http-status: {}", recommendations.getStatusCode());
-			LOG.debug("GetRecommendations body: {}", Arrays.toString(recommendations.getBody()));
+			log.debug("GetRecommendations http-status: {}", recommendations.getStatusCode());
 
-			LOG.debug("GetRecommendations.cnt {}", recommendations.getBody().length);
+			if (log.isDebugEnabled()) {
+				log.debug("GetRecommendations body: {}", Arrays.toString(recommendations.getBody()));
+			}
+
+			log.debug("GetRecommendations.cnt {}", recommendations.getBody().length);
 
 			return util.createOkResponse(recommendations.getBody());
 		} catch (Exception t) {
-			LOG.error("getRecommendations error", t);
+			log.error("getRecommendations error", t);
 			throw t;
 		}
 	}
@@ -98,8 +101,8 @@ public class ProductCompositeIntegration {
 	 * @return
 	 */
 	public ResponseEntity<Recommendation[]> defaultRecommendations(int productId) {
-		LOG.warn("Using fallback method for recommendation-service");
-		LOG.debug("GetRecommendations.fallback-cnt {}", 1);
+		log.warn("Using fallback method for recommendation-service");
+		log.debug("GetRecommendations.fallback-cnt {}", 1);
 
 		Recommendation[] result = { new Recommendation(productId, 1, "Fallback Author 1", 1, "Fallback Content 1") };
 		return util.createResponse(result, HttpStatus.OK);
@@ -111,17 +114,20 @@ public class ProductCompositeIntegration {
 
 	@HystrixCommand(fallbackMethod = "defaultReviews")
 	public ResponseEntity<Review[]> getReviews(int productId) {
-		LOG.debug("Will call getReviews with Hystrix protection");
+		log.debug("Will call getReviews with Hystrix protection");
 
 		String url = "http://review-service/review/" + productId;
 
-		LOG.debug("GetReviews from URL: {}", url);
+		log.debug("GetReviews from URL: {}", url);
 
 		ResponseEntity<Review[]> reviews = restTemplate.getForEntity(url, Review[].class);
-		LOG.debug("GetReviews http-status: {}", reviews.getStatusCode());
-		LOG.debug("GetReviews body: {}", Arrays.toString(reviews.getBody()));
+		log.debug("GetReviews http-status: {}", reviews.getStatusCode());
 
-		LOG.debug("GetReviews.cnt {}", reviews.getBody().length);
+		if (log.isDebugEnabled()) {
+			log.debug("GetReviews body: {}", Arrays.toString(reviews.getBody()));
+		}
+
+		log.debug("GetReviews.cnt {}", reviews.getBody().length);
 
 		return util.createOkResponse(reviews.getBody());
 	}
@@ -133,8 +139,8 @@ public class ProductCompositeIntegration {
 	 * @return
 	 */
 	public ResponseEntity<Review[]> defaultReviews(int productId) {
-		LOG.warn("Using fallback method for review-service");
-		LOG.debug("GetReviews.fallback-cnt {}", 1);
+		log.warn("Using fallback method for review-service");
+		log.debug("GetReviews.fallback-cnt {}", 1);
 
 		Review[] result = { new Review(productId, 1, "Fallback Author 1", "Fallback Subject 1", "Fallback Content 1") };
 		return util.createResponse(result, HttpStatus.OK);

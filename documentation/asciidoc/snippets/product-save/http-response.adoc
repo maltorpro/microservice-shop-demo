@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
+Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 166
 
-{"productUuid":"d9b3be71-6963-4516-b82f-ddd146ba33c3","name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description"}
+{"productUuid":"844ff7bc-4d25-445d-a56c-6b7f990bad96","name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description"}
 ----

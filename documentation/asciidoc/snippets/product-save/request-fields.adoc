@@ -1,10 +1,6 @@
 |===
 |Path|Type|Description
 
-|`productId`
-|`Null`
-|The unique prodcut identifier of the database
-
 |`productUuid`
 |`Null`
 |The unique prodcut identifier
@@ -20,5 +16,9 @@
 |`longDescription`
 |`String`
 |Long product description
+
+|`links`
+|`Array`
+|Not used, only for the response!
 
 |===

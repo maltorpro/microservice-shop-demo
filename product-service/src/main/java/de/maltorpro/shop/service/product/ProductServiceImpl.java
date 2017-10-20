@@ -4,12 +4,10 @@ import java.util.UUID;
 
 import javax.transaction.Transactional;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import de.maltorpro.shop.dto.ProductDto;
 import de.maltorpro.shop.model.Product;
 
 @Service("productService")
@@ -22,37 +20,32 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductPagingRepository productPagingRepository;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
 	@Override
-	public ProductDto saveProduct(ProductDto productDto) {
+	public Product saveProduct(Product product) {
 
-		if (productDto == null) {
-			throw new IllegalArgumentException("productDto cannot be null");
+		if (product == null) {
+			throw new IllegalArgumentException("product cannot be null");
 		}
-		Product product = null;
+		Product productDB = null;
 
-		if (!StringUtils.isEmpty(productDto.getProductUuid())) {
-			product = productRepository.findFirstByProductUuid(productDto.getProductUuid());
+		if (!StringUtils.isEmpty(product.getProductUuid())) {
+			productDB = productRepository.findFirstByProductUuid(product.getProductUuid());
 		}
 
 		// set uuid for the new product
-		if (product == null) {
-			product = modelMapper.map(productDto, Product.class);
-			product.setProductUuid(UUID.randomUUID().toString());
+		if (productDB == null) {
+
+			productDB = product;
+			productDB.setProductUuid(UUID.randomUUID().toString());
 		}
 
-		product = productRepository.save(product);
-
-		return modelMapper.map(product, ProductDto.class);
+		return productRepository.save(productDB);
 	}
 
 	@Override
-	public ProductDto findByUuid(String uuid) {
+	public Product findByUuid(String uuid) {
 
-		Product product = productRepository.findFirstByProductUuid(uuid);
-		return modelMapper.map(product, ProductDto.class);
+		return productRepository.findFirstByProductUuid(uuid);
 	}
 
 }

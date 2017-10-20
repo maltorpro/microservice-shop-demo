@@ -91,11 +91,11 @@ public class ApplicationTest {
 				.andDo(print()).andExpect(status().isOk()).andDo(document("product-save",
 
 						requestFields(attributes(key("title").value("Fields saving a product")),
-								fieldWithPath("productId").description("The unique prodcut identifier of the database"),
 								fieldWithPath("productUuid").description("The unique prodcut identifier"),
 								fieldWithPath("name").description("Name of the product"),
 								fieldWithPath("shortDescription").description("Short product description"),
-								fieldWithPath("longDescription").description("Long product description"))));
+								fieldWithPath("longDescription").description("Long product description"),
+								fieldWithPath("links").description("Not used, only for the response!"))));
 	}
 
 	@Test

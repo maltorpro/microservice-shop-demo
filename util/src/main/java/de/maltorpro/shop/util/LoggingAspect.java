@@ -26,7 +26,7 @@ import de.maltorpro.shop.model.enums.LogtashMarker;
 @Component
 public class LoggingAspect {
 
-	static Logger LOGGER = LoggerFactory.getLogger(LoggingAspect.class);
+	static Logger log = LoggerFactory.getLogger(LoggingAspect.class);
 
 	@Autowired
 	private Tracer tracer;
@@ -59,7 +59,7 @@ public class LoggingAspect {
 			long elapsedTime = System.currentTimeMillis() - start;
 			String args = Arrays.toString(joinPoint.getArgs());
 
-			LOGGER.info(
+			log.info(
 					append(LogtashMarker.EVENT.name(), Event.SERVICE_CALL.name())
 							.and(append(LogtashMarker.EXECUTION_TIME.name(), elapsedTime))
 							.and(append(LogtashMarker.API_NAME.name(), apiName))

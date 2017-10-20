@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-GET /product/bf6fe9f8-e652-4a56-b714-a55b4fcbe313 HTTP/1.1
+GET /product/3206519f-8075-403f-9fe3-4927d55e665e HTTP/1.1
 Accept: application/hal+json
 Host: localhost:8080
 

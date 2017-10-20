@@ -1,4 +1,4 @@
 [source,bash]
 ----
-$ echo '{"productId":null,"productUuid":null,"name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description"}' | http POST 'http://localhost:8080/product' 'Content-Type:application/json'
+$ echo '{"productUuid":null,"name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description","links":[]}' | http POST 'http://localhost:8080/product' 'Content-Type:application/json'
 ----

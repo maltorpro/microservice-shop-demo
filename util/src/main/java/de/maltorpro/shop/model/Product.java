@@ -9,10 +9,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.hateoas.ResourceSupport;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = { @Index(name = "IDX_PRODUCT_IDS", columnList = "productId,productUuid") })
-public class Product {
+public class Product extends ResourceSupport {
 	// @formatter:off
 	
 	@Id
@@ -26,6 +29,7 @@ public class Product {
 	        }
 	)
 	@GeneratedValue(generator = "productSequenceGenerator")
+	@JsonIgnore
 	private Long productId;
 
 	@Column(columnDefinition = "char(36)", nullable = false)
