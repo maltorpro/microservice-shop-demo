@@ -1,0 +1,36 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 828
+
+{
+  "content" : [ {
+    "productUuid" : "aff1fb8f-f8da-41e6-a67c-27850555f898",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description",
+    "links" : [ ]
+  }, {
+    "productUuid" : "dbdb788c-eb8a-4c98-9a02-9c35ff717181",
+    "name" : "Product3",
+    "shortDescription" : "product3 short description",
+    "longDescription" : "product3 long description",
+    "links" : [ ]
+  }, {
+    "productUuid" : "d7c24759-8ac5-4f03-b1f0-e6545ec964c6",
+    "name" : "name updated",
+    "shortDescription" : "short description updated",
+    "longDescription" : "long description updated",
+    "links" : [ ]
+  } ],
+  "last" : false,
+  "totalPages" : 2,
+  "totalElements" : 4,
+  "size" : 3,
+  "number" : 0,
+  "first" : true,
+  "sort" : null,
+  "numberOfElements" : 3
+}
+----

@@ -1,4 +1,10 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{"productUuid":null,"name":"Product2","shortDescription":"product2 short description","longDescription":"product2 long description","links":[]}'
+$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
+  "productUuid" : null,
+  "name" : "Product2",
+  "shortDescription" : "product2 short description",
+  "longDescription" : "product2 long description",
+  "links" : [ ]
+}'
 ----

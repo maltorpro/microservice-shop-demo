@@ -32,7 +32,7 @@ public class LoggingAspect {
 	private Tracer tracer;
 
 	@Around("execution(* de.maltorpro.shop.service..*(..))")
-	public Object profileExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+	public Object logRestCalls(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		long start = System.currentTimeMillis();
 		String className = joinPoint.getSignature().getDeclaringTypeName();

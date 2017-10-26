@@ -1,0 +1,56 @@
+|===
+|Path|Type|Description
+
+|`content[].productUuid`
+|`String`
+|The unique identifier of the product
+
+|`content[].name`
+|`String`
+|Name of the product
+
+|`content[].shortDescription`
+|`String`
+|Short product description
+
+|`content.[].longDescription`
+|`String`
+|Long product description
+
+|`content[].links`
+|`Array`
+|Link to the next product
+
+|`totalPages`
+|`Number`
+|Number of total pages.
+
+|`totalElements`
+|`Number`
+|Total amount of elements.
+
+|`last`
+|`Boolean`
+|Indicates whether the current page is the first one.
+
+|`size`
+|`Number`
+|Size of the page.
+
+|`number`
+|`Number`
+|Number of the current page.
+
+|`sort`
+|`Null`
+|Sorting parameters for the page.
+
+|`first`
+|`Boolean`
+|Indicates whether the current page is the first one.
+
+|`numberOfElements`
+|`Number`
+|Number of elements currently on this page.
+
+|===

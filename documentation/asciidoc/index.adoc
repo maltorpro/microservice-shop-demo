@@ -72,11 +72,46 @@ not create URIs themselves, instead they should use the above-described links to
 
 [[resources-product]]
 == Product REST Service
-A `GET` request returns a product.
-include::{snippets}/product/response-fields.adoc[]
+The product rest service is used to create, modify and list products.
+
+=== Listing product
+The `GET` request returns all products.
+
+include::{snippets}/products-get/response-fields.adoc[]
 
 ==== Example request
-include::{snippets}/product/curl-request.adoc[]
+include::{snippets}/products-get/curl-request.adoc[]
 
 ==== Example response
-include::{snippets}/product/http-response.adoc[]
+include::{snippets}/products-get/http-response.adoc[]
+
+=== Returning product
+The `GET` request returns a product identified by the unique identifier.
+
+include::{snippets}/product-get/response-fields.adoc[]
+
+==== Example request
+include::{snippets}/product-get/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/product-get/http-response.adoc[]
+
+=== Saving/Updating product
+The `POST` request saves or updates a product.
+
+include::{snippets}/product-save/request-fields.adoc[]
+
+==== Example request
+include::{snippets}/product-save/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/product-save/http-response.adoc[]
+
+=== Deleting product
+The `DELETE` request deletes a product identified by the unique identifier.
+
+==== Example request
+include::{snippets}/product-delete/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/product-delete/http-response.adoc[]

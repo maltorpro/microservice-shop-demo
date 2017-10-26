@@ -3,7 +3,7 @@
 
 |`productUuid`
 |`Null`
-|The unique prodcut identifier
+|The unique identifier of the product
 
 |`name`
 |`String`

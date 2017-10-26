@@ -2,7 +2,17 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 234
+Content-Length: 284
 
-{"productUuid":"3206519f-8075-403f-9fe3-4927d55e665e","name":"Product1","shortDescription":"product1 short description","longDescription":"product1 long description","_links":{"next":{"href":"http://localhost:8080/product/testuuid"}}}
+{
+  "productUuid" : "aff1fb8f-f8da-41e6-a67c-27850555f898",
+  "name" : "Product1",
+  "shortDescription" : "product1 short description",
+  "longDescription" : "product1 long description",
+  "_links" : {
+    "next" : {
+      "href" : "http://localhost:8080/product/testuuid"
+    }
+  }
+}
 ----

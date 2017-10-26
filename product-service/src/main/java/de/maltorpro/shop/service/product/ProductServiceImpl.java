@@ -5,6 +5,8 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -37,6 +39,11 @@ public class ProductServiceImpl implements ProductService {
 
 			productDB = product;
 			productDB.setProductUuid(UUID.randomUUID().toString());
+		} else {
+
+			productDB.setName(product.getName());
+			productDB.setShortDescription(product.getShortDescription());
+			productDB.setLongDescription(product.getLongDescription());
 		}
 
 		return productRepository.save(productDB);
@@ -46,6 +53,18 @@ public class ProductServiceImpl implements ProductService {
 	public Product findByUuid(String uuid) {
 
 		return productRepository.findFirstByProductUuid(uuid);
+	}
+
+	@Override
+	public long deleteByUuid(String uuid) {
+
+		return productRepository.deleteByProductUuid(uuid);
+	}
+
+	@Override
+	public Page<Product> listAllProductsByPage(int page, int size) {
+
+		return productPagingRepository.findAll(new PageRequest(page, size));
 	}
 
 }

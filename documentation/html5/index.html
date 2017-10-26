@@ -435,9 +435,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#overview-http-verbs">HTTP verbs</a></li>
 <li><a href="#overview-hypermedia">Hypermedia</a></li>
 <li><a href="#resources-product">Product REST Service</a>
+<ul class="sectlevel2">
+<li><a href="#_listing_product">Listing product</a>
 <ul class="sectlevel3">
 <li><a href="#_example_request">Example request</a></li>
 <li><a href="#_example_response">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_returning_product">Returning product</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_2">Example request</a></li>
+<li><a href="#_example_response_2">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_saving_updating_product">Saving/Updating product</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_3">Example request</a></li>
+<li><a href="#_example_response_3">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_deleting_product">Deleting product</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_4">Example request</a></li>
+<li><a href="#_example_response_4">Example response</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -549,7 +571,12 @@ not create URIs themselves, instead they should use the above-described links to
 <h2 id="resources-product"><a class="link" href="#resources-product">Product REST Service</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <code>GET</code> request returns a product.</p>
+<p>The product rest service is used to create, modify and list products.</p>
+</div>
+<div class="sect2">
+<h3 id="_listing_product"><a class="link" href="#_listing_product">Listing product</a></h3>
+<div class="paragraph">
+<p>The <code>GET</code> request returns all products.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -566,24 +593,69 @@ not create URIs themselves, instead they should use the above-described links to
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].productUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>weight</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].shortDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].longDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].links</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link to the next product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalPages</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bla</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of total pages.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the Product</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalElements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total amount of elements.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.weiter.href</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">bla</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>last</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the current page is the first one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size of the page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sorting parameters for the page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the current page is the first one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>numberOfElements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of elements currently on this page.</p></td>
 </tr>
 </tbody>
 </table>
@@ -591,7 +663,7 @@ not create URIs themselves, instead they should use the above-described links to
 <h4 id="_example_request"><a class="link" href="#_example_request">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/1' -i -H 'Accept: application/hal+json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/products/0/3' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -600,10 +672,220 @@ not create URIs themselves, instead they should use the above-described links to
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 105
+Content-Type: application/json;charset=UTF-8
+Content-Length: 828
 
-{"productId":1,"name":"name","weight":123,"_links":{"weiter":{"href":"http://localhost:8080/product/2"}}}</code></pre>
+{
+  "content" : [ {
+    "productUuid" : "aff1fb8f-f8da-41e6-a67c-27850555f898",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description",
+    "links" : [ ]
+  }, {
+    "productUuid" : "dbdb788c-eb8a-4c98-9a02-9c35ff717181",
+    "name" : "Product3",
+    "shortDescription" : "product3 short description",
+    "longDescription" : "product3 long description",
+    "links" : [ ]
+  }, {
+    "productUuid" : "d7c24759-8ac5-4f03-b1f0-e6545ec964c6",
+    "name" : "name updated",
+    "shortDescription" : "short description updated",
+    "longDescription" : "long description updated",
+    "links" : [ ]
+  } ],
+  "last" : false,
+  "totalPages" : 2,
+  "totalElements" : 4,
+  "size" : 3,
+  "number" : 0,
+  "first" : true,
+  "sort" : null,
+  "numberOfElements" : 3
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_returning_product"><a class="link" href="#_returning_product">Returning product</a></h3>
+<div class="paragraph">
+<p>The <code>GET</code> request returns a product identified by the unique identifier.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>shortDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>longDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.next.href</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Link to the next product</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_2"><a class="link" href="#_example_request_2">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/aff1fb8f-f8da-41e6-a67c-27850555f898' -i -H 'Accept: application/hal+json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_2"><a class="link" href="#_example_response_2">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 284
+
+{
+  "productUuid" : "aff1fb8f-f8da-41e6-a67c-27850555f898",
+  "name" : "Product1",
+  "shortDescription" : "product1 short description",
+  "longDescription" : "product1 long description",
+  "_links" : {
+    "next" : {
+      "href" : "http://localhost:8080/product/testuuid"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_saving_updating_product"><a class="link" href="#_saving_updating_product">Saving/Updating product</a></h3>
+<div class="paragraph">
+<p>The <code>POST</code> request saves or updates a product.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>shortDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Short product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>longDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Long product description</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>links</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not used, only for the response!</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_3"><a class="link" href="#_example_request_3">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
+  "productUuid" : null,
+  "name" : "Product2",
+  "shortDescription" : "product2 short description",
+  "longDescription" : "product2 long description",
+  "links" : [ ]
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_3"><a class="link" href="#_example_response_3">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 187
+
+{
+  "productUuid" : "bfd644ce-5cb2-47ae-9f90-1639750c62ce",
+  "name" : "Product2",
+  "shortDescription" : "product2 short description",
+  "longDescription" : "product2 long description"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deleting_product"><a class="link" href="#_deleting_product">Deleting product</a></h3>
+<div class="paragraph">
+<p>The <code>DELETE</code> request deletes a product identified by the unique identifier.</p>
+</div>
+<div class="sect3">
+<h4 id="_example_request_4"><a class="link" href="#_example_request_4">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/dbdb788c-eb8a-4c98-9a02-9c35ff717181' -i -X DELETE -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_4"><a class="link" href="#_example_response_4">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1
+
+1</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -612,7 +894,7 @@ Content-Length: 105
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-10-03 11:16:07 MESZ
+Last updated 2017-10-26 21:15:15 MESZ
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
