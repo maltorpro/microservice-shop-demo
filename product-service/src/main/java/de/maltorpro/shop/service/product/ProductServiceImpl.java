@@ -1,5 +1,6 @@
 package de.maltorpro.shop.service.product;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -17,10 +18,10 @@ import de.maltorpro.shop.model.Product;
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 
 	@Autowired
-	ProductPagingRepository productPagingRepository;
+	private ProductPagingRepository productPagingRepository;
 
 	@Override
 	public Product saveProduct(Product product) {
@@ -39,8 +40,9 @@ public class ProductServiceImpl implements ProductService {
 
 			productDB = product;
 			productDB.setProductUuid(UUID.randomUUID().toString());
-		} else {
+		} else { // update product
 
+			productDB.setUpdateDate(new Date());
 			productDB.setName(product.getName());
 			productDB.setShortDescription(product.getShortDescription());
 			productDB.setLongDescription(product.getLongDescription());

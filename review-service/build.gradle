@@ -10,5 +10,5 @@ dependencies {
 
 	compile("org.springframework.boot:spring-boot-starter-hateoas")	
 	
-	compile project(":util")
+	compile project(":main-module")
 }

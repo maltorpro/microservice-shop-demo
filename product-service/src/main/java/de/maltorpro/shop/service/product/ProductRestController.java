@@ -6,6 +6,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.domain.Page;
+import org.springframework.hateoas.Resource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import de.maltorpro.shop.model.Product;
 public class ProductRestController {
 
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 
 	// @formatter:off
 	/**
@@ -31,20 +32,28 @@ public class ProductRestController {
 	 */
 	 // @formatter:on
 	@RequestMapping(method = RequestMethod.GET, value = "/product/{uuid}")
-	public Product getProduct(@PathVariable String uuid) {
+	public Resource<Product> getProduct(@PathVariable String uuid) {
 
 		Product product = productService.findByUuid(uuid);
+		Resource<Product> resourceProduct = new Resource<Product>(product);
+
 		if (product != null) {
-			product.add(linkTo(methodOn(ProductRestController.class).getProduct("testuuid")).withRel("next"));
+			resourceProduct.add(linkTo(methodOn(ProductRestController.class).getProduct("testuuid")).withRel("next"));
 		}
 
-		return product;
+		return resourceProduct;
 	}
 
 	// @formatter:off
     /**
      * Save or update a single product.
-     * Sample usage: curl $HOST:$PORT/product -H "Content-Type: application/json" -X POST -d '{"name":"Product Name 1","shortDescription":"Product short description", "longDescription": "Product long description"}' 
+     * Sample usage: $ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d 
+     * '{
+	 *	  "productUuid" : null,
+	 *	  "name" : "Product2",
+	 *	  "shortDescription" : "product2 short description",
+	 *	  "longDescription" : "product2 long description",
+	 *	}'
      * @param product
      */
     // @formatter:on
@@ -72,14 +81,14 @@ public class ProductRestController {
 	// @formatter:off
     /**
      * Get all products via paging.
-     * Sample usage: curl $HOST:$PORT/products/
+     * Sample usage: curl $HOST:$PORT/products/0/1
      *
      * @param pageable paging objects
      * @return List of products.
      */
     // @formatter:on
 	@RequestMapping(value = "/products/{page}/{size}", method = RequestMethod.GET)
-	Page<Product> getProducts(@PathVariable int page, @PathVariable int size) {
+	public Page<Product> getProducts(@PathVariable int page, @PathVariable int size) {
 
 		return productService.listAllProductsByPage(page, size);
 	}

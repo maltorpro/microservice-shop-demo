@@ -115,3 +115,38 @@ include::{snippets}/product-delete/curl-request.adoc[]
 
 ==== Example response
 include::{snippets}/product-delete/http-response.adoc[]
+
+[[resources-recommendation]]
+== Recommendation REST Service
+The recommendation rest service is used to create, modify and list product recommendations.
+
+=== Returning recommendations for a product
+The `GET` request returns the recommendations for a product identified by the unique product identifier.
+
+include::{snippets}/recommendation-get/response-fields.adoc[]
+
+==== Example request
+include::{snippets}/recommendation-get/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/recommendation-get/http-response.adoc[]
+
+=== Saving/Updating recommendation
+The `POST` request saves or updates a recommendation.
+
+include::{snippets}/recommendation-save/request-fields.adoc[]
+
+==== Example request
+include::{snippets}/recommendation-save/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/recommendation-save/http-response.adoc[]
+
+=== Deleting recommendation
+The `DELETE` request deletes a recommendation identified by the unique product identifier.
+
+==== Example request
+include::{snippets}/recommendation-delete/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/recommendation-delete/http-response.adoc[]

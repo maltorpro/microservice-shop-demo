@@ -1,6 +1,7 @@
 package de.maltorpro.shop.service.product.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -23,9 +24,11 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 import java.util.UUID;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
@@ -36,15 +39,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.service.product.ProductRepository;
 import de.maltorpro.shop.service.product.ProductServiceApplication;
+import de.maltorpro.shop.service.test.support.FieldDescription;
+import de.maltorpro.shop.service.test.support.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductServiceApplication.class)
 @WebAppConfiguration
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ApplicationTest {
 
 	private MockMvc mockMvc;
@@ -67,42 +71,6 @@ public class ApplicationTest {
 	private static int productCounter = 0;
 
 	private static boolean setUpIsDone = false;
-
-	/*
-	 * Product field descriptions
-	 */
-
-	private static final String productUuidDescription = "The unique identifier of the product";
-
-	private static final String nameDescription = "Name of the product";
-
-	private static final String shortDescription = "Short product description";
-
-	private static final String longDescription = "Long product description";
-
-	private static final String linksDescription = "Link to the next product";
-
-	private static final String notUsedResponse = "Not used, only for the response!";
-
-	/*
-	 * Page field descriptions
-	 */
-
-	private static final String totalElementsDescription = "Total amount of elements.";
-
-	private static final String totalPagesDescription = "Number of total pages.";
-
-	private static final String lastDescription = "Indicates whether the current page is the first one.";
-
-	private static final String sizeDescription = "Size of the page.";
-
-	private static final String numberDescription = "Number of the current page.";
-
-	private static final String sortDescription = "Sorting parameters for the page.";
-
-	private static final String firstDescription = "Indicates whether the current page is the first one.";
-
-	private static final String numberOfElementsDescription = "Number of elements currently on this page.";
 
 	@Before
 	public void setup() throws Exception {
@@ -139,18 +107,8 @@ public class ApplicationTest {
 		}
 	}
 
-	public static String asJsonString(final Object obj) {
-		try {
-			final ObjectMapper mapper = new ObjectMapper();
-			final String jsonContent = mapper.writeValueAsString(obj);
-			return jsonContent;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	@Test
-	public void testSaveDefaultProduct() throws Exception {
+	public void test1SaveProduct() throws Exception {
 
 		Product product = new Product();
 		product.setName("Product2");
@@ -159,37 +117,45 @@ public class ApplicationTest {
 
 		this.mockMvc
 				.perform(post("/product").contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-						.content(asJsonString(product)))
-				.andDo(print()).andExpect(status().isOk())
+						.content(TestUtils.asJsonString(product)))
+				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product2")))
+				.andExpect(jsonPath("$.shortDescription", equalTo("product2 short description")))
+				.andExpect(jsonPath("$.longDescription", equalTo("product2 long description")))
 				.andDo(document("product-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
 						requestFields(attributes(key("title").value("Fields for saving a product")),
-								fieldWithPath("productUuid").description(productUuidDescription),
-								fieldWithPath("name").description(nameDescription),
-								fieldWithPath("shortDescription").description(shortDescription),
-								fieldWithPath("longDescription").description(longDescription),
-								fieldWithPath("links").description(notUsedResponse))));
+								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
+								fieldWithPath("creationDate").description(FieldDescription.creationDate),
+								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("name").description(FieldDescription.nameDescription),
+								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
+								fieldWithPath("longDescription").description(FieldDescription.longDescription))));
 
 		productCounter++;
 	}
 
 	@Test
-	public void testGetDefaultProdut() throws Exception {
+	public void test2GetProdut() throws Exception {
 
 		Product product = productRepository.findOne(defaultProductId);
 
 		this.mockMvc.perform(get("/product/" + product.getProductUuid()).accept(MediaTypes.HAL_JSON)).andDo(print())
 				.andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product1")))
+				.andExpect(jsonPath("$.shortDescription", equalTo("product1 short description")))
+				.andExpect(jsonPath("$.longDescription", equalTo("product1 long description")))
 				.andDo(document("product-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						responseFields(fieldWithPath("productUuid").description(productUuidDescription),
-								fieldWithPath("name").description(nameDescription),
-								fieldWithPath("shortDescription").description(shortDescription),
-								fieldWithPath("longDescription").description(longDescription),
-								fieldWithPath("_links.next.href").description(linksDescription))));
+						responseFields(
+								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
+								fieldWithPath("creationDate").description(FieldDescription.creationDate),
+								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("name").description(FieldDescription.nameDescription),
+								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
+								fieldWithPath("longDescription").description(FieldDescription.longDescription),
+								fieldWithPath("_links.next.href").description(FieldDescription.linksDescription))));
 	}
 
 	@Test
-	public void testUpdateProduct() throws Exception {
+	public void test3UpdateProduct() throws Exception {
 
 		Product product = productRepository.findOne(updateProductId);
 		product.setName("name updated");
@@ -198,7 +164,7 @@ public class ApplicationTest {
 
 		this.mockMvc
 				.perform(post("/product").contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-						.content(asJsonString(product)))
+						.content(TestUtils.asJsonString(product)))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.productUuid", equalTo(product.getProductUuid())))
 				.andExpect(jsonPath("$.name", equalTo("name updated")))
@@ -207,7 +173,7 @@ public class ApplicationTest {
 	}
 
 	@Test
-	public void testDeleteProduct() throws Exception {
+	public void test4DeleteProduct() throws Exception {
 
 		assertEquals("Check the product count before delete.", productCounter, productRepository.count());
 
@@ -220,28 +186,38 @@ public class ApplicationTest {
 				.andDo(document("product-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
 
 		productCounter--;
-		assertEquals("Check the product count before delete.", productCounter, productRepository.count());
+		assertEquals("Check the product count after delete.", productCounter, productRepository.count());
 	}
 
 	@Test
-	public void testGetProducts() throws Exception {
+	public void test5GetProducts() throws Exception {
 
 		this.mockMvc.perform(get("/products/0/3").accept(org.springframework.http.MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content[0].name", equalTo("Product1")))
+				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content[*]", hasSize(3)))
+				.andExpect(jsonPath("$.content[0].name", equalTo("Product1")))
+				.andExpect(jsonPath("$.content[0].shortDescription", equalTo("product1 short description")))
+				.andExpect(jsonPath("$.content[0].longDescription", equalTo("product1 long description")))
 				.andDo(document("products-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						responseFields(fieldWithPath("content[].productUuid").description(productUuidDescription),
-								fieldWithPath("content[].name").description(nameDescription),
-								fieldWithPath("content[].shortDescription").description(shortDescription),
-								fieldWithPath("content.[].longDescription").description(longDescription),
-								fieldWithPath("content[].links").description(linksDescription),
-								fieldWithPath("totalPages").description(totalPagesDescription),
-								fieldWithPath("totalElements").description(totalElementsDescription),
-								fieldWithPath("last").description(lastDescription),
-								fieldWithPath("size").description(sizeDescription),
-								fieldWithPath("number").description(numberDescription),
-								fieldWithPath("sort").description(sortDescription),
-								fieldWithPath("first").description(firstDescription),
-								fieldWithPath("numberOfElements").description(numberOfElementsDescription))));
+						responseFields(
+								fieldWithPath("content[].productUuid")
+										.description(FieldDescription.productUuidDescription),
+								fieldWithPath("content[].creationDate").description(FieldDescription.creationDate),
+								fieldWithPath("content[].updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("content[].name").description(FieldDescription.nameDescription),
+								fieldWithPath("content[].shortDescription")
+										.description(FieldDescription.shortDescription),
+								fieldWithPath("content.[].longDescription")
+										.description(FieldDescription.longDescription),
+
+								fieldWithPath("totalPages").description(FieldDescription.totalPagesDescription),
+								fieldWithPath("totalElements").description(FieldDescription.totalElementsDescription),
+								fieldWithPath("last").description(FieldDescription.lastDescription),
+								fieldWithPath("size").description(FieldDescription.sizeDescription),
+								fieldWithPath("number").description(FieldDescription.numberDescription),
+								fieldWithPath("sort").description(FieldDescription.sortDescription),
+								fieldWithPath("first").description(FieldDescription.firstDescription),
+								fieldWithPath("numberOfElements")
+										.description(FieldDescription.numberOfElementsDescription))));
 	}
 
 }

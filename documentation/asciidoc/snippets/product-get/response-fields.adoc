@@ -5,6 +5,14 @@
 |`String`
 |The unique identifier of the product
 
+|`creationDate`
+|`String`
+|Creation date ot the object
+
+|`updateDate`
+|`String`
+|Update date of the object
+
 |`name`
 |`String`
 |Name of the product

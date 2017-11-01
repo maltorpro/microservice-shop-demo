@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`creationDate`
+|`String`
+|Creation date ot the object
+
+|`updateDate`
+|`String`
+|Update date of the object
+
+|`recommendationUuid`
+|`String`
+|The unique identifier of the recommendation
+
+|`recommendationFor`
+|`Object`
+|Product for which the recommendations are
+
+|`recommendations[]`
+|`Array`
+|Recommendations for the product
+
+|===

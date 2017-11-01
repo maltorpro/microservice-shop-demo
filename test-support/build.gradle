@@ -1,0 +1,14 @@
+jar {
+    baseName = "test-support"
+    version = "0.0.1-SNAPSHOT"
+}
+
+springBoot {
+	layout = "NONE"
+}
+
+dependencies {
+
+	compile project(":main-module")
+	
+}

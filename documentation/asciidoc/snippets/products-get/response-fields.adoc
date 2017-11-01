@@ -5,6 +5,14 @@
 |`String`
 |The unique identifier of the product
 
+|`content[].creationDate`
+|`String`
+|Creation date ot the object
+
+|`content[].updateDate`
+|`String`
+|Update date of the object
+
 |`content[].name`
 |`String`
 |Name of the product
@@ -16,10 +24,6 @@
 |`content.[].longDescription`
 |`String`
 |Long product description
-
-|`content[].links`
-|`Array`
-|Link to the next product
 
 |`totalPages`
 |`Number`

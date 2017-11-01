@@ -1,11 +1,13 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 187
+Content-Type: application/json;charset=UTF-8
+Content-Length: 277
 
 {
-  "productUuid" : "bfd644ce-5cb2-47ae-9f90-1639750c62ce",
+  "creationDate" : "2017-11-01 14:08 PM UTC",
+  "updateDate" : "2017-11-01 14:08 PM UTC",
+  "productUuid" : "38768152-cc11-4d41-a9a1-4be0db7604ab",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"

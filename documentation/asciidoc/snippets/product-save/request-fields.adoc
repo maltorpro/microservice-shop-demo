@@ -5,6 +5,14 @@
 |`Null`
 |The unique identifier of the product
 
+|`creationDate`
+|`String`
+|Creation date ot the object
+
+|`updateDate`
+|`String`
+|Update date of the object
+
 |`name`
 |`String`
 |Name of the product
@@ -16,9 +24,5 @@
 |`longDescription`
 |`String`
 |Long product description
-
-|`links`
-|`Array`
-|Not used, only for the response!
 
 |===

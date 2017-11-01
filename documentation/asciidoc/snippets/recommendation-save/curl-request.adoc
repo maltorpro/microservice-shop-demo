@@ -1,0 +1,31 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/recommendation' -i -X POST -H 'Content-Type: application/json' -d '{
+  "creationDate" : "2017-11-01 16:16 PM UTC",
+  "updateDate" : "2017-11-01 16:16 PM UTC",
+  "recommendationUuid" : "95e65ab8-0ee0-4f47-8112-c5a25cc61f65",
+  "recommendationFor" : {
+    "creationDate" : "2017-11-01 16:16 PM UTC",
+    "updateDate" : "2017-11-01 16:16 PM UTC",
+    "productUuid" : "731dd0d6-44ec-4a1b-974f-9db5a0e8a704",
+    "name" : "Product5",
+    "shortDescription" : "product5 short description",
+    "longDescription" : "product5 long description"
+  },
+  "recommendations" : [ {
+    "creationDate" : "2017-11-01 16:16 PM UTC",
+    "updateDate" : "2017-11-01 16:16 PM UTC",
+    "productUuid" : "e3b43d62-851f-450e-bfb1-63bb5b92064b",
+    "name" : "Product3",
+    "shortDescription" : "product3 short description",
+    "longDescription" : "product3 long description"
+  }, {
+    "creationDate" : "2017-11-01 16:16 PM UTC",
+    "updateDate" : "2017-11-01 16:16 PM UTC",
+    "productUuid" : "982c4061-3985-489f-a95f-859bf279182c",
+    "name" : "Product4",
+    "shortDescription" : "product4 short description",
+    "longDescription" : "product4 long description"
+  } ]
+}'
+----

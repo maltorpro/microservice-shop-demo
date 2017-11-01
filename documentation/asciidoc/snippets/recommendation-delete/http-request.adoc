@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+DELETE /recommendation/product/731dd0d6-44ec-4a1b-974f-9db5a0e8a704 HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----
