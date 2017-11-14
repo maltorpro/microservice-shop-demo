@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/reviews/product/a5cb8650-7d98-4dba-8baf-ce23d6d815cf/0/4' -i -H 'Accept: application/json'
+----

@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = { @Index(name = "IDX_REVIEW_IDS", columnList = "reviewId,reviewUuid") })
@@ -26,7 +25,6 @@ public class Review extends ShopObject {
 					@Parameter(name = "sequence_name", value = "REVEIW_SEQUENCE"),
 					@Parameter(name = "initial_value", value = "1000"), @Parameter(name = "increment_size", value = "1") })
 	@GeneratedValue(generator = "reviewSequenceGenerator")
-	@JsonIgnore
 	private Long reviewId;
 
 	@Column(columnDefinition = "char(36)", nullable = false)
@@ -37,8 +35,12 @@ public class Review extends ShopObject {
 
 	@Column(nullable = false)
 	private Integer rating;
+	
+	@Column(length = 1024)
+	private String reviewText;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "productId")
 	private Product product;
 
 	// @formatter:on
@@ -80,6 +82,14 @@ public class Review extends ShopObject {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public String getReviewText() {
+		return reviewText;
+	}
+
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
 	}
 
 	@Override

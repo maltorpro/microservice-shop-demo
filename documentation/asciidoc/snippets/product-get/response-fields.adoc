@@ -13,6 +13,10 @@
 |`String`
 |Update date of the object
 
+|`productId`
+|`Number`
+|Database primary key
+
 |`name`
 |`String`
 |Name of the product

@@ -3,12 +3,30 @@ package de.maltorpro.shop.service.test.support;
 public final class FieldDescription {
 
 	/*
+	 * Table titles
+	 */
+
+	public static final String requestParamDescription = "Request path parameters";
+
+	public static final String responseParamDescription = "Response fields";
+
+	/*
+	 * Paging path parameters
+	 */
+
+	public static final String pageParamDescription = "Page of results";
+
+	public static final String sizeParamDescription = "Size of results";
+
+	/*
 	 * ShopOpject field descriptions
 	 */
 
-	public static final String creationDate = "Creation date ot the object";
+	public static final String creationDateDescription = "Creation date ot the object";
 
-	public static final String updateDate = "Update date of the object";
+	public static final String updateDateDescription = "Update date of the object";
+
+	public static final String idDescription = "Database primary key";
 
 	/*
 	 * Product field descriptions
@@ -33,6 +51,20 @@ public final class FieldDescription {
 	public static final String recommendationForDescription = "Product for which the recommendations are";
 
 	public static final String recommendationsDescription = "Recommendations for the product";
+
+	/*
+	 * Review field descriptions
+	 */
+
+	public static final String reviewUuidDescription = "The unique identifier of the review";
+
+	public static final String reviewAuthorDescription = "Author of the rating";
+
+	public static final String reviewRatingDescription = "Evaluation of the product in a value range from 1 to 5 stars";
+
+	public static final String reviewReviewText = "Review text written by the author";
+
+	public static final String reviewProductDescription = "Rated product";
 
 	/*
 	 * Page field descriptions

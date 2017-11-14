@@ -1,0 +1,36 @@
+|===
+|Path|Type|Description
+
+|`creationDate`
+|`String`
+|Creation date ot the object
+
+|`updateDate`
+|`String`
+|Update date of the object
+
+|`reviewId`
+|`Null`
+|Database primary key
+
+|`reviewUuid`
+|`Null`
+|The unique identifier of the review
+
+|`author`
+|`String`
+|Author of the rating
+
+|`rating`
+|`Number`
+|Evaluation of the product in a value range from 1 to 5 stars
+
+|`reviewText`
+|`String`
+|Review text written by the author
+
+|`product`
+|`Object`
+|Rated product
+
+|===

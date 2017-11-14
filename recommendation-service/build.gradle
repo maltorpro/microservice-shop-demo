@@ -7,9 +7,7 @@ dependencies {
 	
 	
 	compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
-	
 	compile("org.springframework.boot:spring-boot-starter-hateoas")
-	
 	compile project(":main-module")
 	
 	testCompile project (":test-support")

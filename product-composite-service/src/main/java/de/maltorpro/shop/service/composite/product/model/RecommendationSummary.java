@@ -1,27 +1,25 @@
 package de.maltorpro.shop.service.composite.product.model;
 
+import java.util.List;
+
+import de.maltorpro.shop.model.Product;
 
 public class RecommendationSummary {
 
-    private int recommendationId;
-    private String author;
-    private int rate;
+	private String recommendationUuid;
+	private List<Product> recommendations;
 
-    public RecommendationSummary(int recommendationId, String author, int rate) {
-        this.recommendationId = recommendationId;
-        this.author = author;
-        this.rate = rate;
-    }
+	public RecommendationSummary(String recommendationUuid, List<Product> recommendations) {
+		this.recommendationUuid = recommendationUuid;
+		this.recommendations = recommendations;
+	}
 
-    public int getRecommendationId() {
-        return recommendationId;
-    }
+	public String getRecommendationUuid() {
+		return recommendationUuid;
+	}
 
-    public String getAuthor() {
-        return author;
-    }
+	public List<Product> getRecommendations() {
+		return recommendations;
+	}
 
-    public int getRate() {
-        return rate;
-    }
 }

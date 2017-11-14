@@ -77,6 +77,8 @@ The product rest service is used to create, modify and list products.
 === Listing product
 The `GET` request returns all products.
 
+include::{snippets}/products-get/path-parameters.adoc[]
+
 include::{snippets}/products-get/response-fields.adoc[]
 
 ==== Example request
@@ -88,6 +90,10 @@ include::{snippets}/products-get/http-response.adoc[]
 === Returning product
 The `GET` request returns a product identified by the unique identifier.
 
+==== Request path parameters
+include::{snippets}/product-get/path-parameters.adoc[]
+
+==== Response fields
 include::{snippets}/product-get/response-fields.adoc[]
 
 ==== Example request
@@ -109,6 +115,9 @@ include::{snippets}/product-save/http-response.adoc[]
 
 === Deleting product
 The `DELETE` request deletes a product identified by the unique identifier.
+
+==== Request path parameters
+include::{snippets}/product-delete/path-parameters.adoc[]
 
 ==== Example request
 include::{snippets}/product-delete/curl-request.adoc[]
@@ -150,3 +159,38 @@ include::{snippets}/recommendation-delete/curl-request.adoc[]
 
 ==== Example response
 include::{snippets}/recommendation-delete/http-response.adoc[]
+
+[[resources-review]]
+== Review REST Service
+The review rest service is used to create, modify and list product reviews.
+
+=== Listing reviews
+The `GET` request returns all reviews of a product.
+
+include::{snippets}/reviews-get/response-fields.adoc[]
+
+==== Example request
+include::{snippets}/reviews-get/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/reviews-get/http-response.adoc[]
+
+=== Saving/Updating review
+The `POST` request saves or updates a review for a product.
+
+include::{snippets}/review-save/request-fields.adoc[]
+
+==== Example request
+include::{snippets}/review-save/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/review-save/http-response.adoc[]
+
+=== Deleting review
+The `DELETE` request deletes a review identified by the unique review identifier.
+
+==== Example request
+include::{snippets}/review-delete/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/review-delete/http-response.adoc[]

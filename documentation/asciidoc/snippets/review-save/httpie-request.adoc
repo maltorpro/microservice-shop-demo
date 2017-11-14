@@ -1,0 +1,21 @@
+[source,bash]
+----
+$ echo '{
+  "creationDate" : "2017-11-09 21:58 PM UTC",
+  "updateDate" : "2017-11-09 21:58 PM UTC",
+  "reviewId" : null,
+  "reviewUuid" : null,
+  "author" : "Max Mustermann2",
+  "rating" : 3,
+  "reviewText" : "Nice product2",
+  "product" : {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "41a2f12d-0271-4638-b4ba-78557a2d15eb",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }
+}' | http POST 'http://localhost:8080/review' 'Content-Type:application/json'
+----

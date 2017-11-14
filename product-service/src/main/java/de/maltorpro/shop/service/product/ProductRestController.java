@@ -27,7 +27,7 @@ public class ProductRestController {
 	 * Retrieve a single product by its uuid.
 	 * Sample usage: curl $HOST:$PORT/product/550e8400-e29b-11d4-a716-446655440000
 	 *
-	 * @param uuid
+	 * @param uuid The unique identifier of the product.
 	 * @return
 	 */
 	 // @formatter:on
@@ -54,7 +54,7 @@ public class ProductRestController {
 	 *	  "shortDescription" : "product2 short description",
 	 *	  "longDescription" : "product2 long description",
 	 *	}'
-     * @param product
+     * @param product Product object.
      */
     // @formatter:on
 	@RequestMapping(method = RequestMethod.POST, value = "/product")
@@ -68,7 +68,7 @@ public class ProductRestController {
      * Delete a single product by its uuid.
      * Sample usage: curl $HOST:$PORT/product/550e8400-e29b-11d4-a716-446655440000
      *
-     * @param uuid
+     * @param uuid The unique identifier of the product.
      * @return Number of deleted products.
      */
     // @formatter:on
@@ -83,7 +83,8 @@ public class ProductRestController {
      * Get all products via paging.
      * Sample usage: curl $HOST:$PORT/products/0/1
      *
-     * @param pageable paging objects
+     * @param page
+     * @param size 
      * @return List of products.
      */
     // @formatter:on

@@ -1,8 +1,9 @@
 [source,bash]
 ----
 $ echo '{
-  "creationDate" : "2017-11-01 14:08 PM UTC",
-  "updateDate" : "2017-11-01 14:08 PM UTC",
+  "creationDate" : "2017-11-14 20:54 PM UTC",
+  "updateDate" : "2017-11-14 20:54 PM UTC",
+  "productId" : null,
   "productUuid" : null,
   "name" : "Product2",
   "shortDescription" : "product2 short description",

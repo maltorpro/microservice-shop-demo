@@ -2,7 +2,6 @@ package de.maltorpro.shop.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(indexes = { @Index(name = "IDX_RECOMMENDATION_IDS", columnList = "recommendationId,recommendationUuid") })
@@ -36,16 +33,16 @@ public class Recommendation extends ShopObject {
 	        }
 	)
 	@GeneratedValue(generator = "recommendationSequenceGenerator")
-	@JsonIgnore
 	private Long recommendationId;
 
 	@Column(columnDefinition = "char(36)", nullable = false)
 	private String recommendationUuid;
 	
-	@OneToOne(optional = false, cascade = CascadeType.ALL)
+	@OneToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "productId")
 	private Product recommendationFor;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(	
 			name = "recommenation_product",
 				joinColumns = @JoinColumn(name = "recommendationId"),

@@ -2,12 +2,13 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 277
+Content-Length: 299
 
 {
-  "creationDate" : "2017-11-01 14:08 PM UTC",
-  "updateDate" : "2017-11-01 14:08 PM UTC",
-  "productUuid" : "38768152-cc11-4d41-a9a1-4be0db7604ab",
+  "creationDate" : "2017-11-14 20:54 PM UTC",
+  "updateDate" : "2017-11-14 20:54 PM UTC",
+  "productId" : 1003,
+  "productUuid" : "b71b7417-22a1-49b2-b9cd-ac779054cbc5",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"

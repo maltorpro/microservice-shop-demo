@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -40,6 +41,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Recommendation;
+import de.maltorpro.shop.service.product.ProductRepository;
 import de.maltorpro.shop.service.recommendation.RecommendationRepository;
 import de.maltorpro.shop.service.recommendation.RecommendationServiceApplication;
 import de.maltorpro.shop.service.test.support.FieldDescription;
@@ -48,8 +50,7 @@ import de.maltorpro.shop.service.test.support.TestUtils;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RecommendationServiceApplication.class)
 @WebAppConfiguration
-// @EnableJpaRepositories({ "de.maltorpro.shop.service.product",
-// "de.maltorpro.shop.service.recommendation" })
+@EnableJpaRepositories({ "de.maltorpro.shop.service.product", "de.maltorpro.shop.service.recommendation" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ApplicationTest {
 
@@ -58,8 +59,8 @@ public class ApplicationTest {
 	@Rule
 	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("../documentation/asciidoc/snippets");
 
-	// @Autowired
-	// private ProductRepository productRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Autowired
 	private RecommendationRepository recommendationRepository;
@@ -116,6 +117,12 @@ public class ApplicationTest {
 			product5.setLongDescription("product5 long description");
 			product5.setProductUuid(UUID.randomUUID().toString());
 
+			productRepository.save(product1);
+			productRepository.save(product2);
+			productRepository.save(product3);
+			productRepository.save(product4);
+			productRepository.save(product5);
+
 			List<Product> recommendedProducts = new ArrayList<>();
 			recommendedProducts.add(product1);
 			recommendedProducts.add(product3);
@@ -128,6 +135,7 @@ public class ApplicationTest {
 
 			recommendationRepository.save(recommendation);
 			recommendationCounter++;
+			setUpIsDone = true;
 		}
 	}
 
@@ -152,8 +160,9 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product2 long description")))
 				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
+								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
+								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
 								fieldWithPath("recommendationUuid")
 										.description(FieldDescription.recommendationUuidDescription),
 								fieldWithPath("recommendationFor")
@@ -183,8 +192,9 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[1].longDescription", equalTo("product3 long description")))
 				.andDo(document("recommendation-get", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), responseFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
+								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
+								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
 								fieldWithPath("recommendationUuid")
 										.description(FieldDescription.recommendationUuidDescription),
 								fieldWithPath("recommendationFor")
@@ -211,8 +221,9 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product3 long description")))
 				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
+								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
+								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
 								fieldWithPath("recommendationUuid")
 										.description(FieldDescription.recommendationUuidDescription),
 								fieldWithPath("recommendationFor")

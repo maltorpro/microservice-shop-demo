@@ -1,28 +1,32 @@
 [source,bash]
 ----
 $ echo '{
-  "creationDate" : "2017-11-01 16:16 PM UTC",
-  "updateDate" : "2017-11-01 16:16 PM UTC",
-  "recommendationUuid" : "95e65ab8-0ee0-4f47-8112-c5a25cc61f65",
+  "creationDate" : "2017-11-04 23:27 PM UTC",
+  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "recommendationId" : 1000,
+  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
   "recommendationFor" : {
-    "creationDate" : "2017-11-01 16:16 PM UTC",
-    "updateDate" : "2017-11-01 16:16 PM UTC",
-    "productUuid" : "731dd0d6-44ec-4a1b-974f-9db5a0e8a704",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1004,
+    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-01 16:16 PM UTC",
-    "updateDate" : "2017-11-01 16:16 PM UTC",
-    "productUuid" : "e3b43d62-851f-450e-bfb1-63bb5b92064b",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1002,
+    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-01 16:16 PM UTC",
-    "updateDate" : "2017-11-01 16:16 PM UTC",
-    "productUuid" : "982c4061-3985-489f-a95f-859bf279182c",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"

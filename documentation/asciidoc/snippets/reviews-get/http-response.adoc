@@ -1,0 +1,52 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1398
+
+{
+  "content" : [ {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "reviewId" : 1000,
+    "reviewUuid" : "5899329c-3b14-4548-b502-79fbf96ab362",
+    "author" : "Max Mustermann",
+    "rating" : 5,
+    "reviewText" : "Nice product",
+    "product" : {
+      "creationDate" : "2017-11-09 21:58 PM UTC",
+      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "productId" : 1000,
+      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "name" : "Product1",
+      "shortDescription" : "product1 short description",
+      "longDescription" : "product1 long description"
+    }
+  }, {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "reviewId" : 1001,
+    "reviewUuid" : "6dc3e135-c6e5-4f57-bb34-37638ce88bf0",
+    "author" : "John Doe",
+    "rating" : 1,
+    "reviewText" : "Bad product",
+    "product" : {
+      "creationDate" : "2017-11-09 21:58 PM UTC",
+      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "productId" : 1000,
+      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "name" : "Product1",
+      "shortDescription" : "product1 short description",
+      "longDescription" : "product1 long description"
+    }
+  } ],
+  "totalPages" : 1,
+  "totalElements" : 2,
+  "last" : true,
+  "size" : 4,
+  "number" : 0,
+  "sort" : null,
+  "numberOfElements" : 2,
+  "first" : true
+}
+----

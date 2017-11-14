@@ -1,7 +1,8 @@
 include 	"main-module",
 			"test-support",
- 			"product-composite-service",
-  			"product-service",
+			"product-service",
    			"recommendation-service",
    			"review-service",
+   			"product-composite-service",
    			"shop-gui"
+  			

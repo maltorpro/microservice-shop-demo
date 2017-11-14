@@ -444,6 +444,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_returning_product">Returning product</a>
 <ul class="sectlevel3">
+<li><a href="#_request_path_parameters">Request path parameters</a></li>
+<li><a href="#_response_fields">Response fields</a></li>
 <li><a href="#_example_request_2">Example request</a></li>
 <li><a href="#_example_response_2">Example response</a></li>
 </ul>
@@ -456,6 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_deleting_product">Deleting product</a>
 <ul class="sectlevel3">
+<li><a href="#_request_path_parameters_2">Request path parameters</a></li>
 <li><a href="#_example_request_4">Example request</a></li>
 <li><a href="#_example_response_4">Example response</a></li>
 </ul>
@@ -480,6 +483,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_example_request_7">Example request</a></li>
 <li><a href="#_example_response_7">Example response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#resources-review">Review REST Service</a>
+<ul class="sectlevel2">
+<li><a href="#_listing_reviews">Listing reviews</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_8">Example request</a></li>
+<li><a href="#_example_response_8">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_saving_updating_review">Saving/Updating review</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_9">Example request</a></li>
+<li><a href="#_example_response_9">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_deleting_review">Deleting review</a>
+<ul class="sectlevel3">
+<li><a href="#_example_request_10">Example request</a></li>
+<li><a href="#_example_response_10">Example response</a></li>
 </ul>
 </li>
 </ul>
@@ -600,7 +625,34 @@ not create URIs themselves, instead they should use the above-described links to
 <div class="paragraph">
 <p>The <code>GET</code> request returns all products.</p>
 </div>
+<div class="paragraph">
+<div class="title">Request path parameters</div>
+<p>/products/{page}/{size}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page of results</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size of the page.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -628,6 +680,11 @@ not create URIs themselves, instead they should use the above-described links to
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].updateDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].name</code></p></td>
@@ -700,27 +757,30 @@ not create URIs themselves, instead they should use the above-described links to
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1052
+Content-Length: 1124
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-01 14:08 PM UTC",
-    "updateDate" : "2017-11-01 14:08 PM UTC",
-    "productUuid" : "5635f332-86cc-487d-9d9a-90f0401e3774",
+    "creationDate" : "2017-11-14 20:02 PM UTC",
+    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "39a198c8-894c-438a-b421-3cb042b155a5",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-01 14:08 PM UTC",
-    "updateDate" : "2017-11-01 14:08 PM UTC",
-    "productUuid" : "38768152-cc11-4d41-a9a1-4be0db7604ab",
+    "creationDate" : "2017-11-14 20:02 PM UTC",
+    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "290e69b2-cf8e-4ece-8871-19fd4397adaa",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2017-11-01 14:08 PM UTC",
-    "updateDate" : "2017-11-01 14:08 PM UTC",
-    "productUuid" : "e1f60e88-5a82-496d-9ddf-d22eeac7f653",
+    "creationDate" : "2017-11-14 20:02 PM UTC",
+    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "12861648-cdb6-458b-8aa9-23558723e4f4",
     "name" : "name updated",
     "shortDescription" : "short description updated",
     "longDescription" : "long description updated"
@@ -743,7 +803,35 @@ Content-Length: 1052
 <div class="paragraph">
 <p>The <code>GET</code> request returns a product identified by the unique identifier.</p>
 </div>
+<div class="sect3">
+<h4 id="_request_path_parameters"><a class="link" href="#_request_path_parameters">Request path parameters</a></h4>
+<div class="paragraph">
+<div class="title">Request path parameters</div>
+<p>/product/{uuid}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_response_fields"><a class="link" href="#_response_fields">Response fields</a></h4>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -773,6 +861,11 @@ Content-Length: 1052
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the product</p></td>
@@ -794,11 +887,12 @@ Content-Length: 1052
 </tr>
 </tbody>
 </table>
+</div>
 <div class="sect3">
 <h4 id="_example_request_2"><a class="link" href="#_example_request_2">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/5635f332-86cc-487d-9d9a-90f0401e3774' -i -H 'Accept: application/hal+json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/39a198c8-894c-438a-b421-3cb042b155a5' -i -H 'Accept: application/hal+json'</code></pre>
 </div>
 </div>
 </div>
@@ -808,12 +902,13 @@ Content-Length: 1052
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 374
+Content-Length: 396
 
 {
-  "creationDate" : "2017-11-01 14:08 PM UTC",
-  "updateDate" : "2017-11-01 14:08 PM UTC",
-  "productUuid" : "5635f332-86cc-487d-9d9a-90f0401e3774",
+  "creationDate" : "2017-11-14 20:02 PM UTC",
+  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "productId" : 1000,
+  "productUuid" : "39a198c8-894c-438a-b421-3cb042b155a5",
   "name" : "Product1",
   "shortDescription" : "product1 short description",
   "longDescription" : "product1 long description",
@@ -862,6 +957,11 @@ Content-Length: 374
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>productId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the product</p></td>
@@ -883,8 +983,9 @@ Content-Length: 374
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-01 14:08 PM UTC",
-  "updateDate" : "2017-11-01 14:08 PM UTC",
+  "creationDate" : "2017-11-14 20:02 PM UTC",
+  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "productId" : null,
   "productUuid" : null,
   "name" : "Product2",
   "shortDescription" : "product2 short description",
@@ -899,12 +1000,13 @@ Content-Length: 374
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 277
+Content-Length: 299
 
 {
-  "creationDate" : "2017-11-01 14:08 PM UTC",
-  "updateDate" : "2017-11-01 14:08 PM UTC",
-  "productUuid" : "38768152-cc11-4d41-a9a1-4be0db7604ab",
+  "creationDate" : "2017-11-14 20:02 PM UTC",
+  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "productId" : 1003,
+  "productUuid" : "290e69b2-cf8e-4ece-8871-19fd4397adaa",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"
@@ -919,10 +1021,35 @@ Content-Length: 277
 <p>The <code>DELETE</code> request deletes a product identified by the unique identifier.</p>
 </div>
 <div class="sect3">
+<h4 id="_request_path_parameters_2"><a class="link" href="#_request_path_parameters_2">Request path parameters</a></h4>
+<div class="paragraph">
+<div class="title">Request path parameters</div>
+<p>/product/{uuid}</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_example_request_4"><a class="link" href="#_example_request_4">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/6559c2f0-baa7-4e89-aff0-dca0f9f393d7' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/7fe671f1-1697-4254-9126-a97d8354b672' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -977,6 +1104,11 @@ Content-Length: 1
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationUuid</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the recommendation</p></td>
@@ -997,7 +1129,7 @@ Content-Length: 1
 <h4 id="_example_request_5"><a class="link" href="#_example_request_5">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/c7fec008-6e3b-47f9-8591-65c759fce363' -i -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/3d53ab0a-f0f2-466e-9441-09835e8ed871' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1007,38 +1139,43 @@ Content-Length: 1
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1379
+Content-Length: 1504
 
 {
-  "creationDate" : "2017-11-01 15:24 PM UTC",
-  "updateDate" : "2017-11-01 15:24 PM UTC",
-  "recommendationUuid" : "41eecce8-d99d-401c-b113-930ef5e9d7d9",
+  "creationDate" : "2017-11-04 23:27 PM UTC",
+  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "recommendationId" : 1000,
+  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
   "recommendationFor" : {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "c7fec008-6e3b-47f9-8591-65c759fce363",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1004,
+    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "d3b358da-7b11-459d-8ed6-8d99a32dc577",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "28e6e6a9-a7a0-4f11-9c78-10bf9dbe5f47",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "4d723be5-d932-4f91-b8e7-ea6a030098d4",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1002,
+    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "e33ab218-90da-491a-a9d2-c6bbf30e0672",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1078,6 +1215,11 @@ Content-Length: 1379
 <td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationUuid</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the recommendation</p></td>
@@ -1099,28 +1241,32 @@ Content-Length: 1379
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-01 15:24 PM UTC",
-  "updateDate" : "2017-11-01 15:24 PM UTC",
-  "recommendationUuid" : "41eecce8-d99d-401c-b113-930ef5e9d7d9",
+  "creationDate" : "2017-11-04 23:27 PM UTC",
+  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "recommendationId" : 1000,
+  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
   "recommendationFor" : {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "c7fec008-6e3b-47f9-8591-65c759fce363",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1004,
+    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "4d723be5-d932-4f91-b8e7-ea6a030098d4",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1002,
+    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "e33ab218-90da-491a-a9d2-c6bbf30e0672",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1135,31 +1281,35 @@ Content-Length: 1379
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1086
+Content-Length: 1187
 
 {
-  "creationDate" : "2017-11-01 15:24 PM UTC",
-  "updateDate" : "2017-11-01 15:24 PM UTC",
-  "recommendationUuid" : "41eecce8-d99d-401c-b113-930ef5e9d7d9",
+  "creationDate" : "2017-11-04 23:27 PM UTC",
+  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "recommendationId" : 1000,
+  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
   "recommendationFor" : {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "c7fec008-6e3b-47f9-8591-65c759fce363",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1004,
+    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "4d723be5-d932-4f91-b8e7-ea6a030098d4",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1002,
+    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-01 15:24 PM UTC",
-    "updateDate" : "2017-11-01 15:24 PM UTC",
-    "productUuid" : "e33ab218-90da-491a-a9d2-c6bbf30e0672",
+    "creationDate" : "2017-11-04 23:27 PM UTC",
+    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1178,7 +1328,7 @@ Content-Length: 1086
 <h4 id="_example_request_7"><a class="link" href="#_example_request_7">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/c7fec008-6e3b-47f9-8591-65c759fce363' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/3d53ab0a-f0f2-466e-9441-09835e8ed871' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1197,10 +1347,326 @@ Content-Length: 1
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="resources-review"><a class="link" href="#resources-review">Review REST Service</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The review rest service is used to create, modify and list product reviews.</p>
+</div>
+<div class="sect2">
+<h3 id="_listing_reviews"><a class="link" href="#_listing_reviews">Listing reviews</a></h3>
+<div class="paragraph">
+<p>The <code>GET</code> request returns all reviews of a product.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creation date ot the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].updateDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].reviewId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].reviewUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the review</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].author</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Author of the rating</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].rating</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Evaluation of the product in a value range from 1 to 5 stars</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].reviewText</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Review text written by the author</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>content[].product</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rated product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalPages</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of total pages.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalElements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total amount of elements.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>last</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the current page is the first one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size of the page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of the current page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sorting parameters for the page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>first</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates whether the current page is the first one.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>numberOfElements</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of elements currently on this page.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_8"><a class="link" href="#_example_request_8">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/reviews/product/a5cb8650-7d98-4dba-8baf-ce23d6d815cf/0/4' -i -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_8"><a class="link" href="#_example_response_8">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1398
+
+{
+  "content" : [ {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "reviewId" : 1000,
+    "reviewUuid" : "5899329c-3b14-4548-b502-79fbf96ab362",
+    "author" : "Max Mustermann",
+    "rating" : 5,
+    "reviewText" : "Nice product",
+    "product" : {
+      "creationDate" : "2017-11-09 21:58 PM UTC",
+      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "productId" : 1000,
+      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "name" : "Product1",
+      "shortDescription" : "product1 short description",
+      "longDescription" : "product1 long description"
+    }
+  }, {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "reviewId" : 1001,
+    "reviewUuid" : "6dc3e135-c6e5-4f57-bb34-37638ce88bf0",
+    "author" : "John Doe",
+    "rating" : 1,
+    "reviewText" : "Bad product",
+    "product" : {
+      "creationDate" : "2017-11-09 21:58 PM UTC",
+      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "productId" : 1000,
+      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "name" : "Product1",
+      "shortDescription" : "product1 short description",
+      "longDescription" : "product1 long description"
+    }
+  } ],
+  "totalPages" : 1,
+  "totalElements" : 2,
+  "last" : true,
+  "size" : 4,
+  "number" : 0,
+  "sort" : null,
+  "numberOfElements" : 2,
+  "first" : true
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_saving_updating_review"><a class="link" href="#_saving_updating_review">Saving/Updating review</a></h3>
+<div class="paragraph">
+<p>The <code>POST</code> request saves or updates a review for a product.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creation date ot the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Update date of the object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reviewId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reviewUuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the review</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>author</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Author of the rating</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rating</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Evaluation of the product in a value range from 1 to 5 stars</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reviewText</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Review text written by the author</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>product</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rated product</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_example_request_9"><a class="link" href="#_example_request_9">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review' -i -X POST -H 'Content-Type: application/json' -d '{
+  "creationDate" : "2017-11-09 21:58 PM UTC",
+  "updateDate" : "2017-11-09 21:58 PM UTC",
+  "reviewId" : null,
+  "reviewUuid" : null,
+  "author" : "Max Mustermann2",
+  "rating" : 3,
+  "reviewText" : "Nice product2",
+  "product" : {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "41a2f12d-0271-4638-b4ba-78557a2d15eb",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }
+}'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_9"><a class="link" href="#_example_response_9">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 583
+
+{
+  "creationDate" : "2017-11-09 21:58 PM UTC",
+  "updateDate" : "2017-11-09 21:58 PM UTC",
+  "reviewId" : 1002,
+  "reviewUuid" : "51844542-d73e-4056-b890-44d248102b00",
+  "author" : "Max Mustermann2",
+  "rating" : 3,
+  "reviewText" : "Nice product2",
+  "product" : {
+    "creationDate" : "2017-11-09 21:58 PM UTC",
+    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "41a2f12d-0271-4638-b4ba-78557a2d15eb",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deleting_review"><a class="link" href="#_deleting_review">Deleting review</a></h3>
+<div class="paragraph">
+<p>The <code>DELETE</code> request deletes a review identified by the unique review identifier.</p>
+</div>
+<div class="sect3">
+<h4 id="_example_request_10"><a class="link" href="#_example_request_10">Example request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review/5899329c-3b14-4548-b502-79fbf96ab362' -i -X DELETE -H 'Accept: application/json'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_response_10"><a class="link" href="#_example_response_10">Example response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1
+
+1</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-01 16:51:23 MEZ
+Last updated 2017-11-13 23:15:20 MEZ
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

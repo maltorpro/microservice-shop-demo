@@ -12,8 +12,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableAspectJAutoProxy
-@ComponentScan({ "de.maltorpro.shop.service.product", "de.maltorpro.shop.util", "de.maltorpro.shop.model",
-		"de.maltorpro.shop.dto" })
+@ComponentScan({ "de.maltorpro.shop.service.product", "de.maltorpro.shop.util", "de.maltorpro.shop.model" })
 @EntityScan({ "de.maltorpro.shop.model" })
 public class ProductServiceApplication {
 

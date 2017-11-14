@@ -7,51 +7,49 @@ import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Recommendation;
 import de.maltorpro.shop.model.Review;
 
-
 public class ProductAggregated {
-    private long productId;
-    private String name;
-    private int weight;
-    private List<RecommendationSummary> recommendations;
-    private List<ReviewSummary> reviews;
 
-    public ProductAggregated(Product product, List<Recommendation> recommendations, List<Review> reviews) {
+	private String productUuid;
+	private String name;
+	private List<RecommendationSummary> recommendations;
+	private List<ReviewSummary> reviews;
 
-        // 1. Setup product info
-        this.productId = product.getProductId();
-        this.name = product.getName();
- 
+	public ProductAggregated(Product product, List<Recommendation> recommendations, List<Review> reviews) {
 
-        // 2. Copy summary recommendation info, if available
-        if (recommendations != null)
-            this.recommendations = recommendations.stream()
-                .map(r -> new RecommendationSummary(r.getRecommendationId(), r.getAuthor(), r.getRate()))
-                .collect(Collectors.toList());
+		// 1. Setup product info
+		this.name = product.getName();
 
-        // 3. Copy summary review info, if available
-        if (reviews != null)
-            this.reviews = reviews.stream()
-                .map(r -> new ReviewSummary(r.getReviewId(), r.getAuthor(), r.getSubject()))
-                .collect(Collectors.toList());
-    }
+		// 2. Copy summary recommendation info, if available
+		if (recommendations != null)
+			this.recommendations = recommendations.stream()
+					.map(x -> new RecommendationSummary(x.getRecommendationUuid(), x.getRecommendations()))
+					.collect(Collectors.toList());
 
-    public long getProductId() {
-        return productId;
-    }
+		// 3. Copy summary review info, if available
+		if (reviews != null)
+			this.reviews = reviews.stream().map(x -> {
+				ReviewSummary rSummary = new ReviewSummary();
+				rSummary.setReviewUuid(x.getReviewUuid());
+				rSummary.setAuthor(x.getAuthor());
+				rSummary.setRating(x.getRating());
+				rSummary.setReviewText(x.getReviewText());
+				return rSummary;
+			}).collect(Collectors.toList());
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getProductUuid() {
+		return productUuid;
+	}
 
-    public int getWeight() {
-        return weight;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public List<RecommendationSummary> getRecommendations() {
-        return recommendations;
-    }
+	public List<RecommendationSummary> getRecommendations() {
+		return recommendations;
+	}
 
-    public List<ReviewSummary> getReviews() {
-        return reviews;
-    }
+	public List<ReviewSummary> getReviews() {
+		return reviews;
+	}
 }

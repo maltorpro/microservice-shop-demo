@@ -6,7 +6,7 @@ It should be serve as framework for further implementations.
 
 *  [Preconditions](#preconditions)
 *  [Deployment](#deployment)
-*  [Run the Application](#run-the-application)
+*  [Run the Application in Eclipse](#run-the-application-in-eclipse)
 *  [Run the Application in Docker-Swarm](#run-the-application-in-docker-swarm)
 
 

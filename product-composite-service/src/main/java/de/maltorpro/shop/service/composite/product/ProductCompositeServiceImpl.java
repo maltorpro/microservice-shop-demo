@@ -3,13 +3,14 @@ package de.maltorpro.shop.service.composite.product;
 import java.util.Arrays;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -19,10 +20,11 @@ import de.maltorpro.shop.model.Recommendation;
 import de.maltorpro.shop.model.Review;
 import de.maltorpro.shop.util.ServiceUtils;
 
-@Component
-public class ProductCompositeIntegration {
+@Service("productCompositeService")
+@Transactional
+public class ProductCompositeServiceImpl {
 
-	private static final Logger log = LoggerFactory.getLogger(ProductCompositeIntegration.class);
+	private static final Logger log = LoggerFactory.getLogger(ProductCompositeServiceImpl.class);
 
 	@Inject
 	private ServiceUtils util;
@@ -104,7 +106,7 @@ public class ProductCompositeIntegration {
 		log.warn("Using fallback method for recommendation-service");
 		log.debug("GetRecommendations.fallback-cnt {}", 1);
 
-		Recommendation[] result = { new Recommendation(productId, 1, "Fallback Author 1", 1, "Fallback Content 1") };
+		Recommendation[] result = { new Recommendation() };
 		return util.createResponse(result, HttpStatus.OK);
 	}
 
@@ -142,7 +144,7 @@ public class ProductCompositeIntegration {
 		log.warn("Using fallback method for review-service");
 		log.debug("GetReviews.fallback-cnt {}", 1);
 
-		Review[] result = { new Review(productId, 1, "Fallback Author 1", "Fallback Subject 1", "Fallback Content 1") };
+		Review[] result = { new Review() };
 		return util.createResponse(result, HttpStatus.OK);
 	}
 

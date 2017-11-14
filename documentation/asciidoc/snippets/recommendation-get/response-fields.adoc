@@ -9,6 +9,10 @@
 |`String`
 |Update date of the object
 
+|`recommendationId`
+|`Number`
+|Database primary key
+
 |`recommendationUuid`
 |`String`
 |The unique identifier of the recommendation

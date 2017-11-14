@@ -4,17 +4,19 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.snippet.Attributes.attributes;
 import static org.springframework.restdocs.snippet.Attributes.key;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -123,10 +125,11 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.longDescription", equalTo("product2 long description")))
 				.andDo(document("product-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
-						requestFields(attributes(key("title").value("Fields for saving a product")),
+						requestFields(attributes(key("title").value(FieldDescription.requestParamDescription)),
 								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
-								fieldWithPath("creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
+								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
+								fieldWithPath("productId").description(FieldDescription.idDescription),
 								fieldWithPath("name").description(FieldDescription.nameDescription),
 								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
 								fieldWithPath("longDescription").description(FieldDescription.longDescription))));
@@ -139,15 +142,18 @@ public class ApplicationTest {
 
 		Product product = productRepository.findOne(defaultProductId);
 
-		this.mockMvc.perform(get("/product/" + product.getProductUuid()).accept(MediaTypes.HAL_JSON)).andDo(print())
-				.andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product1")))
+		this.mockMvc.perform(get("/product/{uuid}", product.getProductUuid()).accept(MediaTypes.HAL_JSON))
+				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product1")))
 				.andExpect(jsonPath("$.shortDescription", equalTo("product1 short description")))
 				.andExpect(jsonPath("$.longDescription", equalTo("product1 long description")))
 				.andDo(document("product-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						responseFields(
+						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
+								parameterWithName("uuid").description(FieldDescription.productUuidDescription)),
+						responseFields(attributes(key("title").value(FieldDescription.responseParamDescription)),
 								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
-								fieldWithPath("creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
+								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
+								fieldWithPath("productId").description(FieldDescription.idDescription),
 								fieldWithPath("name").description(FieldDescription.nameDescription),
 								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
 								fieldWithPath("longDescription").description(FieldDescription.longDescription),
@@ -180,10 +186,14 @@ public class ApplicationTest {
 		Product product = productRepository.findOne(deleteProductId);
 
 		this.mockMvc
-				.perform(delete("/product/" + product.getProductUuid())
+				.perform(delete("/product/{uuid}", product.getProductUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(equalTo("1")))
-				.andDo(document("product-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document("product-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
+								parameterWithName("uuid").description(FieldDescription.productUuidDescription))
+
+		));
 
 		productCounter--;
 		assertEquals("Check the product count after delete.", productCounter, productRepository.count());
@@ -192,17 +202,26 @@ public class ApplicationTest {
 	@Test
 	public void test5GetProducts() throws Exception {
 
-		this.mockMvc.perform(get("/products/0/3").accept(org.springframework.http.MediaType.APPLICATION_JSON))
+		this.mockMvc
+				.perform(get("/products/{page}/{size}", 0, 3)
+						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content[*]", hasSize(3)))
 				.andExpect(jsonPath("$.content[0].name", equalTo("Product1")))
 				.andExpect(jsonPath("$.content[0].shortDescription", equalTo("product1 short description")))
 				.andExpect(jsonPath("$.content[0].longDescription", equalTo("product1 long description")))
 				.andDo(document("products-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						responseFields(
+
+						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
+								parameterWithName("page").description(FieldDescription.pageParamDescription),
+								parameterWithName("size").description(FieldDescription.sizeDescription)),
+						responseFields(attributes(key("title").value(FieldDescription.responseParamDescription)),
 								fieldWithPath("content[].productUuid")
 										.description(FieldDescription.productUuidDescription),
-								fieldWithPath("content[].creationDate").description(FieldDescription.creationDate),
-								fieldWithPath("content[].updateDate").description(FieldDescription.updateDate),
+								fieldWithPath("content[].creationDate")
+										.description(FieldDescription.creationDateDescription),
+								fieldWithPath("content[].updateDate")
+										.description(FieldDescription.updateDateDescription),
+								fieldWithPath("content[].productId").description(FieldDescription.idDescription),
 								fieldWithPath("content[].name").description(FieldDescription.nameDescription),
 								fieldWithPath("content[].shortDescription")
 										.description(FieldDescription.shortDescription),

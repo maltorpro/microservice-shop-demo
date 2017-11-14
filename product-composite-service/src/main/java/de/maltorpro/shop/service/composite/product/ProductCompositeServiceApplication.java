@@ -12,28 +12,22 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
 
-
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ComponentScan({
-	"de.maltorpro.shop.service.composite.product",
-	"de.maltorpro.shop.util",
-	"de.maltorpro.shop.model"
-	})
+@ComponentScan({ "de.maltorpro.shop.service.composite.product", "de.maltorpro.shop.util", "de.maltorpro.shop.model" })
 public class ProductCompositeServiceApplication {
 
+	@Bean
+	@LoadBalanced
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
 		SpringApplication.run(ProductCompositeServiceApplication.class, args);
 

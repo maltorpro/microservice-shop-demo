@@ -1,27 +1,42 @@
 package de.maltorpro.shop.service.composite.product.model;
 
-
 public class ReviewSummary {
 
-    private int reviewId;
-    private String author;
-    private String subject;
+	private String reviewUuid;
+	private String author;
+	private Integer rating;
+	private String reviewText;
 
-    public ReviewSummary(int reviewId, String author, String subject) {
-        this.reviewId = reviewId;
-        this.author = author;
-        this.subject = subject;
-    }
+	public String getReviewUuid() {
+		return reviewUuid;
+	}
 
-    public int getReviewId() {
-        return reviewId;
-    }
+	public void setReviewUuid(String reviewUuid) {
+		this.reviewUuid = reviewUuid;
+	}
 
-    public String getAuthor() {
-        return author;
-    }
+	public String getAuthor() {
+		return author;
+	}
 
-    public String getSubject() {
-        return subject;
-    }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	public String getReviewText() {
+		return reviewText;
+	}
+
+	public void setReviewText(String reviewText) {
+		this.reviewText = reviewText;
+	}
+
 }

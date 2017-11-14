@@ -10,8 +10,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(indexes = { @Index(name = "IDX_PRODUCT_IDS", columnList = "productId,productUuid") })
 public class Product extends ShopObject {
@@ -28,7 +26,6 @@ public class Product extends ShopObject {
 	        }
 	)
 	@GeneratedValue(generator = "productSequenceGenerator")
-	@JsonIgnore
 	private Long productId;
 
 	@Column(columnDefinition = "char(36)", nullable = false)

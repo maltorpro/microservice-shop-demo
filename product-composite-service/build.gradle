@@ -20,4 +20,6 @@ dependencies {
 
 	
 	compile project(":main-module")
+	
+	testCompile project (":test-support")
 }

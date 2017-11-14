@@ -1,0 +1,11 @@
+./products/{page}/{size}
+|===
+|Parameter|Description
+
+|`page`
+|Page of results
+
+|`size`
+|Size of the page.
+
+|===
