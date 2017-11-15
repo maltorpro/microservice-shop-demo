@@ -7,6 +7,10 @@ springBoot {
 	layout = "NONE"
 }
 
+bootRepackage {
+    enabled = false
+}
+
 dependencies {
 
 	compile project(":main-module")

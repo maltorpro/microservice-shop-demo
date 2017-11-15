@@ -6,35 +6,35 @@ Content-Length: 1398
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "reviewId" : 1000,
-    "reviewUuid" : "5899329c-3b14-4548-b502-79fbf96ab362",
+    "reviewUuid" : "b40af90a-9a85-4e43-a12b-614cd4eed74d",
     "author" : "Max Mustermann",
     "rating" : 5,
     "reviewText" : "Nice product",
     "product" : {
-      "creationDate" : "2017-11-09 21:58 PM UTC",
-      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "creationDate" : "2017-11-15 19:03 PM UTC",
+      "updateDate" : "2017-11-15 19:03 PM UTC",
       "productId" : 1000,
-      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
     }
   }, {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "reviewId" : 1001,
-    "reviewUuid" : "6dc3e135-c6e5-4f57-bb34-37638ce88bf0",
+    "reviewUuid" : "dec88a06-8118-415a-b7f0-2e280de9546e",
     "author" : "John Doe",
     "rating" : 1,
     "reviewText" : "Bad product",
     "product" : {
-      "creationDate" : "2017-11-09 21:58 PM UTC",
-      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "creationDate" : "2017-11-15 19:03 PM UTC",
+      "updateDate" : "2017-11-15 19:03 PM UTC",
       "productId" : 1000,
-      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
@@ -46,7 +46,7 @@ Content-Length: 1398
   "size" : 4,
   "number" : 0,
   "sort" : null,
-  "numberOfElements" : 2,
-  "first" : true
+  "first" : true,
+  "numberOfElements" : 2
 }
 ----

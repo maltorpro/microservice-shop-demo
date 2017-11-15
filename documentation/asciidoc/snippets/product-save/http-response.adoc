@@ -5,10 +5,10 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 299
 
 {
-  "creationDate" : "2017-11-14 20:54 PM UTC",
-  "updateDate" : "2017-11-14 20:54 PM UTC",
+  "creationDate" : "2017-11-15 18:55 PM UTC",
+  "updateDate" : "2017-11-15 18:55 PM UTC",
   "productId" : 1003,
-  "productUuid" : "b71b7417-22a1-49b2-b9cd-ac779054cbc5",
+  "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"

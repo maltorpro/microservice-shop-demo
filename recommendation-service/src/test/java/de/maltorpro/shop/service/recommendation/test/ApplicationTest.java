@@ -41,16 +41,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Recommendation;
-import de.maltorpro.shop.service.product.ProductRepository;
 import de.maltorpro.shop.service.recommendation.RecommendationRepository;
 import de.maltorpro.shop.service.recommendation.RecommendationServiceApplication;
 import de.maltorpro.shop.service.test.support.FieldDescription;
+import de.maltorpro.shop.service.test.support.ProductTestRepository;
 import de.maltorpro.shop.service.test.support.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RecommendationServiceApplication.class)
 @WebAppConfiguration
-@EnableJpaRepositories({ "de.maltorpro.shop.service.product", "de.maltorpro.shop.service.recommendation" })
+@EnableJpaRepositories({ "de.maltorpro.shop.service.test.support", "de.maltorpro.shop.service.recommendation" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ApplicationTest {
 
@@ -60,7 +60,7 @@ public class ApplicationTest {
 	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("../documentation/asciidoc/snippets");
 
 	@Autowired
-	private ProductRepository productRepository;
+	private ProductTestRepository productTestRepository;
 
 	@Autowired
 	private RecommendationRepository recommendationRepository;
@@ -117,11 +117,11 @@ public class ApplicationTest {
 			product5.setLongDescription("product5 long description");
 			product5.setProductUuid(UUID.randomUUID().toString());
 
-			productRepository.save(product1);
-			productRepository.save(product2);
-			productRepository.save(product3);
-			productRepository.save(product4);
-			productRepository.save(product5);
+			productTestRepository.save(product1);
+			productTestRepository.save(product2);
+			productTestRepository.save(product3);
+			productTestRepository.save(product4);
+			productTestRepository.save(product5);
 
 			List<Product> recommendedProducts = new ArrayList<>();
 			recommendedProducts.add(product1);

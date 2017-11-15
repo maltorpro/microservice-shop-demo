@@ -6,26 +6,26 @@ Content-Length: 1124
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-14 20:54 PM UTC",
-    "updateDate" : "2017-11-14 20:54 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1000,
-    "productUuid" : "92e68bcf-b692-45c0-9da9-731a727145da",
+    "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-14 20:54 PM UTC",
-    "updateDate" : "2017-11-14 20:54 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1003,
-    "productUuid" : "b71b7417-22a1-49b2-b9cd-ac779054cbc5",
+    "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2017-11-14 20:54 PM UTC",
-    "updateDate" : "2017-11-14 20:54 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1001,
-    "productUuid" : "ad5548a9-109f-4776-a084-1056f05f3d8b",
+    "productUuid" : "3c62bad5-fe5b-4c13-9c2f-ec21e6065a24",
     "name" : "name updated",
     "shortDescription" : "short description updated",
     "longDescription" : "long description updated"

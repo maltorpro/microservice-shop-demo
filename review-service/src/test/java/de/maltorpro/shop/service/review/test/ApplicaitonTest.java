@@ -39,16 +39,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Review;
-import de.maltorpro.shop.service.product.ProductRepository;
 import de.maltorpro.shop.service.review.ReviewRepository;
 import de.maltorpro.shop.service.review.ReviewServiceApplication;
 import de.maltorpro.shop.service.test.support.FieldDescription;
+import de.maltorpro.shop.service.test.support.ProductTestRepository;
 import de.maltorpro.shop.service.test.support.TestUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ReviewServiceApplication.class)
 @WebAppConfiguration
-@EnableJpaRepositories({ "de.maltorpro.shop.service.product", "de.maltorpro.shop.service.review" })
+@EnableJpaRepositories({ "de.maltorpro.shop.service.test.support", "de.maltorpro.shop.service.review" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ApplicaitonTest {
 
@@ -61,7 +61,7 @@ public class ApplicaitonTest {
 	private ReviewRepository reviewRepository;
 
 	@Autowired
-	private ProductRepository produtRepository;
+	private ProductTestRepository produtTestRepository;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -108,8 +108,8 @@ public class ApplicaitonTest {
 			review2.setProduct(product1);
 			review2.setReviewUuid(UUID.randomUUID().toString());
 
-			produtRepository.save(product1);
-			produtRepository.save(product2);
+			produtTestRepository.save(product1);
+			produtTestRepository.save(product2);
 
 			reviewRepository.save(review1);
 			reviewRepository.save(review2);

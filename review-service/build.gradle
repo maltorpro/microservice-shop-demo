@@ -13,5 +13,4 @@ dependencies {
 	
 	compile project(":main-module")
 	testCompile project(":test-support")
-	testCompile project (":product-service")
 }
