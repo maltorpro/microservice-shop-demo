@@ -5,10 +5,10 @@ Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 396
 
 {
-  "creationDate" : "2017-11-15 18:55 PM UTC",
-  "updateDate" : "2017-11-15 18:55 PM UTC",
+  "creationDate" : "2017-11-15 19:37 PM UTC",
+  "updateDate" : "2017-11-15 19:37 PM UTC",
   "productId" : 1000,
-  "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
+  "productUuid" : "5611dc50-049d-4824-af67-bed28685f14d",
   "name" : "Product1",
   "shortDescription" : "product1 short description",
   "longDescription" : "product1 long description",

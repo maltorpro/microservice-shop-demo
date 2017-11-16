@@ -160,15 +160,15 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product2 long description")))
 				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("recommendationUuid")
-										.description(FieldDescription.recommendationUuidDescription),
+										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
 								fieldWithPath("recommendationFor")
-										.description(FieldDescription.recommendationForDescription),
+										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
 								fieldWithPath("recommendations[]")
-										.description(FieldDescription.recommendationsDescription)
+										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION)
 
 						)));
 
@@ -192,15 +192,15 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[1].longDescription", equalTo("product3 long description")))
 				.andDo(document("recommendation-get", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), responseFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("recommendationUuid")
-										.description(FieldDescription.recommendationUuidDescription),
+										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
 								fieldWithPath("recommendationFor")
-										.description(FieldDescription.recommendationForDescription),
+										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
 								fieldWithPath("recommendations[]")
-										.description(FieldDescription.recommendationsDescription))));
+										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION))));
 	}
 
 	@Test
@@ -221,15 +221,15 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product3 long description")))
 				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
 						preprocessResponse(prettyPrint()), requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("recommendationId").description(FieldDescription.idDescription),
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("recommendationUuid")
-										.description(FieldDescription.recommendationUuidDescription),
+										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
 								fieldWithPath("recommendationFor")
-										.description(FieldDescription.recommendationForDescription),
+										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
 								fieldWithPath("recommendations[]")
-										.description(FieldDescription.recommendationsDescription)
+										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION)
 
 						)));
 	}

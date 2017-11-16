@@ -125,14 +125,14 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.longDescription", equalTo("product2 long description")))
 				.andDo(document("product-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
-						requestFields(attributes(key("title").value(FieldDescription.requestParamDescription)),
-								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("productId").description(FieldDescription.idDescription),
-								fieldWithPath("name").description(FieldDescription.nameDescription),
-								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
-								fieldWithPath("longDescription").description(FieldDescription.longDescription))));
+						requestFields(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								fieldWithPath("productUuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("productId").description(FieldDescription.ID_DESCRIPTION),
+								fieldWithPath("name").description(FieldDescription.NAME_DESCRIPTION),
+								fieldWithPath("shortDescription").description(FieldDescription.SHORT_DESCRIPTION),
+								fieldWithPath("longDescription").description(FieldDescription.LONG_DESCRIPTION))));
 
 		productCounter++;
 	}
@@ -147,16 +147,16 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.shortDescription", equalTo("product1 short description")))
 				.andExpect(jsonPath("$.longDescription", equalTo("product1 long description")))
 				.andDo(document("product-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
-								parameterWithName("uuid").description(FieldDescription.productUuidDescription)),
-						responseFields(attributes(key("title").value(FieldDescription.responseParamDescription)),
-								fieldWithPath("productUuid").description(FieldDescription.productUuidDescription),
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("productId").description(FieldDescription.idDescription),
-								fieldWithPath("name").description(FieldDescription.nameDescription),
-								fieldWithPath("shortDescription").description(FieldDescription.shortDescription),
-								fieldWithPath("longDescription").description(FieldDescription.longDescription),
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION)),
+						responseFields(attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
+								fieldWithPath("productUuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("productId").description(FieldDescription.ID_DESCRIPTION),
+								fieldWithPath("name").description(FieldDescription.NAME_DESCRIPTION),
+								fieldWithPath("shortDescription").description(FieldDescription.SHORT_DESCRIPTION),
+								fieldWithPath("longDescription").description(FieldDescription.LONG_DESCRIPTION),
 								fieldWithPath("_links.next.href").description(FieldDescription.linksDescription))));
 	}
 
@@ -190,8 +190,8 @@ public class ApplicationTest {
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(equalTo("1")))
 				.andDo(document("product-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
-								parameterWithName("uuid").description(FieldDescription.productUuidDescription))
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION))
 
 		));
 
@@ -211,32 +211,32 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.content[0].longDescription", equalTo("product1 long description")))
 				.andDo(document("products-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
-						pathParameters(attributes(key("title").value(FieldDescription.requestParamDescription)),
-								parameterWithName("page").description(FieldDescription.pageParamDescription),
-								parameterWithName("size").description(FieldDescription.sizeDescription)),
-						responseFields(attributes(key("title").value(FieldDescription.responseParamDescription)),
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("page").description(FieldDescription.PAGE_PARAM_DESCRIPTION),
+								parameterWithName("size").description(FieldDescription.SIZE_DESCRIPTION)),
+						responseFields(attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
 								fieldWithPath("content[].productUuid")
-										.description(FieldDescription.productUuidDescription),
+										.description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
 								fieldWithPath("content[].creationDate")
-										.description(FieldDescription.creationDateDescription),
+										.description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("content[].updateDate")
-										.description(FieldDescription.updateDateDescription),
-								fieldWithPath("content[].productId").description(FieldDescription.idDescription),
-								fieldWithPath("content[].name").description(FieldDescription.nameDescription),
+										.description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("content[].productId").description(FieldDescription.ID_DESCRIPTION),
+								fieldWithPath("content[].name").description(FieldDescription.NAME_DESCRIPTION),
 								fieldWithPath("content[].shortDescription")
-										.description(FieldDescription.shortDescription),
+										.description(FieldDescription.SHORT_DESCRIPTION),
 								fieldWithPath("content.[].longDescription")
-										.description(FieldDescription.longDescription),
+										.description(FieldDescription.LONG_DESCRIPTION),
 
-								fieldWithPath("totalPages").description(FieldDescription.totalPagesDescription),
-								fieldWithPath("totalElements").description(FieldDescription.totalElementsDescription),
-								fieldWithPath("last").description(FieldDescription.lastDescription),
-								fieldWithPath("size").description(FieldDescription.sizeDescription),
-								fieldWithPath("number").description(FieldDescription.numberDescription),
-								fieldWithPath("sort").description(FieldDescription.sortDescription),
-								fieldWithPath("first").description(FieldDescription.firstDescription),
+								fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
+								fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
+								fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
+								fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
+								fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
+								fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
+								fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
 								fieldWithPath("numberOfElements")
-										.description(FieldDescription.numberOfElementsDescription))));
+										.description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
 	}
 
 }

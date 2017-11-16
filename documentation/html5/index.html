@@ -625,11 +625,8 @@ not create URIs themselves, instead they should use the above-described links to
 <div class="paragraph">
 <p>The <code>GET</code> request returns all products.</p>
 </div>
-<div class="paragraph">
-<div class="title">Request path parameters</div>
-<p>/products/{page}/{size}</p>
-</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. /products/{page}/{size}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -652,7 +649,6 @@ not create URIs themselves, instead they should use the above-described links to
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -761,26 +757,26 @@ Content-Length: 1124
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-14 20:02 PM UTC",
-    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1000,
-    "productUuid" : "39a198c8-894c-438a-b421-3cb042b155a5",
+    "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-14 20:02 PM UTC",
-    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1003,
-    "productUuid" : "290e69b2-cf8e-4ece-8871-19fd4397adaa",
+    "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2017-11-14 20:02 PM UTC",
-    "updateDate" : "2017-11-14 20:02 PM UTC",
+    "creationDate" : "2017-11-15 18:55 PM UTC",
+    "updateDate" : "2017-11-15 18:55 PM UTC",
     "productId" : 1001,
-    "productUuid" : "12861648-cdb6-458b-8aa9-23558723e4f4",
+    "productUuid" : "3c62bad5-fe5b-4c13-9c2f-ec21e6065a24",
     "name" : "name updated",
     "shortDescription" : "short description updated",
     "longDescription" : "long description updated"
@@ -805,11 +801,8 @@ Content-Length: 1124
 </div>
 <div class="sect3">
 <h4 id="_request_path_parameters"><a class="link" href="#_request_path_parameters">Request path parameters</a></h4>
-<div class="paragraph">
-<div class="title">Request path parameters</div>
-<p>/product/{uuid}</p>
-</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. /product/{uuid}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -831,7 +824,6 @@ Content-Length: 1124
 <div class="sect3">
 <h4 id="_response_fields"><a class="link" href="#_response_fields">Response fields</a></h4>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -892,7 +884,7 @@ Content-Length: 1124
 <h4 id="_example_request_2"><a class="link" href="#_example_request_2">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/39a198c8-894c-438a-b421-3cb042b155a5' -i -H 'Accept: application/hal+json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/2b3fe800-c982-4d44-a7ad-c645dbec9445' -i -H 'Accept: application/hal+json'</code></pre>
 </div>
 </div>
 </div>
@@ -905,10 +897,10 @@ Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 396
 
 {
-  "creationDate" : "2017-11-14 20:02 PM UTC",
-  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "creationDate" : "2017-11-15 18:55 PM UTC",
+  "updateDate" : "2017-11-15 18:55 PM UTC",
   "productId" : 1000,
-  "productUuid" : "39a198c8-894c-438a-b421-3cb042b155a5",
+  "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
   "name" : "Product1",
   "shortDescription" : "product1 short description",
   "longDescription" : "product1 long description",
@@ -983,8 +975,8 @@ Content-Length: 396
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-14 20:02 PM UTC",
-  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "creationDate" : "2017-11-15 18:55 PM UTC",
+  "updateDate" : "2017-11-15 18:55 PM UTC",
   "productId" : null,
   "productUuid" : null,
   "name" : "Product2",
@@ -1003,10 +995,10 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 299
 
 {
-  "creationDate" : "2017-11-14 20:02 PM UTC",
-  "updateDate" : "2017-11-14 20:02 PM UTC",
+  "creationDate" : "2017-11-15 18:55 PM UTC",
+  "updateDate" : "2017-11-15 18:55 PM UTC",
   "productId" : 1003,
-  "productUuid" : "290e69b2-cf8e-4ece-8871-19fd4397adaa",
+  "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"
@@ -1022,11 +1014,8 @@ Content-Length: 299
 </div>
 <div class="sect3">
 <h4 id="_request_path_parameters_2"><a class="link" href="#_request_path_parameters_2">Request path parameters</a></h4>
-<div class="paragraph">
-<div class="title">Request path parameters</div>
-<p>/product/{uuid}</p>
-</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. /product/{uuid}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1049,7 +1038,7 @@ Content-Length: 299
 <h4 id="_example_request_4"><a class="link" href="#_example_request_4">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/7fe671f1-1697-4254-9126-a97d8354b672' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/6b378ffd-8fec-4919-8e19-823d716eb86d' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1129,7 +1118,7 @@ Content-Length: 1
 <h4 id="_example_request_5"><a class="link" href="#_example_request_5">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/3d53ab0a-f0f2-466e-9441-09835e8ed871' -i -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/d1bfd233-f3ef-41c8-af7b-bbca4486cd49' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1142,40 +1131,40 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 1504
 
 {
-  "creationDate" : "2017-11-04 23:27 PM UTC",
-  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "creationDate" : "2017-11-15 19:02 PM UTC",
+  "updateDate" : "2017-11-15 19:02 PM UTC",
   "recommendationId" : 1000,
-  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
+  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
   "recommendationFor" : {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1004,
-    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
+    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1000,
-    "productUuid" : "28e6e6a9-a7a0-4f11-9c78-10bf9dbe5f47",
+    "productUuid" : "fea4b46e-ad1e-4243-a479-71a8acfb22c6",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1002,
-    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
+    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1003,
-    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
+    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1241,32 +1230,32 @@ Content-Length: 1504
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-04 23:27 PM UTC",
-  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "creationDate" : "2017-11-15 19:02 PM UTC",
+  "updateDate" : "2017-11-15 19:02 PM UTC",
   "recommendationId" : 1000,
-  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
+  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
   "recommendationFor" : {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1004,
-    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
+    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1002,
-    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
+    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1003,
-    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
+    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1284,32 +1273,32 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 1187
 
 {
-  "creationDate" : "2017-11-04 23:27 PM UTC",
-  "updateDate" : "2017-11-04 23:27 PM UTC",
+  "creationDate" : "2017-11-15 19:02 PM UTC",
+  "updateDate" : "2017-11-15 19:02 PM UTC",
   "recommendationId" : 1000,
-  "recommendationUuid" : "01a0a993-9a62-44b5-8c07-5bac8f6c3c93",
+  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
   "recommendationFor" : {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1004,
-    "productUuid" : "3d53ab0a-f0f2-466e-9441-09835e8ed871",
+    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1002,
-    "productUuid" : "ea4750ba-edf4-458e-a69e-adbedf539763",
+    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-04 23:27 PM UTC",
-    "updateDate" : "2017-11-04 23:27 PM UTC",
+    "creationDate" : "2017-11-15 19:02 PM UTC",
+    "updateDate" : "2017-11-15 19:02 PM UTC",
     "productId" : 1003,
-    "productUuid" : "d3e0334e-f9d0-45e2-bb3a-ecda5eb3981e",
+    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1328,7 +1317,7 @@ Content-Length: 1187
 <h4 id="_example_request_7"><a class="link" href="#_example_request_7">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/3d53ab0a-f0f2-466e-9441-09835e8ed871' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/d1bfd233-f3ef-41c8-af7b-bbca4486cd49' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1458,7 +1447,7 @@ Content-Length: 1
 <h4 id="_example_request_8"><a class="link" href="#_example_request_8">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/reviews/product/a5cb8650-7d98-4dba-8baf-ce23d6d815cf/0/4' -i -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/reviews/product/f76a8574-cd1f-4a77-9440-4d6edbfb757d/0/4' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1472,35 +1461,35 @@ Content-Length: 1398
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "reviewId" : 1000,
-    "reviewUuid" : "5899329c-3b14-4548-b502-79fbf96ab362",
+    "reviewUuid" : "b40af90a-9a85-4e43-a12b-614cd4eed74d",
     "author" : "Max Mustermann",
     "rating" : 5,
     "reviewText" : "Nice product",
     "product" : {
-      "creationDate" : "2017-11-09 21:58 PM UTC",
-      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "creationDate" : "2017-11-15 19:03 PM UTC",
+      "updateDate" : "2017-11-15 19:03 PM UTC",
       "productId" : 1000,
-      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
     }
   }, {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "reviewId" : 1001,
-    "reviewUuid" : "6dc3e135-c6e5-4f57-bb34-37638ce88bf0",
+    "reviewUuid" : "dec88a06-8118-415a-b7f0-2e280de9546e",
     "author" : "John Doe",
     "rating" : 1,
     "reviewText" : "Bad product",
     "product" : {
-      "creationDate" : "2017-11-09 21:58 PM UTC",
-      "updateDate" : "2017-11-09 21:58 PM UTC",
+      "creationDate" : "2017-11-15 19:03 PM UTC",
+      "updateDate" : "2017-11-15 19:03 PM UTC",
       "productId" : 1000,
-      "productUuid" : "a5cb8650-7d98-4dba-8baf-ce23d6d815cf",
+      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
@@ -1512,8 +1501,8 @@ Content-Length: 1398
   "size" : 4,
   "number" : 0,
   "sort" : null,
-  "numberOfElements" : 2,
-  "first" : true
+  "first" : true,
+  "numberOfElements" : 2
 }</code></pre>
 </div>
 </div>
@@ -1585,18 +1574,18 @@ Content-Length: 1398
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-09 21:58 PM UTC",
-  "updateDate" : "2017-11-09 21:58 PM UTC",
+  "creationDate" : "2017-11-15 19:03 PM UTC",
+  "updateDate" : "2017-11-15 19:03 PM UTC",
   "reviewId" : null,
   "reviewUuid" : null,
   "author" : "Max Mustermann2",
   "rating" : 3,
   "reviewText" : "Nice product2",
   "product" : {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "productId" : 1001,
-    "productUuid" : "41a2f12d-0271-4638-b4ba-78557a2d15eb",
+    "productUuid" : "ef0e00cd-0dfa-4054-905d-67bd2e38149a",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
@@ -1614,18 +1603,18 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 583
 
 {
-  "creationDate" : "2017-11-09 21:58 PM UTC",
-  "updateDate" : "2017-11-09 21:58 PM UTC",
+  "creationDate" : "2017-11-15 19:03 PM UTC",
+  "updateDate" : "2017-11-15 19:03 PM UTC",
   "reviewId" : 1002,
-  "reviewUuid" : "51844542-d73e-4056-b890-44d248102b00",
+  "reviewUuid" : "0e294fe1-fc2a-42ce-9345-50bc0bfe64b1",
   "author" : "Max Mustermann2",
   "rating" : 3,
   "reviewText" : "Nice product2",
   "product" : {
-    "creationDate" : "2017-11-09 21:58 PM UTC",
-    "updateDate" : "2017-11-09 21:58 PM UTC",
+    "creationDate" : "2017-11-15 19:03 PM UTC",
+    "updateDate" : "2017-11-15 19:03 PM UTC",
     "productId" : 1001,
-    "productUuid" : "41a2f12d-0271-4638-b4ba-78557a2d15eb",
+    "productUuid" : "ef0e00cd-0dfa-4054-905d-67bd2e38149a",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
@@ -1644,7 +1633,7 @@ Content-Length: 583
 <h4 id="_example_request_10"><a class="link" href="#_example_request_10">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review/5899329c-3b14-4548-b502-79fbf96ab362' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review/b40af90a-9a85-4e43-a12b-614cd4eed74d' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>

@@ -6,8 +6,8 @@ Host: localhost:8080
 Content-Length: 265
 
 {
-  "creationDate" : "2017-11-15 18:55 PM UTC",
-  "updateDate" : "2017-11-15 18:55 PM UTC",
+  "creationDate" : "2017-11-15 19:37 PM UTC",
+  "updateDate" : "2017-11-15 19:37 PM UTC",
   "productId" : null,
   "productUuid" : null,
   "name" : "Product2",

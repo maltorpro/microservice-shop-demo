@@ -140,14 +140,14 @@ public class ApplicaitonTest {
 				.andExpect(jsonPath("$.product.longDescription", equalTo("product2 long description")))
 				.andDo(document("review-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 						requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.creationDateDescription),
-								fieldWithPath("updateDate").description(FieldDescription.updateDateDescription),
-								fieldWithPath("reviewId").description(FieldDescription.idDescription),
-								fieldWithPath("reviewUuid").description(FieldDescription.reviewUuidDescription),
-								fieldWithPath("author").description(FieldDescription.reviewAuthorDescription),
-								fieldWithPath("rating").description(FieldDescription.reviewRatingDescription),
-								fieldWithPath("reviewText").description(FieldDescription.reviewReviewText),
-								fieldWithPath("product").description(FieldDescription.reviewProductDescription))));
+								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
+								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("reviewId").description(FieldDescription.ID_DESCRIPTION),
+								fieldWithPath("reviewUuid").description(FieldDescription.REVIEW_UUID_DESCRIPTION),
+								fieldWithPath("author").description(FieldDescription.REVIEW_AUTHOR_DESCRIPTION),
+								fieldWithPath("rating").description(FieldDescription.REVIEW_RATING_DESCRIPTION),
+								fieldWithPath("reviewText").description(FieldDescription.REVIEW_REVIEW_TEXT),
+								fieldWithPath("product").description(FieldDescription.REVIEWP_RODUCT_DESCRIPTION))));
 		reviewCounter++;
 	}
 
@@ -167,26 +167,26 @@ public class ApplicaitonTest {
 				.andDo(document("reviews-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 						responseFields(
 								fieldWithPath("content[].creationDate")
-										.description(FieldDescription.creationDateDescription),
+										.description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("content[].updateDate")
-										.description(FieldDescription.updateDateDescription),
-								fieldWithPath("content[].reviewId").description(FieldDescription.idDescription),
+										.description(FieldDescription.UPDATE_DATE_DESCRIPTION),
+								fieldWithPath("content[].reviewId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("content[].reviewUuid")
-										.description(FieldDescription.reviewUuidDescription),
-								fieldWithPath("content[].author").description(FieldDescription.reviewAuthorDescription),
-								fieldWithPath("content[].rating").description(FieldDescription.reviewRatingDescription),
-								fieldWithPath("content[].reviewText").description(FieldDescription.reviewReviewText),
+										.description(FieldDescription.REVIEW_UUID_DESCRIPTION),
+								fieldWithPath("content[].author").description(FieldDescription.REVIEW_AUTHOR_DESCRIPTION),
+								fieldWithPath("content[].rating").description(FieldDescription.REVIEW_RATING_DESCRIPTION),
+								fieldWithPath("content[].reviewText").description(FieldDescription.REVIEW_REVIEW_TEXT),
 								fieldWithPath("content[].product")
-										.description(FieldDescription.reviewProductDescription),
-								fieldWithPath("totalPages").description(FieldDescription.totalPagesDescription),
-								fieldWithPath("totalElements").description(FieldDescription.totalElementsDescription),
-								fieldWithPath("last").description(FieldDescription.lastDescription),
-								fieldWithPath("size").description(FieldDescription.sizeDescription),
-								fieldWithPath("number").description(FieldDescription.numberDescription),
-								fieldWithPath("sort").description(FieldDescription.sortDescription),
-								fieldWithPath("first").description(FieldDescription.firstDescription),
+										.description(FieldDescription.REVIEWP_RODUCT_DESCRIPTION),
+								fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
+								fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
+								fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
+								fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
+								fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
+								fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
+								fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
 								fieldWithPath("numberOfElements")
-										.description(FieldDescription.numberOfElementsDescription))));
+										.description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
 	}
 
 	@Test
