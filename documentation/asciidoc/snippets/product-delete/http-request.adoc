@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-DELETE /product/f7f4d94a-f197-4227-81d9-7246ebda3cae HTTP/1.1
+DELETE /product/cf341204-dd3d-49cf-8f3e-2d161a3a8864 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
 

@@ -10,9 +10,13 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.snippet.Attributes.attributes;
+import static org.springframework.restdocs.snippet.Attributes.key;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -140,6 +144,7 @@ public class ApplicaitonTest {
 				.andExpect(jsonPath("$.product.longDescription", equalTo("product2 long description")))
 				.andDo(document("review-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 						requestFields(
+								attributes(key("title").value(FieldDescription.REQUEST_FIELDS)),
 								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
 								fieldWithPath("reviewId").description(FieldDescription.ID_DESCRIPTION),
@@ -155,7 +160,7 @@ public class ApplicaitonTest {
 	public void test2GetReviewsForProduct() throws Exception {
 
 		this.mockMvc
-				.perform(get("/reviews/product/" + product1.getProductUuid() + "/0/4")
+				.perform(get("/reviews/product/{uuid}/{page}/{size}", product1.getProductUuid(), 0, 4)
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content[*]", hasSize(2)))
 				.andExpect(jsonPath("$.content[0].author", equalTo("Max Mustermann")))
@@ -165,7 +170,14 @@ public class ApplicaitonTest {
 				.andExpect(jsonPath("$.content[0].product.shortDescription", equalTo("product1 short description")))
 				.andExpect(jsonPath("$.content[0].product.longDescription", equalTo("product1 long description")))
 				.andDo(document("reviews-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+						
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
+								parameterWithName("page").description(FieldDescription.PAGE_PARAM_DESCRIPTION),
+								parameterWithName("size").description(FieldDescription.SIZE_DESCRIPTION)),
+						
 						responseFields(
+								attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
 								fieldWithPath("content[].creationDate")
 										.description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("content[].updateDate")
@@ -216,10 +228,14 @@ public class ApplicaitonTest {
 		Review review = reviewRepository.findOne(defaultReviewId);
 
 		this.mockMvc
-				.perform(delete("/review/" + review.getReviewUuid())
+				.perform(delete("/review/{uuid}", review.getReviewUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(equalTo("1")))
-				.andDo(document("review-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+				.andDo(document("review-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.REVIEW_UUID_DESCRIPTION))
+						
+						));
 
 		reviewCounter--;
 		assertEquals("Check the review count after delete.", reviewCounter, reviewRepository.count());

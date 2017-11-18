@@ -1,0 +1,16 @@
+/reviews/product/{uuid}/{page}/{size}
+
+.Request path parameters 
+|===
+|Parameter|Description
+
+|`uuid`
+|The unique identifier of the product
+
+|`page`
+|Page of results
+
+|`size`
+|Size of the page.
+
+|===

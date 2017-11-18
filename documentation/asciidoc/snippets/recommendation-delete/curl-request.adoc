@@ -1,4 +1,4 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/recommendation/product/d1bfd233-f3ef-41c8-af7b-bbca4486cd49' -i -X DELETE -H 'Accept: application/json'
+$ curl 'http://localhost:8080/recommendation/product/53cbd594-7796-49fb-8f4e-ce627dc645a7' -i -X DELETE -H 'Accept: application/json'
 ----

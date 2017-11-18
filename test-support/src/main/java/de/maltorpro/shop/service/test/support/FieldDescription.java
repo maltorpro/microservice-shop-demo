@@ -7,6 +7,8 @@ public final class FieldDescription {
 	 */
 
 	public static final String REQUEST_PARAM_DESCRIPTION = "Request path parameters";
+	
+	public static final String REQUEST_FIELDS = "Request fields"; 
 
 	public static final String RESPONSE_PARAM_DESCRIPTION = "Response fields";
 

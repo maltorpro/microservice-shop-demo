@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-DELETE /review/b40af90a-9a85-4e43-a12b-614cd4eed74d HTTP/1.1
+DELETE /review/1ed44336-73bd-47c3-b6be-37d08df695a7 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
 

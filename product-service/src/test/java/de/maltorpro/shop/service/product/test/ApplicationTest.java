@@ -125,7 +125,7 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.longDescription", equalTo("product2 long description")))
 				.andDo(document("product-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
 
-						requestFields(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+						requestFields(attributes(key("title").value(FieldDescription.REQUEST_FIELDS)),
 								fieldWithPath("productUuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
 								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),

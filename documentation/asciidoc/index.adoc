@@ -79,6 +79,7 @@ The `GET` request returns all products.
 
 include::{snippets}/products-get/path-parameters.adoc[]
 
+
 include::{snippets}/products-get/response-fields.adoc[]
 
 ==== Example request
@@ -90,10 +91,9 @@ include::{snippets}/products-get/http-response.adoc[]
 === Returning product
 The `GET` request returns a product identified by the unique identifier.
 
-==== Request path parameters
 include::{snippets}/product-get/path-parameters.adoc[]
 
-==== Response fields
+
 include::{snippets}/product-get/response-fields.adoc[]
 
 ==== Example request
@@ -116,7 +116,7 @@ include::{snippets}/product-save/http-response.adoc[]
 === Deleting product
 The `DELETE` request deletes a product identified by the unique identifier.
 
-==== Request path parameters
+
 include::{snippets}/product-delete/path-parameters.adoc[]
 
 ==== Example request
@@ -129,8 +129,11 @@ include::{snippets}/product-delete/http-response.adoc[]
 == Recommendation REST Service
 The recommendation rest service is used to create, modify and list product recommendations.
 
-=== Returning recommendations for a product
+=== Returning recommendations
 The `GET` request returns the recommendations for a product identified by the unique product identifier.
+
+include::{snippets}/recommendation-get/path-parameters.adoc[]
+
 
 include::{snippets}/recommendation-get/response-fields.adoc[]
 
@@ -154,6 +157,8 @@ include::{snippets}/recommendation-save/http-response.adoc[]
 === Deleting recommendation
 The `DELETE` request deletes a recommendation identified by the unique product identifier.
 
+include::{snippets}/recommendation-delete/path-parameters.adoc[]
+
 ==== Example request
 include::{snippets}/recommendation-delete/curl-request.adoc[]
 
@@ -166,6 +171,9 @@ The review rest service is used to create, modify and list product reviews.
 
 === Listing reviews
 The `GET` request returns all reviews of a product.
+
+include::{snippets}/reviews-get/path-parameters.adoc[]
+
 
 include::{snippets}/reviews-get/response-fields.adoc[]
 
@@ -188,6 +196,8 @@ include::{snippets}/review-save/http-response.adoc[]
 
 === Deleting review
 The `DELETE` request deletes a review identified by the unique review identifier.
+
+include::{snippets}/review-delete/path-parameters.adoc[]
 
 ==== Example request
 include::{snippets}/review-delete/curl-request.adoc[]

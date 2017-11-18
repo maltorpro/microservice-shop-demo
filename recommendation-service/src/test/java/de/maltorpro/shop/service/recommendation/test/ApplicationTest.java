@@ -10,9 +10,13 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.snippet.Attributes.attributes;
+import static org.springframework.restdocs.snippet.Attributes.key;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -159,7 +163,9 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[0].shortDescription", equalTo("product2 short description")))
 				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product2 long description")))
 				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
-						preprocessResponse(prettyPrint()), requestFields(
+						preprocessResponse(prettyPrint()), 
+						requestFields(
+								attributes(key("title").value(FieldDescription.REQUEST_FIELDS)),
 								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
 								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
@@ -181,7 +187,7 @@ public class ApplicationTest {
 		Recommendation recommendation = recommendationRepository.findOne(defaultRecommendationId);
 
 		this.mockMvc
-				.perform(get("/recommendation/product/" + recommendation.getRecommendationFor().getProductUuid())
+				.perform(get("/recommendation/product/{uuid}", recommendation.getRecommendationFor().getProductUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.recommendationFor.productUuid",
@@ -191,7 +197,11 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[1].shortDescription", equalTo("product3 short description")))
 				.andExpect(jsonPath("$.recommendations[1].longDescription", equalTo("product3 long description")))
 				.andDo(document("recommendation-get", preprocessRequest(prettyPrint()),
-						preprocessResponse(prettyPrint()), responseFields(
+						preprocessResponse(prettyPrint()),
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION)),
+						responseFields(
+								attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
 								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
 								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
 								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
@@ -218,20 +228,7 @@ public class ApplicationTest {
 				.andExpect(jsonPath("$.recommendations[*]", hasSize(2)))
 				.andExpect(jsonPath("$.recommendations[0].name", equalTo("Product3")))
 				.andExpect(jsonPath("$.recommendations[0].shortDescription", equalTo("product3 short description")))
-				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product3 long description")))
-				.andDo(document("recommendation-save", preprocessRequest(prettyPrint()),
-						preprocessResponse(prettyPrint()), requestFields(
-								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
-								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
-								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
-								fieldWithPath("recommendationUuid")
-										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
-								fieldWithPath("recommendationFor")
-										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
-								fieldWithPath("recommendations[]")
-										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION)
-
-						)));
+				.andExpect(jsonPath("$.recommendations[0].longDescription", equalTo("product3 long description")));
 	}
 
 	@Test
@@ -243,10 +240,12 @@ public class ApplicationTest {
 		Recommendation recommendation = recommendationRepository.findOne(defaultRecommendationId);
 
 		this.mockMvc
-				.perform(delete("/recommendation/product/" + recommendation.getRecommendationFor().getProductUuid())
+				.perform(delete("/recommendation/product/{uuid}", recommendation.getRecommendationFor().getProductUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(equalTo("1"))).andDo(document(
-						"recommendation-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())));
+						"recommendation-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION))));
 
 		recommendationCounter--;
 		assertEquals("Check the product count after delete.", recommendationCounter, recommendationRepository.count());

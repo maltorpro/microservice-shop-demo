@@ -1,0 +1,10 @@
+/review/{uuid}
+
+.Request path parameters 
+|===
+|Parameter|Description
+
+|`uuid`
+|The unique identifier of the review
+
+|===

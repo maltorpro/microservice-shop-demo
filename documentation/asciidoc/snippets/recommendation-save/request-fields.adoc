@@ -1,3 +1,4 @@
+.Request fields
 |===
 |Path|Type|Description
 
@@ -10,11 +11,11 @@
 |Update date of the object
 
 |`recommendationId`
-|`Number`
+|`Null`
 |Database primary key
 
 |`recommendationUuid`
-|`String`
+|`Null`
 |The unique identifier of the recommendation
 
 |`recommendationFor`

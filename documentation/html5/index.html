@@ -444,8 +444,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_returning_product">Returning product</a>
 <ul class="sectlevel3">
-<li><a href="#_request_path_parameters">Request path parameters</a></li>
-<li><a href="#_response_fields">Response fields</a></li>
 <li><a href="#_example_request_2">Example request</a></li>
 <li><a href="#_example_response_2">Example response</a></li>
 </ul>
@@ -458,7 +456,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_deleting_product">Deleting product</a>
 <ul class="sectlevel3">
-<li><a href="#_request_path_parameters_2">Request path parameters</a></li>
 <li><a href="#_example_request_4">Example request</a></li>
 <li><a href="#_example_response_4">Example response</a></li>
 </ul>
@@ -467,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#resources-recommendation">Recommendation REST Service</a>
 <ul class="sectlevel2">
-<li><a href="#_returning_recommendations_for_a_product">Returning recommendations for a product</a>
+<li><a href="#_returning_recommendations">Returning recommendations</a>
 <ul class="sectlevel3">
 <li><a href="#_example_request_5">Example request</a></li>
 <li><a href="#_example_response_5">Example response</a></li>
@@ -625,8 +622,11 @@ not create URIs themselves, instead they should use the above-described links to
 <div class="paragraph">
 <p>The <code>GET</code> request returns all products.</p>
 </div>
+<div class="paragraph">
+<p>/products/{page}/{size}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. /products/{page}/{size}</caption>
+<caption class="title">Table 1. Request path parameters</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -649,6 +649,7 @@ not create URIs themselves, instead they should use the above-described links to
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -757,26 +758,26 @@ Content-Length: 1124
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-15 18:55 PM UTC",
-    "updateDate" : "2017-11-15 18:55 PM UTC",
+    "creationDate" : "2017-11-16 18:01 PM UTC",
+    "updateDate" : "2017-11-16 18:01 PM UTC",
     "productId" : 1000,
-    "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
+    "productUuid" : "82a66bde-03d5-4c67-9be3-f83557eb2917",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-15 18:55 PM UTC",
-    "updateDate" : "2017-11-15 18:55 PM UTC",
+    "creationDate" : "2017-11-16 18:01 PM UTC",
+    "updateDate" : "2017-11-16 18:01 PM UTC",
     "productId" : 1003,
-    "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
+    "productUuid" : "f67dc537-d3d5-4184-86bd-10012b0b65d4",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2017-11-15 18:55 PM UTC",
-    "updateDate" : "2017-11-15 18:55 PM UTC",
+    "creationDate" : "2017-11-16 18:01 PM UTC",
+    "updateDate" : "2017-11-16 18:01 PM UTC",
     "productId" : 1001,
-    "productUuid" : "3c62bad5-fe5b-4c13-9c2f-ec21e6065a24",
+    "productUuid" : "8521be25-2db4-45da-9572-e4c382fe75cc",
     "name" : "name updated",
     "shortDescription" : "short description updated",
     "longDescription" : "long description updated"
@@ -799,10 +800,11 @@ Content-Length: 1124
 <div class="paragraph">
 <p>The <code>GET</code> request returns a product identified by the unique identifier.</p>
 </div>
-<div class="sect3">
-<h4 id="_request_path_parameters"><a class="link" href="#_request_path_parameters">Request path parameters</a></h4>
+<div class="paragraph">
+<p>/product/{uuid}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. /product/{uuid}</caption>
+<caption class="title">Table 3. Request path parameters</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -820,10 +822,8 @@ Content-Length: 1124
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect3">
-<h4 id="_response_fields"><a class="link" href="#_response_fields">Response fields</a></h4>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 4. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -879,12 +879,11 @@ Content-Length: 1124
 </tr>
 </tbody>
 </table>
-</div>
 <div class="sect3">
 <h4 id="_example_request_2"><a class="link" href="#_example_request_2">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/2b3fe800-c982-4d44-a7ad-c645dbec9445' -i -H 'Accept: application/hal+json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/82a66bde-03d5-4c67-9be3-f83557eb2917' -i -H 'Accept: application/hal+json'</code></pre>
 </div>
 </div>
 </div>
@@ -897,10 +896,10 @@ Content-Type: application/hal+json;charset=UTF-8
 Content-Length: 396
 
 {
-  "creationDate" : "2017-11-15 18:55 PM UTC",
-  "updateDate" : "2017-11-15 18:55 PM UTC",
+  "creationDate" : "2017-11-16 18:01 PM UTC",
+  "updateDate" : "2017-11-16 18:01 PM UTC",
   "productId" : 1000,
-  "productUuid" : "2b3fe800-c982-4d44-a7ad-c645dbec9445",
+  "productUuid" : "82a66bde-03d5-4c67-9be3-f83557eb2917",
   "name" : "Product1",
   "shortDescription" : "product1 short description",
   "longDescription" : "product1 long description",
@@ -920,6 +919,7 @@ Content-Length: 396
 <p>The <code>POST</code> request saves or updates a product.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 5. Request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -975,8 +975,8 @@ Content-Length: 396
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-15 18:55 PM UTC",
-  "updateDate" : "2017-11-15 18:55 PM UTC",
+  "creationDate" : "2017-11-16 18:01 PM UTC",
+  "updateDate" : "2017-11-16 18:01 PM UTC",
   "productId" : null,
   "productUuid" : null,
   "name" : "Product2",
@@ -995,10 +995,10 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 299
 
 {
-  "creationDate" : "2017-11-15 18:55 PM UTC",
-  "updateDate" : "2017-11-15 18:55 PM UTC",
+  "creationDate" : "2017-11-16 18:01 PM UTC",
+  "updateDate" : "2017-11-16 18:01 PM UTC",
   "productId" : 1003,
-  "productUuid" : "b6c50cd3-18e4-4ba4-a2b3-8a2e78b3cdb7",
+  "productUuid" : "f67dc537-d3d5-4184-86bd-10012b0b65d4",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"
@@ -1012,10 +1012,11 @@ Content-Length: 299
 <div class="paragraph">
 <p>The <code>DELETE</code> request deletes a product identified by the unique identifier.</p>
 </div>
-<div class="sect3">
-<h4 id="_request_path_parameters_2"><a class="link" href="#_request_path_parameters_2">Request path parameters</a></h4>
+<div class="paragraph">
+<p>/product/{uuid}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 3. /product/{uuid}</caption>
+<caption class="title">Table 6. Request path parameters</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1033,12 +1034,11 @@ Content-Length: 299
 </tr>
 </tbody>
 </table>
-</div>
 <div class="sect3">
 <h4 id="_example_request_4"><a class="link" href="#_example_request_4">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/6b378ffd-8fec-4919-8e19-823d716eb86d' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product/cf341204-dd3d-49cf-8f3e-2d161a3a8864' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1064,11 +1064,34 @@ Content-Length: 1
 <p>The recommendation rest service is used to create, modify and list product recommendations.</p>
 </div>
 <div class="sect2">
-<h3 id="_returning_recommendations_for_a_product"><a class="link" href="#_returning_recommendations_for_a_product">Returning recommendations for a product</a></h3>
+<h3 id="_returning_recommendations"><a class="link" href="#_returning_recommendations">Returning recommendations</a></h3>
 <div class="paragraph">
 <p>The <code>GET</code> request returns the recommendations for a product identified by the unique product identifier.</p>
 </div>
+<div class="paragraph">
+<p>/recommendation/product/{uuid}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 7. Request path parameters</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 8. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1118,7 +1141,7 @@ Content-Length: 1
 <h4 id="_example_request_5"><a class="link" href="#_example_request_5">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/d1bfd233-f3ef-41c8-af7b-bbca4486cd49' -i -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/53cbd594-7796-49fb-8f4e-ce627dc645a7' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1131,40 +1154,40 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 1504
 
 {
-  "creationDate" : "2017-11-15 19:02 PM UTC",
-  "updateDate" : "2017-11-15 19:02 PM UTC",
+  "creationDate" : "2017-11-18 15:14 PM UTC",
+  "updateDate" : "2017-11-18 15:14 PM UTC",
   "recommendationId" : 1000,
-  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
+  "recommendationUuid" : "bcd4ac88-ce90-4c48-ab47-9ec01da00f64",
   "recommendationFor" : {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1004,
-    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
+    "productUuid" : "53cbd594-7796-49fb-8f4e-ce627dc645a7",
     "name" : "Product5",
     "shortDescription" : "product5 short description",
     "longDescription" : "product5 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1000,
-    "productUuid" : "fea4b46e-ad1e-4243-a479-71a8acfb22c6",
+    "productUuid" : "98495b7f-a325-41b1-a31d-fba2c5b8381e",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1002,
-    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
+    "productUuid" : "708f5240-64ce-4e72-bb04-191c82b43cb4",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1003,
-    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
+    "productUuid" : "f20f6f65-a77f-4b45-9aae-e605960f7390",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1180,6 +1203,7 @@ Content-Length: 1504
 <p>The <code>POST</code> request saves or updates a recommendation.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 9. Request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1205,12 +1229,12 @@ Content-Length: 1504
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationId</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Database primary key</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommendationUuid</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the recommendation</p></td>
 </tr>
 <tr>
@@ -1230,32 +1254,40 @@ Content-Length: 1504
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-15 19:02 PM UTC",
-  "updateDate" : "2017-11-15 19:02 PM UTC",
-  "recommendationId" : 1000,
-  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
+  "creationDate" : "2017-11-18 15:14 PM UTC",
+  "updateDate" : "2017-11-18 15:14 PM UTC",
+  "recommendationId" : null,
+  "recommendationUuid" : null,
   "recommendationFor" : {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
-    "productId" : 1004,
-    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
-    "name" : "Product5",
-    "shortDescription" : "product5 short description",
-    "longDescription" : "product5 long description"
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "98495b7f-a325-41b1-a31d-fba2c5b8381e",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "31757887-e312-4819-8561-06f3cca26015",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }, {
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1002,
-    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
+    "productUuid" : "708f5240-64ce-4e72-bb04-191c82b43cb4",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1003,
-    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
+    "productUuid" : "f20f6f65-a77f-4b45-9aae-e605960f7390",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1270,35 +1302,43 @@ Content-Length: 1504
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1187
+Content-Length: 1504
 
 {
-  "creationDate" : "2017-11-15 19:02 PM UTC",
-  "updateDate" : "2017-11-15 19:02 PM UTC",
-  "recommendationId" : 1000,
-  "recommendationUuid" : "b6ee7528-257e-4cc1-bc66-d5f489a53248",
+  "creationDate" : "2017-11-18 15:14 PM UTC",
+  "updateDate" : "2017-11-18 15:14 PM UTC",
+  "recommendationId" : 1001,
+  "recommendationUuid" : "5dc537fa-2ec1-4e70-9406-4e9328982701",
   "recommendationFor" : {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
-    "productId" : 1004,
-    "productUuid" : "d1bfd233-f3ef-41c8-af7b-bbca4486cd49",
-    "name" : "Product5",
-    "shortDescription" : "product5 short description",
-    "longDescription" : "product5 long description"
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "98495b7f-a325-41b1-a31d-fba2c5b8381e",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "31757887-e312-4819-8561-06f3cca26015",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }, {
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1002,
-    "productUuid" : "7c1cbbe2-52d5-4b90-bb24-f0f140fe9c9d",
+    "productUuid" : "708f5240-64ce-4e72-bb04-191c82b43cb4",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-15 19:02 PM UTC",
-    "updateDate" : "2017-11-15 19:02 PM UTC",
+    "creationDate" : "2017-11-18 15:14 PM UTC",
+    "updateDate" : "2017-11-18 15:14 PM UTC",
     "productId" : 1003,
-    "productUuid" : "28dc4068-a483-423f-95e8-c8992397dc08",
+    "productUuid" : "f20f6f65-a77f-4b45-9aae-e605960f7390",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"
@@ -1313,11 +1353,33 @@ Content-Length: 1187
 <div class="paragraph">
 <p>The <code>DELETE</code> request deletes a recommendation identified by the unique product identifier.</p>
 </div>
+<div class="paragraph">
+<p>/recommendation/product/{uuid}</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 10. Request path parameters</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="_example_request_7"><a class="link" href="#_example_request_7">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/d1bfd233-f3ef-41c8-af7b-bbca4486cd49' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/recommendation/product/53cbd594-7796-49fb-8f4e-ce627dc645a7' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1347,7 +1409,38 @@ Content-Length: 1
 <div class="paragraph">
 <p>The <code>GET</code> request returns all reviews of a product.</p>
 </div>
+<div class="paragraph">
+<p>/reviews/product/{uuid}/{page}/{size}</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 11. Request path parameters</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the product</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page of results</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Size of the page.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 12. Response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1447,7 +1540,7 @@ Content-Length: 1
 <h4 id="_example_request_8"><a class="link" href="#_example_request_8">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/reviews/product/f76a8574-cd1f-4a77-9440-4d6edbfb757d/0/4' -i -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/reviews/product/20bd9167-4950-4213-8c01-33c306ed7540/0/4' -i -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1461,35 +1554,35 @@ Content-Length: 1398
 
 {
   "content" : [ {
-    "creationDate" : "2017-11-15 19:03 PM UTC",
-    "updateDate" : "2017-11-15 19:03 PM UTC",
+    "creationDate" : "2017-11-18 15:37 PM UTC",
+    "updateDate" : "2017-11-18 15:37 PM UTC",
     "reviewId" : 1000,
-    "reviewUuid" : "b40af90a-9a85-4e43-a12b-614cd4eed74d",
+    "reviewUuid" : "1ed44336-73bd-47c3-b6be-37d08df695a7",
     "author" : "Max Mustermann",
     "rating" : 5,
     "reviewText" : "Nice product",
     "product" : {
-      "creationDate" : "2017-11-15 19:03 PM UTC",
-      "updateDate" : "2017-11-15 19:03 PM UTC",
+      "creationDate" : "2017-11-18 15:37 PM UTC",
+      "updateDate" : "2017-11-18 15:37 PM UTC",
       "productId" : 1000,
-      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
+      "productUuid" : "20bd9167-4950-4213-8c01-33c306ed7540",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
     }
   }, {
-    "creationDate" : "2017-11-15 19:03 PM UTC",
-    "updateDate" : "2017-11-15 19:03 PM UTC",
+    "creationDate" : "2017-11-18 15:37 PM UTC",
+    "updateDate" : "2017-11-18 15:37 PM UTC",
     "reviewId" : 1001,
-    "reviewUuid" : "dec88a06-8118-415a-b7f0-2e280de9546e",
+    "reviewUuid" : "720088fe-cd57-45d1-957a-ef2caaabf6c0",
     "author" : "John Doe",
     "rating" : 1,
     "reviewText" : "Bad product",
     "product" : {
-      "creationDate" : "2017-11-15 19:03 PM UTC",
-      "updateDate" : "2017-11-15 19:03 PM UTC",
+      "creationDate" : "2017-11-18 15:37 PM UTC",
+      "updateDate" : "2017-11-18 15:37 PM UTC",
       "productId" : 1000,
-      "productUuid" : "f76a8574-cd1f-4a77-9440-4d6edbfb757d",
+      "productUuid" : "20bd9167-4950-4213-8c01-33c306ed7540",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
@@ -1514,6 +1607,7 @@ Content-Length: 1398
 <p>The <code>POST</code> request saves or updates a review for a product.</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 13. Request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1574,18 +1668,18 @@ Content-Length: 1398
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-15 19:03 PM UTC",
-  "updateDate" : "2017-11-15 19:03 PM UTC",
+  "creationDate" : "2017-11-18 15:37 PM UTC",
+  "updateDate" : "2017-11-18 15:37 PM UTC",
   "reviewId" : null,
   "reviewUuid" : null,
   "author" : "Max Mustermann2",
   "rating" : 3,
   "reviewText" : "Nice product2",
   "product" : {
-    "creationDate" : "2017-11-15 19:03 PM UTC",
-    "updateDate" : "2017-11-15 19:03 PM UTC",
+    "creationDate" : "2017-11-18 15:37 PM UTC",
+    "updateDate" : "2017-11-18 15:37 PM UTC",
     "productId" : 1001,
-    "productUuid" : "ef0e00cd-0dfa-4054-905d-67bd2e38149a",
+    "productUuid" : "ccfdef3e-b2be-48df-9636-e138def8a1a3",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
@@ -1603,18 +1697,18 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 583
 
 {
-  "creationDate" : "2017-11-15 19:03 PM UTC",
-  "updateDate" : "2017-11-15 19:03 PM UTC",
+  "creationDate" : "2017-11-18 15:37 PM UTC",
+  "updateDate" : "2017-11-18 15:37 PM UTC",
   "reviewId" : 1002,
-  "reviewUuid" : "0e294fe1-fc2a-42ce-9345-50bc0bfe64b1",
+  "reviewUuid" : "4b3bfc88-0f73-48ec-b7ba-f8f8ea0ed86b",
   "author" : "Max Mustermann2",
   "rating" : 3,
   "reviewText" : "Nice product2",
   "product" : {
-    "creationDate" : "2017-11-15 19:03 PM UTC",
-    "updateDate" : "2017-11-15 19:03 PM UTC",
+    "creationDate" : "2017-11-18 15:37 PM UTC",
+    "updateDate" : "2017-11-18 15:37 PM UTC",
     "productId" : 1001,
-    "productUuid" : "ef0e00cd-0dfa-4054-905d-67bd2e38149a",
+    "productUuid" : "ccfdef3e-b2be-48df-9636-e138def8a1a3",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
@@ -1629,11 +1723,33 @@ Content-Length: 583
 <div class="paragraph">
 <p>The <code>DELETE</code> request deletes a review identified by the unique review identifier.</p>
 </div>
+<div class="paragraph">
+<p>/review/{uuid}</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<caption class="title">Table 14. Request path parameters</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>uuid</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique identifier of the review</p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="_example_request_10"><a class="link" href="#_example_request_10">Example request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review/b40af90a-9a85-4e43-a12b-614cd4eed74d' -i -X DELETE -H 'Accept: application/json'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/review/1ed44336-73bd-47c3-b6be-37d08df695a7' -i -X DELETE -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 </div>
@@ -1655,7 +1771,7 @@ Content-Length: 1
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-13 23:15:20 MEZ
+Last updated 2017-11-18 16:31:32 MEZ
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
