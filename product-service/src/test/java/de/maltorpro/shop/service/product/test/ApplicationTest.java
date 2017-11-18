@@ -157,7 +157,7 @@ public class ApplicationTest {
 								fieldWithPath("name").description(FieldDescription.NAME_DESCRIPTION),
 								fieldWithPath("shortDescription").description(FieldDescription.SHORT_DESCRIPTION),
 								fieldWithPath("longDescription").description(FieldDescription.LONG_DESCRIPTION),
-								fieldWithPath("_links.next.href").description(FieldDescription.linksDescription))));
+								fieldWithPath("_links.next.href").description(FieldDescription.LINKS_DESCRIPTION))));
 	}
 
 	@Test

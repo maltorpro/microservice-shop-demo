@@ -42,7 +42,7 @@ public final class FieldDescription {
 
 	public static final String LONG_DESCRIPTION = "Long product description";
 
-	public static final String linksDescription = "Link to the next product";
+	public static final String LINKS_DESCRIPTION = "Link to the next product";
 
 	/*
 	 * Recommendation field descriptions
@@ -76,7 +76,7 @@ public final class FieldDescription {
 
 	public static final String TOTAL_PAGES_DESCRIPTION = "Number of total pages.";
 
-	public static final String LAST_DESCRIPTION = "Indicates whether the current page is the first one.";
+	public static final String LAST_DESCRIPTION = "Indicates whether the current page is the last one.";
 
 	public static final String SIZE_DESCRIPTION = "Size of the page.";
 
