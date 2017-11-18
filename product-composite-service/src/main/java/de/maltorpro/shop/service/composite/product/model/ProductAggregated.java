@@ -12,7 +12,7 @@ public class ProductAggregated {
 	private String productUuid;
 	private String name;
 	private List<RecommendationSummary> recommendations;
-	private List<ReviewSummary> reviews;
+	private List<Review> reviews;
 
 	public ProductAggregated(Product product, List<Recommendation> recommendations, List<Review> reviews) {
 
@@ -25,16 +25,8 @@ public class ProductAggregated {
 					.map(x -> new RecommendationSummary(x.getRecommendationUuid(), x.getRecommendations()))
 					.collect(Collectors.toList());
 
-		// 3. Copy summary review info, if available
-		if (reviews != null)
-			this.reviews = reviews.stream().map(x -> {
-				ReviewSummary rSummary = new ReviewSummary();
-				rSummary.setReviewUuid(x.getReviewUuid());
-				rSummary.setAuthor(x.getAuthor());
-				rSummary.setRating(x.getRating());
-				rSummary.setReviewText(x.getReviewText());
-				return rSummary;
-			}).collect(Collectors.toList());
+		// 3. Set reviews
+		this.reviews = reviews;
 	}
 
 	public String getProductUuid() {
@@ -49,7 +41,7 @@ public class ProductAggregated {
 		return recommendations;
 	}
 
-	public List<ReviewSummary> getReviews() {
+	public List<Review> getReviews() {
 		return reviews;
 	}
 }

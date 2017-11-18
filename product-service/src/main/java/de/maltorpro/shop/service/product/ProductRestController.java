@@ -35,7 +35,7 @@ public class ProductRestController {
 	public Resource<Product> getProduct(@PathVariable String uuid) {
 
 		Product product = productService.findByUuid(uuid);
-		Resource<Product> resourceProduct = new Resource<Product>(product);
+		Resource<Product> resourceProduct = new Resource<>(product);
 
 		if (product != null) {
 			resourceProduct.add(linkTo(methodOn(ProductRestController.class).getProduct("testuuid")).withRel("next"));

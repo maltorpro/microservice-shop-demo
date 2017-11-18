@@ -37,13 +37,13 @@ public class ProductCompositeRestController {
 	}
 
 	@PreAuthorize("hasAuthority('ROLE_DEVELOPERS')")
-	@RequestMapping("/{productId}")
-	public ResponseEntity<ProductAggregated> getProduct(@PathVariable int productId, Principal currentUser) {
+	@RequestMapping("/{{uuid}}")
+	public ResponseEntity<ProductAggregated> getProduct(@PathVariable String uuid, Principal currentUser) {
 
 		LOG.info("/product called");
 
 		// 1. First get mandatory product information
-		ResponseEntity<Product> productResult = productCompositeService.getProduct(productId);
+		ResponseEntity<Product> productResult = productCompositeService.getProduct(uuid);
 
 		if (!productResult.getStatusCode().is2xxSuccessful()) {
 			// We can't proceed, return whatever fault we got from the
@@ -54,7 +54,7 @@ public class ProductCompositeRestController {
 		// 2. Get optional recommendations
 
 		List<Recommendation> recommendations = null;
-		ResponseEntity<Recommendation[]> recommendationResult = productCompositeService.getRecommendations(productId);
+		ResponseEntity<Recommendation[]> recommendationResult = productCompositeService.getRecommendations(uuid);
 		if (!recommendationResult.getStatusCode().is2xxSuccessful()) {
 			// Something went wrong with getRecommendations, simply skip the
 			// recommendation-information in the response
@@ -69,7 +69,7 @@ public class ProductCompositeRestController {
 		// 3. Get optional reviews
 
 		List<Review> reviews = null;
-		ResponseEntity<Review[]> reviewsResult = productCompositeService.getReviews(productId);
+		ResponseEntity<Review[]> reviewsResult = productCompositeService.getReviews(uuid);
 
 		if (!reviewsResult.getStatusCode().is2xxSuccessful()) {
 			// Something went wrong with getReviews, simply skip the

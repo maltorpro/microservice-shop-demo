@@ -22,7 +22,7 @@ import de.maltorpro.shop.util.ServiceUtils;
 
 @Service("productCompositeService")
 @Transactional
-public class ProductCompositeServiceImpl {
+public class ProductCompositeServiceImpl implements ProductCompositeService{
 
 	private static final Logger log = LoggerFactory.getLogger(ProductCompositeServiceImpl.class);
 
@@ -38,19 +38,17 @@ public class ProductCompositeServiceImpl {
 	// -------- //
 
 	@HystrixCommand(fallbackMethod = "defaultProduct")
-	public ResponseEntity<Product> getProduct(int productId) {
+	public ResponseEntity<Product> getProduct(String productUuid) {
 
 		log.debug("Will call getProduct with Hystrix protection");
 
-		String url = "http://product-service/product/" + productId;
+		String url = "http://product-service/product/{uuid}";
 
 		log.debug("GetProduct from URL: {}", url);
 
-		ResponseEntity<Product> product = restTemplate.getForEntity(url, Product.class);
+		ResponseEntity<Product> product = restTemplate.getForEntity(url, Product.class, productUuid);
 		log.debug("GetProduct http-status: {}", product.getStatusCode());
 		log.debug("GetProduct body: {}", product.getBody());
-
-		log.debug("GetProduct.id: {}", product.getBody().getProductId());
 
 		return util.createOkResponse(product.getBody());
 	}
@@ -61,7 +59,7 @@ public class ProductCompositeServiceImpl {
 	 * @param productId
 	 * @return
 	 */
-	public ResponseEntity<Product> defaultProduct(int productId) {
+	public ResponseEntity<Product> defaultProduct(String productUuid) {
 		log.warn("Using fallback method for product-service");
 		// If we can't get basic product info we better fail!
 		return util.createResponse(null, HttpStatus.BAD_GATEWAY);
@@ -72,15 +70,15 @@ public class ProductCompositeServiceImpl {
 	// --------------- //
 
 	@HystrixCommand(fallbackMethod = "defaultRecommendations")
-	public ResponseEntity<Recommendation[]> getRecommendations(int productId) {
+	public ResponseEntity<Recommendation[]> getRecommendations(String productUuid) {
 		try {
 			log.debug("Will call getRecommendations with Hystrix protection");
 
-			String url = "http://recommendation-service/recommendation/" + productId;
+			String url = "http://recommendation-service/recommendation/product/{uuid}/";
 
 			log.debug("GetRecommendations from URL: {}", url);
 
-			ResponseEntity<Recommendation[]> recommendations = restTemplate.getForEntity(url, Recommendation[].class);
+			ResponseEntity<Recommendation[]> recommendations = restTemplate.getForEntity(url, Recommendation[].class, productUuid);
 			log.debug("GetRecommendations http-status: {}", recommendations.getStatusCode());
 
 			if (log.isDebugEnabled()) {
@@ -102,7 +100,7 @@ public class ProductCompositeServiceImpl {
 	 * @param productId
 	 * @return
 	 */
-	public ResponseEntity<Recommendation[]> defaultRecommendations(int productId) {
+	public ResponseEntity<Recommendation[]> defaultRecommendations(String productUuid) {
 		log.warn("Using fallback method for recommendation-service");
 		log.debug("GetRecommendations.fallback-cnt {}", 1);
 
@@ -115,14 +113,14 @@ public class ProductCompositeServiceImpl {
 	// ------- //
 
 	@HystrixCommand(fallbackMethod = "defaultReviews")
-	public ResponseEntity<Review[]> getReviews(int productId) {
+	public ResponseEntity<Review[]> getReviews(String productUuid) {
 		log.debug("Will call getReviews with Hystrix protection");
 
-		String url = "http://review-service/review/" + productId;
+		String url = "http://review-service/reviews/product/{uuid}/{page}/{size}";
 
 		log.debug("GetReviews from URL: {}", url);
 
-		ResponseEntity<Review[]> reviews = restTemplate.getForEntity(url, Review[].class);
+		ResponseEntity<Review[]> reviews = restTemplate.getForEntity(url, Review[].class, productUuid, 0, 10);
 		log.debug("GetReviews http-status: {}", reviews.getStatusCode());
 
 		if (log.isDebugEnabled()) {
@@ -140,7 +138,7 @@ public class ProductCompositeServiceImpl {
 	 * @param productId
 	 * @return
 	 */
-	public ResponseEntity<Review[]> defaultReviews(int productId) {
+	public ResponseEntity<Review[]> defaultReviews(String productUuid) {
 		log.warn("Using fallback method for review-service");
 		log.debug("GetReviews.fallback-cnt {}", 1);
 

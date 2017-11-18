@@ -8,9 +8,9 @@ import de.maltorpro.shop.model.Review;
 
 public interface ProductCompositeService {
 
-	ResponseEntity<Product> getProduct(int productId);
+	ResponseEntity<Product> getProduct(String productUuid);
 
-	ResponseEntity<Recommendation[]> getRecommendations(int productId);
+	ResponseEntity<Recommendation[]> getRecommendations(String productUuid);
 
-	ResponseEntity<Review[]> getReviews(int productId);
+	ResponseEntity<Review[]> getReviews(String productUuid);
 }
