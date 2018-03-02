@@ -3,6 +3,7 @@ package de.maltorpro.shop.service.recommendation.test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -184,8 +186,11 @@ public class ApplicationTest {
 	@Test
 	public void test2GetRecommendationForProduct() throws Exception {
 
-		Recommendation recommendation = recommendationRepository.findOne(defaultRecommendationId);
+		Optional<Recommendation> recommendationOpt = recommendationRepository.findById(defaultRecommendationId);
 
+		assertTrue(recommendationOpt.isPresent());
+		Recommendation recommendation = recommendationOpt.get();
+		
 		this.mockMvc
 				.perform(get("/recommendation/product/{uuid}", recommendation.getRecommendationFor().getProductUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
@@ -216,7 +221,11 @@ public class ApplicationTest {
 	@Test
 	public void test3UpdateRecommendation() throws Exception {
 
-		Recommendation recommendation = recommendationRepository.findOne(defaultRecommendationId);
+		Optional<Recommendation> recommendationOpt = recommendationRepository.findById(defaultRecommendationId);
+		
+		assertTrue(recommendationOpt.isPresent());
+        Recommendation recommendation = recommendationOpt.get();
+		
 		recommendation.getRecommendations().remove(0);
 
 		this.mockMvc
@@ -237,8 +246,11 @@ public class ApplicationTest {
 		assertEquals("Check the recommendation count before delete.", recommendationCounter,
 				recommendationRepository.count());
 
-		Recommendation recommendation = recommendationRepository.findOne(defaultRecommendationId);
-
+		Optional<Recommendation> recommendationOpt = recommendationRepository.findById(defaultRecommendationId);
+		
+		assertTrue(recommendationOpt.isPresent());
+        Recommendation recommendation = recommendationOpt.get();
+		
 		this.mockMvc
 				.perform(delete("/recommendation/product/{uuid}", recommendation.getRecommendationFor().getProductUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))

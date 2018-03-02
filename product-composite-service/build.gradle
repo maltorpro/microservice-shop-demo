@@ -6,17 +6,19 @@ jar {
 
 dependencies {
 	
-    compile("org.springframework.cloud:spring-cloud-starter-eureka")
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     
     compile("org.springframework.cloud:spring-cloud-starter-oauth2")
     compile("org.springframework.cloud:spring-cloud-starter-security")
     
     
-	compile("org.springframework.cloud:spring-cloud-starter-hystrix")
+	compile("org.springframework.cloud:spring-cloud-starter-netflix-hystrix")
 	compile("org.springframework.cloud:spring-cloud-netflix-hystrix-stream")
 	compile("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
 	
 	compile("org.springframework.boot:spring-boot-starter-hateoas")
+	
+	testCompile("org.springframework.security:spring-security-test")
 	
 	compile project(":main-module")
 	

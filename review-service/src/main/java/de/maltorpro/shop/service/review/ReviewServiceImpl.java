@@ -62,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public Page<Review> findByProductUuid(String productUuid, int page, int size) {
-		return reviewPagingRepository.findByProductProductUuid(productUuid, new PageRequest(page, size));
+		return reviewPagingRepository.findByProductProductUuid(productUuid, PageRequest.of(page, size));
 	}
 
 	@Override

@@ -2,16 +2,15 @@ package de.maltorpro.shop.service.composite.product;
 
 import java.util.Arrays;
 
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
@@ -22,16 +21,15 @@ import de.maltorpro.shop.util.ServiceUtils;
 
 @Service("productCompositeService")
 @Transactional
-public class ProductCompositeServiceImpl implements ProductCompositeService{
+public class ProductCompositeServiceImpl implements ProductCompositeService {
 
 	private static final Logger log = LoggerFactory.getLogger(ProductCompositeServiceImpl.class);
 
-	@Inject
+	@Autowired
 	private ServiceUtils util;
 
-	@Inject
-	@LoadBalanced
-	private RestOperations restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	// -------- //
 	// PRODUCTS //
@@ -78,7 +76,8 @@ public class ProductCompositeServiceImpl implements ProductCompositeService{
 
 			log.debug("GetRecommendations from URL: {}", url);
 
-			ResponseEntity<Recommendation[]> recommendations = restTemplate.getForEntity(url, Recommendation[].class, productUuid);
+			ResponseEntity<Recommendation[]> recommendations = restTemplate.getForEntity(url, Recommendation[].class,
+					productUuid);
 			log.debug("GetRecommendations http-status: {}", recommendations.getStatusCode());
 
 			if (log.isDebugEnabled()) {

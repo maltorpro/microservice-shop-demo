@@ -3,6 +3,7 @@ package de.maltorpro.shop.service.review.test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -204,7 +206,11 @@ public class ApplicaitonTest {
 	@Test
 	public void test3UpdateReview() throws Exception {
 
-		Review review = reviewRepository.findOne(defaultReviewId);
+		Optional<Review> reviewOpt = reviewRepository.findById(defaultReviewId);
+		
+		assertTrue(reviewOpt.isPresent());
+        Review review = reviewOpt.get();
+		
 		review.setAuthor("Max Mustermann updated");
 		review.setReviewText("Nice product updated");
 		review.setRating(4);
@@ -225,8 +231,11 @@ public class ApplicaitonTest {
 
 		assertEquals("Check the review count before delete.", reviewCounter, reviewRepository.count());
 
-		Review review = reviewRepository.findOne(defaultReviewId);
-
+		Optional<Review> reviewOpt = reviewRepository.findById(defaultReviewId);
+		
+	    assertTrue(reviewOpt.isPresent());
+	    Review review = reviewOpt.get();
+		
 		this.mockMvc
 				.perform(delete("/review/{uuid}", review.getReviewUuid())
 						.accept(org.springframework.http.MediaType.APPLICATION_JSON))

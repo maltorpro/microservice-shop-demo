@@ -181,7 +181,7 @@ services:
   #######################################
   
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
@@ -195,7 +195,7 @@ services:
       - shopnet
   
   kibana:
-    image: docker.elastic.co/kibana/kibana:5.6.2
+    image: docker.elastic.co/kibana/kibana:6.2.2
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]
@@ -207,7 +207,7 @@ services:
       - shopnet
   
   logstash:
-    image: docker.elastic.co/logstash/logstash:5.6.2
+    image: docker.elastic.co/logstash/logstash:6.2.2
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]
@@ -224,21 +224,7 @@ services:
   
      
   #monitoring
-  zipkin-server:
-    image: maltor/zipkin-server
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    deploy:
-      placement:
-        constraints: [node.hostname == monitoring1]    
-      resources:
-        limits:
-         memory: 128M
-    ports:
-     - "9411:9411" 
-    networks:
-     - shopnet
-
+  
   turbine-server:
     image: maltor/turbine-server
     environment:

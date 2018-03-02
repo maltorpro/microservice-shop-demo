@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> listAllProductsByPage(int page, int size) {
 
-		return productPagingRepository.findAll(new PageRequest(page, size));
+		return productPagingRepository.findAll(PageRequest.of(page, size));
 	}
 
 }

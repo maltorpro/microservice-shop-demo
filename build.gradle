@@ -1,11 +1,12 @@
 buildscript {
 	    ext {
-	        springBootVersion = "1.5.8.RELEASE"
-        	springCloudVersion = "Dalston.SR4"
+	        springBootVersion = "2.0.0.RELEASE"
 	    }
 	    repositories {
 	        mavenCentral()
 	        jcenter()
+	        maven { url "https://repo.spring.io/snapshot" }
+			maven { url "https://repo.spring.io/milestone" }
 	    }
 	    dependencies {
 	        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
@@ -32,18 +33,23 @@ subprojects {
 	apply plugin: "java"
 	apply plugin: "eclipse"
 	apply plugin: "org.springframework.boot"
+	apply plugin: "io.spring.dependency-management"
+	
 	
 	
 	sourceCompatibility = 1.8
 	targetCompatibility = 1.8
 	
 	repositories {
-	   	mavenLocal()
-    		jcenter()
     		mavenCentral()
-    		maven { url "https://repo.spring.io/milestone" }
+    		jcenter()
+    		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
 	}
 	
+	ext {
+		springCloudVersion = 'Finchley.M6'
+	}
 
 	dependencies {
 	
@@ -53,7 +59,6 @@ subprojects {
     	
    	 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
  		compile ("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
-    		compile ("org.springframework.cloud:spring-cloud-sleuth-stream")
     	
     		compile("net.logstash.logback:logstash-logback-encoder:4.9")
  		compile("org.aspectj:aspectjweaver:1.8.10")

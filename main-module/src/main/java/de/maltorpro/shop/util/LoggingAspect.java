@@ -12,8 +12,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
+import brave.Span;
+import brave.Tracer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -40,7 +40,7 @@ public class LoggingAspect {
 		String apiName = className + "." + methodName;
 
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-		Span currentSpan = tracer.getCurrentSpan();
+		Span currentSpan = tracer.currentSpan();
 
 		if (requestAttributes != null && currentSpan != null) {
 
@@ -53,8 +53,8 @@ public class LoggingAspect {
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 					.getRequest();
 
-			String traceId = Long.toHexString(currentSpan.getTraceId());
-			String spanId = Long.toHexString(currentSpan.getSpanId());
+			String traceId = Long.toHexString(currentSpan.context().traceId());
+			String spanId = Long.toHexString(currentSpan.context().spanId());
 
 			long elapsedTime = System.currentTimeMillis() - start;
 			String args = Arrays.toString(joinPoint.getArgs());

@@ -3,6 +3,7 @@ package de.maltorpro.shop.service.product.test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.delete;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.Before;
@@ -140,9 +142,9 @@ public class ApplicationTest {
 	@Test
 	public void test2GetProdut() throws Exception {
 
-		Product product = productRepository.findOne(defaultProductId);
+		Optional<Product> product = productRepository.findById(defaultProductId);
 
-		this.mockMvc.perform(get("/product/{uuid}", product.getProductUuid()).accept(MediaTypes.HAL_JSON))
+		this.mockMvc.perform(get("/product/{uuid}", product.get().getProductUuid()).accept(MediaTypes.HAL_JSON))
 				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product1")))
 				.andExpect(jsonPath("$.shortDescription", equalTo("product1 short description")))
 				.andExpect(jsonPath("$.longDescription", equalTo("product1 long description")))
@@ -163,7 +165,11 @@ public class ApplicationTest {
 	@Test
 	public void test3UpdateProduct() throws Exception {
 
-		Product product = productRepository.findOne(updateProductId);
+		Optional<Product> productOpt = productRepository.findById(updateProductId);
+		
+		assertTrue(productOpt.isPresent());
+		Product product= productOpt.get();
+		
 		product.setName("name updated");
 		product.setShortDescription("short description updated");
 		product.setLongDescription("long description updated");
@@ -183,7 +189,10 @@ public class ApplicationTest {
 
 		assertEquals("Check the product count before delete.", productCounter, productRepository.count());
 
-		Product product = productRepository.findOne(deleteProductId);
+		Optional<Product> productOpt = productRepository.findById(deleteProductId);
+		
+		assertTrue(productOpt.isPresent());
+	    Product product= productOpt.get();
 
 		this.mockMvc
 				.perform(delete("/product/{uuid}", product.getProductUuid())

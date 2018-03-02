@@ -37,7 +37,7 @@ public class ProductCompositeRestController {
 	}
 
 	@PreAuthorize("hasAuthority('ROLE_DEVELOPERS')")
-	@RequestMapping("/{{uuid}}")
+	@RequestMapping("/{uuid}")
 	public ResponseEntity<ProductAggregated> getProduct(@PathVariable String uuid, Principal currentUser) {
 
 		LOG.info("/product called");

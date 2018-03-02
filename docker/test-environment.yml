@@ -5,20 +5,39 @@ services:
   config-server:
     image: maltor/config-server
     container_name: config-server
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     restart: always
     ports:
     - "8888:8888"
- 
+  
   rabbitmq:
     image: rabbitmq:3.6-management
     container_name: rabbitmq
     ports:
      - "5672:5672"
+     
+#  auth-server:
+#    image: maltor/auth-server
+#    container_name: auth-server
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+#    ports:
+#     - "9999:9999"
+#       
+#  resource-server:
+#    image: maltor/resource-server
+#    container_name: resource-server
+#    environment:
+#      SPRING_PROFILES_ACTIVE: docker
+#    ports:
+#     - "9090:9090"   
  
   discovery-server:
     image: maltor/discovery-server
     container_name: discovery-server
-    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     ports:
     - "8761:8761"
     

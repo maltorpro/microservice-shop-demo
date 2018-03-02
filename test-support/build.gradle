@@ -3,14 +3,6 @@ jar {
     version = "0.0.1-SNAPSHOT"
 }
 
-springBoot {
-	layout = "NONE"
-}
-
-bootRepackage {
-    enabled = false
-}
-
 dependencies {
 
 	compile project(":main-module")
