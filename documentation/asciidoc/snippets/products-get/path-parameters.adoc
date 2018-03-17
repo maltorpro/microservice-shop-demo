@@ -1,6 +1,4 @@
-/products/{page}/{size}
-
-.Request path parameters 
+./products/{page}/{size}
 |===
 |Parameter|Description
 

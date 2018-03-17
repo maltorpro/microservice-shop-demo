@@ -1,4 +1,5 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/product/82a66bde-03d5-4c67-9be3-f83557eb2917' -i -H 'Accept: application/hal+json'
+$ curl 'http://localhost:8080/product/2ef289e2-5d3c-4194-a0f5-3b0247ce6259' -i \
+    -H 'Accept: application/hal+json'
 ----

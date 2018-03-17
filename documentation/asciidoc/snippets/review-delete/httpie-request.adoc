@@ -1,4 +1,5 @@
 [source,bash]
 ----
-$ http DELETE 'http://localhost:8080/review/1ed44336-73bd-47c3-b6be-37d08df695a7' 'Accept:application/json'
+$ http DELETE 'http://localhost:8080/review/80a3224b-e0be-4d73-9e19-925b892f1ee1' \
+    'Accept:application/json'
 ----

@@ -9,6 +9,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -154,7 +155,7 @@ public class ApplicaitonTest {
 								fieldWithPath("author").description(FieldDescription.REVIEW_AUTHOR_DESCRIPTION),
 								fieldWithPath("rating").description(FieldDescription.REVIEW_RATING_DESCRIPTION),
 								fieldWithPath("reviewText").description(FieldDescription.REVIEW_REVIEW_TEXT),
-								fieldWithPath("product").description(FieldDescription.REVIEWP_RODUCT_DESCRIPTION))));
+								subsectionWithPath("product").description(FieldDescription.REVIEWP_RODUCT_DESCRIPTION))));
 		reviewCounter++;
 	}
 
@@ -190,17 +191,23 @@ public class ApplicaitonTest {
 								fieldWithPath("content[].author").description(FieldDescription.REVIEW_AUTHOR_DESCRIPTION),
 								fieldWithPath("content[].rating").description(FieldDescription.REVIEW_RATING_DESCRIPTION),
 								fieldWithPath("content[].reviewText").description(FieldDescription.REVIEW_REVIEW_TEXT),
-								fieldWithPath("content[].product")
+								subsectionWithPath("content[].product")
 										.description(FieldDescription.REVIEWP_RODUCT_DESCRIPTION),
-								fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
-								fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
-								fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
-								fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
-								fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
-								fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
-								fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
-								fieldWithPath("numberOfElements")
-										.description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
+								
+								// ignore sorting      
+                                subsectionWithPath("pageable").ignored(),
+                                subsectionWithPath("sort").ignored(),
+                                
+                                // paging
+                                fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
+                                fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
+                                fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
+                                fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
+                                fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
+                                fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
+                                fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
+                                fieldWithPath("numberOfElements")
+                                        .description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
 	}
 
 	@Test

@@ -204,3 +204,21 @@ include::{snippets}/review-delete/curl-request.adoc[]
 
 ==== Example response
 include::{snippets}/review-delete/http-response.adoc[]
+
+[[resources-product-composite]]
+== Product Composite REST Service
+The product composite rest service is used to list a summary product with reviews and recommendations.
+
+=== Listing reviews
+The `GET` request returns the summary product.
+
+include::{snippets}/product-composite-get/path-parameters.adoc[]
+
+
+include::{snippets}/product-composite-get/response-fields.adoc[]
+
+==== Example request
+include::{snippets}/product-composite-get/curl-request.adoc[]
+
+==== Example response
+include::{snippets}/product-composite-get/http-response.adoc[]

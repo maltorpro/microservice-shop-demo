@@ -9,39 +9,48 @@ import de.maltorpro.shop.model.Review;
 
 public class ProductAggregated {
 
-	private String productUuid;
-	private String name;
-	private List<RecommendationSummary> recommendations;
-	private List<Review> reviews;
+    private ProductSummary product;
+    private List<RecommendationSummary> recommendations;
+    private List<ReviewSummary> reviews;
 
-	public ProductAggregated(Product product, List<Recommendation> recommendations, List<Review> reviews) {
+    public ProductAggregated(Product product,
+            List<Recommendation> recommendations, List<Review> reviews) {
 
-		// 1. Setup product info
-		this.name = product.getName();
+        // 1. Set product
+        this.product = new ProductSummary(product.getProductUuid(),
+                product.getName());
 
-		// 2. Copy summary recommendation info, if available
-		if (recommendations != null)
-			this.recommendations = recommendations.stream()
-					.map(x -> new RecommendationSummary(x.getRecommendationUuid(), x.getRecommendations()))
-					.collect(Collectors.toList());
+        // 2. Copy summary recommendation info, if available
+        if (recommendations != null)
+            this.recommendations = recommendations.stream()
+                    .map(x -> new RecommendationSummary(
+                            x.getRecommendationUuid(), x.getRecommendations()))
+                    .collect(Collectors.toList());
 
-		// 3. Set reviews
-		this.reviews = reviews;
-	}
+        // 3. Set reviews
+        if (reviews != null) {
+            this.reviews = reviews.stream().map(x -> {
 
-	public String getProductUuid() {
-		return productUuid;
-	}
+                ReviewSummary reviewSummary = new ReviewSummary();
+                reviewSummary.setReviewUuid(x.getReviewUuid());
+                reviewSummary.setAuthor(x.getAuthor());
+                reviewSummary.setRating(x.getRating());
+                return reviewSummary;
 
-	public String getName() {
-		return name;
-	}
+            }).collect(Collectors.toList());
+        }
 
-	public List<RecommendationSummary> getRecommendations() {
-		return recommendations;
-	}
+    }
 
-	public List<Review> getReviews() {
-		return reviews;
-	}
+    public List<RecommendationSummary> getRecommendations() {
+        return recommendations;
+    }
+
+    public List<ReviewSummary> getReviews() {
+        return reviews;
+    }
+
+    public ProductSummary getProduct() {
+        return product;
+    }
 }

@@ -1,8 +1,10 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/product' -i -X POST -H 'Content-Type: application/json' -d '{
-  "creationDate" : "2017-11-16 18:01 PM UTC",
-  "updateDate" : "2017-11-16 18:01 PM UTC",
+$ curl 'http://localhost:8080/product' -i -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{
+  "creationDate" : "2018-03-17 23:12 PM UTC",
+  "updateDate" : "2018-03-17 23:12 PM UTC",
   "productId" : null,
   "productUuid" : null,
   "name" : "Product2",

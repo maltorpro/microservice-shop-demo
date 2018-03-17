@@ -1,6 +1,4 @@
-/product/{uuid}
-
-.Request path parameters 
+./product/{uuid}
 |===
 |Parameter|Description
 

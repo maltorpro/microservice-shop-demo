@@ -1,0 +1,17 @@
+[source,options="nowrap"]
+----
+{
+  "creationDate" : "2018-03-17 23:12 PM UTC",
+  "updateDate" : "2018-03-17 23:12 PM UTC",
+  "productId" : 1000,
+  "productUuid" : "2ef289e2-5d3c-4194-a0f5-3b0247ce6259",
+  "name" : "Product1",
+  "shortDescription" : "product1 short description",
+  "longDescription" : "product1 long description",
+  "_links" : {
+    "next" : {
+      "href" : "http://localhost:8080/product/testuuid"
+    }
+  }
+}
+----

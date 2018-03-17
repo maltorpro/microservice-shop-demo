@@ -5,40 +5,40 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 1504
 
 {
-  "creationDate" : "2017-11-18 15:14 PM UTC",
-  "updateDate" : "2017-11-18 15:14 PM UTC",
+  "creationDate" : "2018-03-17 23:12 PM UTC",
+  "updateDate" : "2018-03-17 23:12 PM UTC",
   "recommendationId" : 1001,
-  "recommendationUuid" : "5dc537fa-2ec1-4e70-9406-4e9328982701",
+  "recommendationUuid" : "1b22b866-90fe-42d5-8a13-fcc2fb4e6d7a",
   "recommendationFor" : {
-    "creationDate" : "2017-11-18 15:14 PM UTC",
-    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
     "productId" : 1000,
-    "productUuid" : "98495b7f-a325-41b1-a31d-fba2c5b8381e",
+    "productUuid" : "a357b344-e3c7-4807-843e-571824c78caf",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   },
   "recommendations" : [ {
-    "creationDate" : "2017-11-18 15:14 PM UTC",
-    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
     "productId" : 1001,
-    "productUuid" : "31757887-e312-4819-8561-06f3cca26015",
+    "productUuid" : "82471ab6-319e-46e5-ac00-d15cdc5a37b0",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2017-11-18 15:14 PM UTC",
-    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
     "productId" : 1002,
-    "productUuid" : "708f5240-64ce-4e72-bb04-191c82b43cb4",
+    "productUuid" : "bf62bf77-0c13-4ca7-bfe8-3cb985309dc9",
     "name" : "Product3",
     "shortDescription" : "product3 short description",
     "longDescription" : "product3 long description"
   }, {
-    "creationDate" : "2017-11-18 15:14 PM UTC",
-    "updateDate" : "2017-11-18 15:14 PM UTC",
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
     "productId" : 1003,
-    "productUuid" : "f20f6f65-a77f-4b45-9aae-e605960f7390",
+    "productUuid" : "25f1f660-28ee-4323-be52-d28fa6bc9da7",
     "name" : "Product4",
     "shortDescription" : "product4 short description",
     "longDescription" : "product4 long description"

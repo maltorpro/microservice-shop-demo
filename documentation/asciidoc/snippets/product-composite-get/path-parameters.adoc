@@ -1,0 +1,8 @@
+./{uuid}
+|===
+|Parameter|Description
+
+|`uuid`
+|The unique identifier of the product
+
+|===

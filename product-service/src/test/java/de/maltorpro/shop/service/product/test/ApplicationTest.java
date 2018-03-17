@@ -12,6 +12,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -236,16 +237,21 @@ public class ApplicationTest {
 										.description(FieldDescription.SHORT_DESCRIPTION),
 								fieldWithPath("content.[].longDescription")
 										.description(FieldDescription.LONG_DESCRIPTION),
-
+										
+								// ignore sorting		
+								subsectionWithPath("pageable").ignored(),
+								subsectionWithPath("sort").ignored(),
+								
+								// paging
 								fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
-								fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
-								fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
-								fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
-								fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
-								fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
-								fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
-								fieldWithPath("numberOfElements")
-										.description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
+                                fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
+                                fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
+                                fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
+                                fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
+                                fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
+                                fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
+                                fieldWithPath("numberOfElements")
+                                        .description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
 	}
 
 }

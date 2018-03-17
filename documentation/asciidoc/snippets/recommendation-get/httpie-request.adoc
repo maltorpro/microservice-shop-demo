@@ -1,4 +1,5 @@
 [source,bash]
 ----
-$ http GET 'http://localhost:8080/recommendation/product/53cbd594-7796-49fb-8f4e-ce627dc645a7' 'Accept:application/json'
+$ http GET 'http://localhost:8080/recommendation/product/b43ed5bd-6a5c-44ae-8676-cda0121b0842' \
+    'Accept:application/json'
 ----

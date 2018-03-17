@@ -1,0 +1,27 @@
+[source,options="nowrap"]
+----
+{
+  "product" : {
+    "productUuid" : "f67dc537-d3d5-4184-86bd-10012b0b65d4",
+    "name" : "Product2"
+  },
+  "recommendations" : [ {
+    "recommendationUuid" : "bcd4ac88-ce90-4c48-ab47-9ec01da00f64",
+    "products" : [ {
+      "productUuid" : "98495b7f-a325-41b1-a31d-fba2c5b8381e",
+      "name" : "Product1"
+    }, {
+      "productUuid" : "708f5240-64ce-4e72-bb04-191c82b43cb4",
+      "name" : "Product3"
+    }, {
+      "productUuid" : "f20f6f65-a77f-4b45-9aae-e605960f7390",
+      "name" : "Product4"
+    } ]
+  } ],
+  "reviews" : [ {
+    "reviewUuid" : "4b3bfc88-0f73-48ec-b7ba-f8f8ea0ed86b",
+    "author" : "Max Mustermann2",
+    "rating" : 3
+  } ]
+}
+----

@@ -1,6 +1,4 @@
-/review/{uuid}
-
-.Request path parameters 
+./review/{uuid}
 |===
 |Parameter|Description
 

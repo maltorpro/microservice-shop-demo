@@ -1,0 +1,7 @@
+[source,http,options="nowrap"]
+----
+GET /82a66bde-03d5-4c67-9be3-f83557eb2917 HTTP/1.1
+Accept: application/json
+Host: localhost:8080
+
+----

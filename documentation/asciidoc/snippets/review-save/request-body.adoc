@@ -1,0 +1,21 @@
+[source,options="nowrap"]
+----
+{
+  "creationDate" : "2018-03-17 23:13 PM UTC",
+  "updateDate" : "2018-03-17 23:13 PM UTC",
+  "reviewId" : null,
+  "reviewUuid" : null,
+  "author" : "Max Mustermann2",
+  "rating" : 3,
+  "reviewText" : "Nice product2",
+  "product" : {
+    "creationDate" : "2018-03-17 23:13 PM UTC",
+    "updateDate" : "2018-03-17 23:13 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "86b290da-cf28-4b7b-ae87-87068a5099d5",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }
+}
+----

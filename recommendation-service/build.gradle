@@ -10,7 +10,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-hateoas")
 	
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("postgresql:postgresql:9.4.1208-jdbc42-atlassian-hosted")	
+    compile("org.postgresql:postgresql:42.2.1")		
 	
 	compile project(":main-module")
 	

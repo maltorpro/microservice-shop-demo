@@ -1,0 +1,43 @@
+[source,options="nowrap"]
+----
+{
+  "creationDate" : "2018-03-17 23:12 PM UTC",
+  "updateDate" : "2018-03-17 23:12 PM UTC",
+  "recommendationId" : 1000,
+  "recommendationUuid" : "fdc2c8ed-8d0a-4220-a026-0c57ba19b2b6",
+  "recommendationFor" : {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1004,
+    "productUuid" : "b43ed5bd-6a5c-44ae-8676-cda0121b0842",
+    "name" : "Product5",
+    "shortDescription" : "product5 short description",
+    "longDescription" : "product5 long description"
+  },
+  "recommendations" : [ {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "a357b344-e3c7-4807-843e-571824c78caf",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description"
+  }, {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1002,
+    "productUuid" : "bf62bf77-0c13-4ca7-bfe8-3cb985309dc9",
+    "name" : "Product3",
+    "shortDescription" : "product3 short description",
+    "longDescription" : "product3 long description"
+  }, {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "25f1f660-28ee-4323-be52-d28fa6bc9da7",
+    "name" : "Product4",
+    "shortDescription" : "product4 short description",
+    "longDescription" : "product4 long description"
+  } ]
+}
+----

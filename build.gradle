@@ -1,6 +1,6 @@
 buildscript {
 	    ext {
-	        springBootVersion = "2.0.0.RELEASE"
+	        springBootVersion = "2.0.0.RC2"
 	    }
 	    repositories {
 	        mavenCentral()
@@ -26,7 +26,9 @@ asciidoctor {
     	attributes \
       		'snippets': file("documentation/asciidoc/snippets")
       	backends 'html5', 'pdf'
-	}
+}
+
+build.finalizedBy(asciidoctor)
 
 subprojects {
     
@@ -48,7 +50,7 @@ subprojects {
 	}
 	
 	ext {
-		springCloudVersion = 'Finchley.M6'
+		springCloudVersion = 'Finchley.M7'
 	}
 
 	dependencies {

@@ -1,0 +1,52 @@
+[source,options="nowrap"]
+----
+{
+  "content" : [ {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1000,
+    "productUuid" : "2ef289e2-5d3c-4194-a0f5-3b0247ce6259",
+    "name" : "Product1",
+    "shortDescription" : "product1 short description",
+    "longDescription" : "product1 long description"
+  }, {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1003,
+    "productUuid" : "ac23f5fb-ae41-4969-a12c-29ce6feffdc9",
+    "name" : "Product2",
+    "shortDescription" : "product2 short description",
+    "longDescription" : "product2 long description"
+  }, {
+    "creationDate" : "2018-03-17 23:12 PM UTC",
+    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "productId" : 1001,
+    "productUuid" : "34131b36-5c2d-4f9c-90c5-4b98cccc231b",
+    "name" : "name updated",
+    "shortDescription" : "short description updated",
+    "longDescription" : "long description updated"
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true
+    },
+    "offset" : 0,
+    "pageSize" : 3,
+    "pageNumber" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 1,
+  "totalElements" : 3,
+  "last" : true,
+  "size" : 3,
+  "number" : 0,
+  "numberOfElements" : 3,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true
+  },
+  "first" : true
+}
+----

@@ -54,6 +54,7 @@ public final class FieldDescription {
 
 	public static final String RECOMMENDATIONS_DESCRIPTION = "Recommendations for the product";
 
+
 	/*
 	 * Review field descriptions
 	 */
@@ -67,26 +68,34 @@ public final class FieldDescription {
 	public static final String REVIEW_REVIEW_TEXT = "Review text written by the author";
 
 	public static final String REVIEWP_RODUCT_DESCRIPTION = "Rated product";
-
+	
+	
+	/*
+	 * Product composite descriptions
+	 */
+	public static final String PRODUCT_COMPOSITE_PRODUCT_DESCRIPTION = "Product summary data";
+	
+    public static final String REVIEW_DESCRIPTION = "Reviews for the product.";
+	
 	/*
 	 * Page field descriptions
 	 */
-
 	public static final String TOTAL_ELEMENTS_DESCRIPTION = "Total amount of elements.";
 
-	public static final String TOTAL_PAGES_DESCRIPTION = "Number of total pages.";
+    public static final String TOTAL_PAGES_DESCRIPTION = "Number of total pages.";
 
-	public static final String LAST_DESCRIPTION = "Indicates whether the current page is the last one.";
+    public static final String LAST_DESCRIPTION = "Indicates whether the current page is the last one.";
 
-	public static final String SIZE_DESCRIPTION = "Size of the page.";
+    public static final String SIZE_DESCRIPTION = "Size of the page.";
 
-	public static final String NUMBER_DESCRIPTION = "Number of the current page.";
+    public static final String NUMBER_DESCRIPTION = "Number of the current page.";
 
-	public static final String SORT_DESCRIPTION = "Sorting parameters for the page.";
+    public static final String SORT_DESCRIPTION = "Sorting parameters for the page.";
 
-	public static final String FIRST_DESCRIPTION = "Indicates whether the current page is the first one.";
+    public static final String FIRST_DESCRIPTION = "Indicates whether the current page is the first one.";
 
-	public static final String NUMBER_OF_ELEMENTS_DESCRIPTION = "Number of elements currently on this page.";
+    public static final String NUMBER_OF_ELEMENTS_DESCRIPTION = "Number of elements currently on this page.";
+
 
 	private FieldDescription() {
 		// not for creation.

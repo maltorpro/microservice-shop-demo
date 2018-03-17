@@ -13,108 +13,108 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(indexes = { @Index(name = "IDX_REVIEW_IDS", columnList = "reviewId,reviewUuid") })
+@Table(indexes = {
+        @Index(name = "IDX_REVIEW_IDS", columnList = "reviewId,reviewUuid") })
 public class Review extends ShopObject {
-	// @formatter:off
-	
-	@Id
-	@GenericGenerator(
-			name = "reviewSequenceGenerator",
-			strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-			parameters = {
-					@Parameter(name = "sequence_name", value = "REVEIW_SEQUENCE"),
-					@Parameter(name = "initial_value", value = "1000"), @Parameter(name = "increment_size", value = "1") })
-	@GeneratedValue(generator = "reviewSequenceGenerator")
-	private Long reviewId;
+    // @formatter:off
 
-	@Column(columnDefinition = "char(36)", nullable = false)
-	private String reviewUuid;
+    @Id
+    @GenericGenerator(name = "reviewSequenceGenerator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = "sequence_name", value = "REVEIW_SEQUENCE"),
+            @Parameter(name = "initial_value", value = "1000"),
+            @Parameter(name = "increment_size", value = "1") })
+    @GeneratedValue(generator = "reviewSequenceGenerator")
+    private Long reviewId;
 
-	@Column(nullable = false)
-	private String author;
+    @Column(columnDefinition = "char(36)", nullable = false)
+    private String reviewUuid;
 
-	@Column(nullable = false)
-	private Integer rating;
-	
-	@Column(length = 1024)
-	private String reviewText;
+    @Column(nullable = false)
+    private String author;
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "productId")
-	private Product product;
+    @Column(nullable = false)
+    private Integer rating;
 
-	// @formatter:on
-	public Long getReviewId() {
-		return reviewId;
-	}
+    @Column(length = 1024)
+    private String reviewText;
 
-	public void setReviewId(Long reviewId) {
-		this.reviewId = reviewId;
-	}
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "productId")
+    private Product product;
 
-	public String getReviewUuid() {
-		return reviewUuid;
-	}
+    // @formatter:on
+    public Long getReviewId() {
+        return reviewId;
+    }
 
-	public void setReviewUuid(String reviewUuid) {
-		this.reviewUuid = reviewUuid;
-	}
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getReviewUuid() {
+        return reviewUuid;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setReviewUuid(String reviewUuid) {
+        this.reviewUuid = reviewUuid;
+    }
 
-	public Integer getRating() {
-		return rating;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setRating(Integer rating) {
-		this.rating = rating;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public Integer getRating() {
+        return rating;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
 
-	public String getReviewText() {
-		return reviewText;
-	}
+    public Product getProduct() {
+        return product;
+    }
 
-	public void setReviewText(String reviewText) {
-		this.reviewText = reviewText;
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((reviewUuid == null) ? 0 : reviewUuid.hashCode());
-		return result;
-	}
+    public String getReviewText() {
+        return reviewText;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Review other = (Review) obj;
-		if (reviewUuid == null) {
-			if (other.reviewUuid != null)
-				return false;
-		} else if (!reviewUuid.equals(other.reviewUuid))
-			return false;
-		return true;
-	}
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((reviewUuid == null) ? 0 : reviewUuid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Review other = (Review) obj;
+        if (reviewUuid == null) {
+            if (other.reviewUuid != null)
+                return false;
+        } else if (!reviewUuid.equals(other.reviewUuid))
+            return false;
+        return true;
+    }
 
 }

@@ -9,6 +9,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -173,9 +174,9 @@ public class ApplicationTest {
 								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("recommendationUuid")
 										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
-								fieldWithPath("recommendationFor")
+								subsectionWithPath("recommendationFor")
 										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
-								fieldWithPath("recommendations[]")
+								subsectionWithPath("recommendations[]")
 										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION)
 
 						)));
@@ -212,9 +213,9 @@ public class ApplicationTest {
 								fieldWithPath("recommendationId").description(FieldDescription.ID_DESCRIPTION),
 								fieldWithPath("recommendationUuid")
 										.description(FieldDescription.RECOMMENDATION_UUID_DESCRIPTION),
-								fieldWithPath("recommendationFor")
+								subsectionWithPath("recommendationFor")
 										.description(FieldDescription.RECOMMENDATION_FOR_DESCRIPTION),
-								fieldWithPath("recommendations[]")
+								subsectionWithPath("recommendations[]")
 										.description(FieldDescription.RECOMMENDATIONS_DESCRIPTION))));
 	}
 

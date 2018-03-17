@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-GET /recommendation/product/53cbd594-7796-49fb-8f4e-ce627dc645a7 HTTP/1.1
+GET /recommendation/product/b43ed5bd-6a5c-44ae-8676-cda0121b0842 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
 

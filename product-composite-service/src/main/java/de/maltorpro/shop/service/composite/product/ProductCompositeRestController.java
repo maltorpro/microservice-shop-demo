@@ -23,65 +23,72 @@ import de.maltorpro.shop.util.ServiceUtils;
 @RestController
 public class ProductCompositeRestController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ProductCompositeRestController.class);
+    private static final Logger LOG = LoggerFactory
+            .getLogger(ProductCompositeRestController.class);
 
-	@Autowired
-	ProductCompositeService productCompositeService;
+    @Autowired
+    ProductCompositeService productCompositeService;
 
-	@Autowired
-	ServiceUtils util;
+    @Autowired
+    ServiceUtils util;
 
-	@RequestMapping("/")
-	public String getProduct() {
-		return "{\"timestamp\":\"" + new Date() + "\",\"content\":\"Hello from ProductAPi\"}";
-	}
+    @RequestMapping("/")
+    public String getProduct() {
+        return "{\"timestamp\":\"" + new Date()
+                + "\",\"content\":\"Hello from ProductAPi\"}";
+    }
 
-	@PreAuthorize("hasAuthority('ROLE_DEVELOPERS')")
-	@RequestMapping("/{uuid}")
-	public ResponseEntity<ProductAggregated> getProduct(@PathVariable String uuid, Principal currentUser) {
+    @PreAuthorize("hasAuthority('ROLE_DEVELOPERS')")
+    @RequestMapping("/{uuid}")
+    public ResponseEntity<ProductAggregated> getProduct(
+            @PathVariable String uuid, Principal currentUser) {
 
-		LOG.info("/product called");
+        LOG.info("/product called");
 
-		// 1. First get mandatory product information
-		ResponseEntity<Product> productResult = productCompositeService.getProduct(uuid);
+        // 1. First get mandatory product information
+        ResponseEntity<Product> productResult = productCompositeService
+                .getProduct(uuid);
 
-		if (!productResult.getStatusCode().is2xxSuccessful()) {
-			// We can't proceed, return whatever fault we got from the
-			// getProduct call
-			return util.createResponse(null, productResult.getStatusCode());
-		}
+        if (!productResult.getStatusCode().is2xxSuccessful()) {
+            // We can't proceed, return whatever fault we got from the
+            // getProduct call
+            return util.createResponse(null, productResult.getStatusCode());
+        }
 
-		// 2. Get optional recommendations
+        // 2. Get optional recommendations
+        List<Recommendation> recommendations = null;
+        ResponseEntity<Recommendation[]> recommendationResult = productCompositeService
+                .getRecommendations(uuid);
+        if (!recommendationResult.getStatusCode().is2xxSuccessful()) {
+            // Something went wrong with getRecommendations, simply skip the
+            // recommendation-information in the response
+            LOG.debug("Call to getRecommendations failed: {}",
+                    recommendationResult.getStatusCode());
+        } else {
+            Recommendation[] result = recommendationResult.getBody();
+            if (result != null && result.length > 0) {
+                recommendations = Arrays.asList(result);
+            }
+        }
 
-		List<Recommendation> recommendations = null;
-		ResponseEntity<Recommendation[]> recommendationResult = productCompositeService.getRecommendations(uuid);
-		if (!recommendationResult.getStatusCode().is2xxSuccessful()) {
-			// Something went wrong with getRecommendations, simply skip the
-			// recommendation-information in the response
-			LOG.debug("Call to getRecommendations failed: {}", recommendationResult.getStatusCode());
-		} else {
-			Recommendation[] result = recommendationResult.getBody();
-			if (result != null && result.length > 0) {
-				recommendations = Arrays.asList(result);
-			}
-		}
+        // 3. Get optional reviews
+        List<Review> reviews = null;
+        ResponseEntity<Review[]> reviewsResult = productCompositeService
+                .getReviews(uuid);
 
-		// 3. Get optional reviews
+        if (!reviewsResult.getStatusCode().is2xxSuccessful()) {
+            // Something went wrong with getReviews, simply skip the
+            // review-information in the response
+            LOG.debug("Call to getReviews failed: {}",
+                    reviewsResult.getStatusCode());
+        } else {
+            Review[] result = reviewsResult.getBody();
+            if (result != null && result.length > 0) {
+                reviews = Arrays.asList(result);
+            }
+        }
 
-		List<Review> reviews = null;
-		ResponseEntity<Review[]> reviewsResult = productCompositeService.getReviews(uuid);
-
-		if (!reviewsResult.getStatusCode().is2xxSuccessful()) {
-			// Something went wrong with getReviews, simply skip the
-			// review-information in the response
-			LOG.debug("Call to getReviews failed: {}", reviewsResult.getStatusCode());
-		} else {
-			Review[] result = reviewsResult.getBody();
-			if (result != null && result.length > 0) {
-				reviews = Arrays.asList(result);
-			}
-		}
-
-		return util.createOkResponse(new ProductAggregated(productResult.getBody(), recommendations, reviews));
-	}
+        return util.createOkResponse(new ProductAggregated(
+                productResult.getBody(), recommendations, reviews));
+    }
 }

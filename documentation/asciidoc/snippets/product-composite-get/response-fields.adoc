@@ -1,0 +1,16 @@
+|===
+|Path|Type|Description
+
+|`product`
+|`Object`
+|Product summary data
+
+|`recommendations[]`
+|`Array`
+|Recommendations for the product
+
+|`reviews[]`
+|`Array`
+|Reviews for the product.
+
+|===
