@@ -50,7 +50,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: gradle dependencies
+      - run: ./gradlew dependencies
 
       - save_cache:
           paths:
@@ -58,10 +58,10 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
       
       # run gradle build
-      - run: gradle build
+      - run: ./gradlew build
       
       # generate documentation
-      - run: gradle asciidoctor
+      - run: ./gradlew asciidoctor
       
         #sonarqube
       - run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN

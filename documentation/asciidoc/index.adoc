@@ -209,7 +209,7 @@ include::{snippets}/review-delete/http-response.adoc[]
 == Product Composite REST Service
 The product composite rest service is used to list a summary product with reviews and recommendations.
 
-=== Listing reviews
+=== Listing composite products
 The `GET` request returns the summary product.
 
 include::{snippets}/product-composite-get/path-parameters.adoc[]
