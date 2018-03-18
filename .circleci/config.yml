@@ -64,7 +64,7 @@ jobs:
       - run: gradle asciidoctor
       
         #sonarqube
-      - run: gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
+      - run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
       
       # store build files
       - store_artifacts:
