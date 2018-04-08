@@ -2,107 +2,288 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+
+defaults: &defaults
+  working_directory: ~/workspace 
+  docker:
+    - image: circleci/openjdk:8-jdk
+  environment:
+      TERM: dumb
+      _JAVA_OPTIONS: "-Xmx512m"
+
+test_defaults: &test_defaults
+  working_directory: ~/workspace 
+  docker:  
+    - image: circleci/openjdk:8-jdk  
+    - image: rabbitmq:3.6-management
+      ports:
+        - "5672:5672"
+    - image: maltor/config-server
+      environment:
+        SPRING_PROFILES_ACTIVE: test
+        JAVA_OPTS: -Xmx128m
+      ports:
+      - "8888:8888"      
+    - image: maltor/discovery-server
+      environment:
+        SPRING_PROFILES_ACTIVE: default
+        JAVA_OPTS: -Xmx128m
+      ports:
+      - "8761:8761"
+    - image: postgres:10
+      environment:
+        POSTGRES_USER: shop
+        POSTGRES_PASSWORD: shop
+        POSTGRES_DB: shop-db
+      ports:
+      - "5432:5432"
+  environment:
+      TERM: dumb
+      _JAVA_OPTIONS: "-Xmx512m"
+
+      
+cache_key : &cache_key v7-microservice-shop-demo-dependencies-{{ checksum "build.gradle" }}       
+  
 version: 2
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-      - image: rabbitmq:3.6-management
-        ports:
-        - "5672:5672"
-      - image: maltor/config-server
-        environment:
-          SPRING_PROFILES_ACTIVE: test
-          JAVA_OPTS: -Xmx128m
-        ports:
-        - "8888:8888"      
-      - image: maltor/discovery-server
-        environment:
-          SPRING_PROFILES_ACTIVE: default
-          JAVA_OPTS: -Xmx128m
-        ports:
-        - "8761:8761"
-      - image: postgres:10
-        environment:
-          POSTGRES_USER: shop
-          POSTGRES_PASSWORD: shop
-          POSTGRES_DB: shop-db
-        ports:
-        - "5432:5432"
-     
-
-    working_directory: ~/microservice-shop-demo
-
-    environment:
-      # Customize the JVM maximum heap limit
-      TERM: dumb
-      _JAVA_OPTIONS: "-Xmx256m"
-    
+    <<: *defaults
     steps:
-      
       - checkout
-
-      # Download and cache dependencies
+      
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: ./gradlew dependencies
+          key: *cache_key
+      
+      - run: gradle dependencies 
+      - run: gradle allDeps 
 
       - save_cache:
           paths:
+            - ~/.gradle
             - ~/.m2
-          key: v1-dependencies-{{ checksum "build.gradle" }}
-      
-      # run gradle build
-      - run: ./gradlew build
-      
-      # generate documentation
-      - run: ./gradlew asciidoctor
-      
-        #sonarqube
-      - run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
-      
-      # store build files
-      - store_artifacts:
-          path: ~/microservice-shop-demo
-      
-      # store test results
+          key: *cache_key
+
+      - run: gradle build -x test
+           
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  documentation:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key
+      - run: gradle asciidoctor    
+      - persist_to_workspace:
+          root: .
+          paths:
+            - documentation  
+    
+  sonarqube:
+    <<: *test_defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key    
+      - run: gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
+  
+  test_product_service:
+    <<: *test_defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: Run tests 
+          command: |
+              cd product-service
+              gradle test
       - run:
           name: Save test results 
           command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+            mkdir -p junit
+            cd product-service
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ../junit/ \;
           when: always
       - store_test_results:
-          path: ~/junit
+          path: junit
       - store_artifacts:
-          path: ~/junit   
-    
+          path: junit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - junit   
+
+  test_recommendation_service:
+    <<: *test_defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: Run tests 
+          command: |
+              cd recommendation-service
+              gradle test
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p junit
+            cd recommendation-service
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ../junit/ \;
+          when: always
+      - store_test_results:
+          path: junit
+      - store_artifacts:
+          path: junit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - junit 
+
+  test_review_service:
+    <<: *test_defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: Run tests 
+          command: |
+              cd review-service
+              gradle test
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p junit
+            cd review-service
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ../junit/ \;
+          when: always
+      - store_test_results:
+          path: junit
+      - store_artifacts:
+          path: junit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - junit 
+ 
+  test_product_composite_service:
+    <<: *test_defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: Run tests 
+          command: |
+              cd product-composite-service
+              gradle test
+      - run:
+          name: Save test results 
+          command: |
+            mkdir -p junit
+            cd product-composite-service
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ../junit/ \;
+          when: always
+      - store_test_results:
+          path: junit
+      - store_artifacts:
+          path: junit
+      - persist_to_workspace:
+          root: .
+          paths:
+            - junit                
+            
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/workspace
+      
+      - store_test_results:
+          path: junit
+      - store_artifacts:
+          path: junit
+      - store_artifacts:
+          path: documentation    
+      
       - setup_remote_docker
       
-      - deploy:
-          name: Build and push Docker image
+      - run:
+          name: Push Docker images
           command: |
             #TAG="0.1.${CIRCLE_BUILD_NUM}"
             TAG="latest"
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             
-            cd ~/microservice-shop-demo/product-composite-service
-            docker build -t maltor/product-composite-service:$TAG .
-            docker push maltor/product-composite-service:$TAG
-            
-            cd ~/microservice-shop-demo/product-service
+            cd product-service
             docker build -t maltor/product-service:$TAG .
             docker push maltor/product-service:$TAG
             
-            cd ~/microservice-shop-demo/recommendation-service
+            cd ..
+            cd recommendation-service
             docker build -t maltor/recommendation-service:$TAG .
             docker push maltor/recommendation-service:$TAG 
             
-            cd ~/microservice-shop-demo/review-service
+            cd ..
+            cd review-service
             docker build -t maltor/review-service:$TAG .
             docker push maltor/review-service:$TAG 
+            
+            cd ..
+            cd product-composite-service
+            docker build -t maltor/product-composite-service:$TAG .
+            docker push maltor/product-composite-service:$TAG
+   
+workflows:
+  version: 2
+  ci:
+    jobs:
+      
+      - build
+      
+      - documentation:
+          requires:
+            - build
+    
+      - test_product_service:
+          requires:
+            - build
+          
+      - test_recommendation_service:
+          requires:
+            - build 
+          
+      - test_review_service:
+          requires:
+            - build      
+      
+      - test_product_composite_service:
+          requires:
+            - build
+            - test_product_service
+            - test_review_service
+            - test_recommendation_service             
+
+      - sonarqube:
+          requires:
+            - build
+                
+      - deploy:
+          requires:
+            - documentation
+            - sonarqube
+            - test_product_composite_service
+            
+            
+            
