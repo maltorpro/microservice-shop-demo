@@ -2,14 +2,13 @@ package de.maltorpro.shop.service.composite.product;
 
 import java.util.Arrays;
 
-import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -17,7 +16,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Recommendation;
 import de.maltorpro.shop.model.Review;
-import de.maltorpro.shop.util.ServiceUtils;
+import de.maltorpro.shop.utils.ServiceUtils;
 
 @Service("productCompositeService")
 @Transactional
@@ -41,7 +40,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
 
         log.debug("Will call getProduct with Hystrix protection");
 
-        String url = "http://product-service/product/{uuid}";
+        String url = "https://product-service/product/{uuid}";
 
         log.debug("GetProduct from URL: {}", url);
 
@@ -75,7 +74,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
         try {
             log.debug("Will call getRecommendations with Hystrix protection");
 
-            String url = "http://recommendation-service/recommendation/product/{uuid}";
+            String url = "https://recommendation-service/recommendation/product/{uuid}";
 
             log.debug("GetRecommendations from URL: {}", url);
 
@@ -122,7 +121,7 @@ public class ProductCompositeServiceImpl implements ProductCompositeService {
     public ResponseEntity<Review[]> getReviews(String productUuid) {
         log.debug("Will call getReviews with Hystrix protection");
 
-        String url = "http://review-service/reviews/product/{uuid}/{page}/{size}";
+        String url = "https://review-service/reviews/product/{uuid}/{page}/{size}";
 
         log.debug("GetReviews from URL: {}", url);
 

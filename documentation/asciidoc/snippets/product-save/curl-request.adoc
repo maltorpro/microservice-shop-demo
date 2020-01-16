@@ -3,8 +3,8 @@
 $ curl 'http://localhost:8080/product' -i -X POST \
     -H 'Content-Type: application/json' \
     -d '{
-  "creationDate" : "2018-03-17 23:12 PM UTC",
-  "updateDate" : "2018-03-17 23:12 PM UTC",
+  "creationDate" : "2020-01-10 20:06 PM UTC",
+  "updateDate" : "2020-01-10 20:06 PM UTC",
   "productId" : null,
   "productUuid" : null,
   "name" : "Product2",

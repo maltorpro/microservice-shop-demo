@@ -1,68 +1,72 @@
 |===
 |Path|Type|Description
 
-|`content[].creationDate`
-|`String`
+|`+content[].creationDate+`
+|`+String+`
 |Creation date ot the object
 
-|`content[].updateDate`
-|`String`
+|`+content[].updateDate+`
+|`+String+`
 |Update date of the object
 
-|`content[].reviewId`
-|`Number`
+|`+content[].reviewId+`
+|`+Number+`
 |Database primary key
 
-|`content[].reviewUuid`
-|`String`
+|`+content[].reviewUuid+`
+|`+String+`
 |The unique identifier of the review
 
-|`content[].author`
-|`String`
+|`+content[].author+`
+|`+String+`
 |Author of the rating
 
-|`content[].rating`
-|`Number`
+|`+content[].rating+`
+|`+Number+`
 |Evaluation of the product in a value range from 1 to 5 stars
 
-|`content[].reviewText`
-|`String`
+|`+content[].reviewText+`
+|`+String+`
 |Review text written by the author
 
-|`content[].product`
-|`Object`
+|`+content[].product+`
+|`+Object+`
 |Rated product
 
-|`totalPages`
-|`Number`
+|`+totalPages+`
+|`+Number+`
 |Number of total pages.
 
-|`totalElements`
-|`Number`
+|`+totalElements+`
+|`+Number+`
 |Total amount of elements.
 
-|`last`
-|`Boolean`
+|`+last+`
+|`+Boolean+`
 |Indicates whether the current page is the last one.
 
-|`size`
-|`Number`
+|`+size+`
+|`+Number+`
 |Size of the page.
 
-|`number`
-|`Number`
+|`+number+`
+|`+Number+`
 |Number of the current page.
 
-|`sort`
-|`Object`
+|`+sort+`
+|`+Object+`
 |Sorting parameters for the page.
 
-|`first`
-|`Boolean`
+|`+first+`
+|`+Boolean+`
 |Indicates whether the current page is the first one.
 
-|`numberOfElements`
-|`Number`
+|`+empty+`
+|`+Boolean+`
+|Description not known.
+
+|`+numberOfElements+`
+|`+Number+`
 |Number of elements currently on this page.
 
 |===

@@ -1,6 +1,6 @@
 jar {
-    baseName = "test-support"
-    version = "0.0.1-SNAPSHOT"
+    archiveBaseName = "test-support"
+    archiveVersion = "0.0.1-SNAPSHOT"
 }
 
 bootJar.enabled = false
@@ -8,6 +8,8 @@ jar.enabled = true
 
 dependencies {
 
-	compile project(":main-module")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    implementation project(":main-module")
 	
 }

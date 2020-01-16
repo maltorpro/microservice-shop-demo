@@ -12,7 +12,8 @@ spring:
       discovery:
         serviceId: config-server
         enabled: false
-      uri: http://localhost:8888
+      uri: https://localhost:8888
+      label: http2-support      
 
 ---
 # For deployment in Docker containers
@@ -22,4 +23,4 @@ spring:
     config:
       discovery:
         enabled: false
-      uri: http://config-server:8888
+      uri: https://config-server:8888

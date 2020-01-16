@@ -7,15 +7,15 @@ services:
     container_name: config-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
-    restart: always
+      CERTIFICATE_CHECK: 0 
     ports:
     - "8888:8888"
   
-  rabbitmq:
-    image: rabbitmq:3.6-management
-    container_name: rabbitmq
-    ports:
-     - "5672:5672"
+#  rabbitmq:
+#    image: rabbitmq:3.6-management
+#    container_name: rabbitmq
+#    ports:
+#     - "5672:5672"
      
 #  auth-server:
 #    image: maltor/auth-server
@@ -38,6 +38,7 @@ services:
     container_name: discovery-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0 
     ports:
     - "8761:8761"
     

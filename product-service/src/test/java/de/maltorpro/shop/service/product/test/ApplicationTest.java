@@ -12,9 +12,9 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.snippet.Attributes.attributes;
@@ -25,10 +25,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,6 +53,7 @@ import de.maltorpro.shop.service.product.ProductRepository;
 import de.maltorpro.shop.service.product.ProductServiceApplication;
 import de.maltorpro.shop.service.test.support.FieldDescription;
 import de.maltorpro.shop.service.test.support.TestUtils;
+import de.maltorpro.shop.utils.SSLUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductServiceApplication.class)
@@ -56,202 +61,289 @@ import de.maltorpro.shop.service.test.support.TestUtils;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ApplicationTest {
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Rule
-	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("../documentation/asciidoc/snippets");
+    @Rule
+    public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation(
+            "../documentation/asciidoc/snippets");
 
-	@Autowired
-	private ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-	@Autowired
-	private WebApplicationContext webApplicationContext;
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-	private static long defaultProductId = 1000l;
+    private static long defaultProductId = 1000l;
 
-	private static long updateProductId = 1001l;
+    private static long updateProductId = 1001l;
 
-	private static long deleteProductId = 1002l;
+    private static long deleteProductId = 1002l;
 
-	private static int productCounter = 0;
+    private static int productCounter = 0;
 
-	private static boolean setUpIsDone = false;
+    private static boolean setUpIsDone = false;
 
-	@Before
-	public void setup() throws Exception {
-		this.mockMvc = webAppContextSetup(webApplicationContext)
-				.apply(MockMvcRestDocumentation.documentationConfiguration(this.restDocumentation)).build();
+    @BeforeClass
+    public static void turnOffSslChecking()
+            throws KeyManagementException, NoSuchAlgorithmException {
+        String certificateCheck = System.getProperty("certificateCheck");
 
-		if (!setUpIsDone) {
+        if (StringUtils.equals(certificateCheck, "false")
+                || StringUtils.equals(certificateCheck, "0")) {
 
-			Product defaultProduct = new Product();
-			defaultProduct.setName("Product1");
-			defaultProduct.setShortDescription("product1 short description");
-			defaultProduct.setLongDescription("product1 long description");
-			defaultProduct.setProductUuid(UUID.randomUUID().toString());
+            SSLUtils.turnOffSslChecking();
+        }
+    }
 
-			Product updateProduct = new Product();
-			updateProduct.setName("Product2");
-			updateProduct.setShortDescription("product2 short description");
-			updateProduct.setLongDescription("product2 long description");
-			updateProduct.setProductUuid(UUID.randomUUID().toString());
+    @Before
+    public void setup() throws Exception {
 
-			Product deleteProduct = new Product();
-			deleteProduct.setName("Product3");
-			deleteProduct.setShortDescription("product3 short description");
-			deleteProduct.setLongDescription("product3 long description");
-			deleteProduct.setProductUuid(UUID.randomUUID().toString());
+        this.mockMvc = webAppContextSetup(webApplicationContext)
+                .apply(MockMvcRestDocumentation
+                        .documentationConfiguration(this.restDocumentation))
+                .build();
 
-			this.productRepository.save(defaultProduct);
-			this.productRepository.save(updateProduct);
-			this.productRepository.save(deleteProduct);
+        if (!setUpIsDone) {
 
-			productCounter = 3;
+            Product defaultProduct = new Product();
+            defaultProduct.setName("Product1");
+            defaultProduct.setShortDescription("product1 short description");
+            defaultProduct.setLongDescription("product1 long description");
+            defaultProduct.setProductUuid(UUID.randomUUID().toString());
 
-			setUpIsDone = true;
-		}
-	}
+            Product updateProduct = new Product();
+            updateProduct.setName("Product2");
+            updateProduct.setShortDescription("product2 short description");
+            updateProduct.setLongDescription("product2 long description");
+            updateProduct.setProductUuid(UUID.randomUUID().toString());
 
-	@Test
-	public void test1SaveProduct() throws Exception {
+            Product deleteProduct = new Product();
+            deleteProduct.setName("Product3");
+            deleteProduct.setShortDescription("product3 short description");
+            deleteProduct.setLongDescription("product3 long description");
+            deleteProduct.setProductUuid(UUID.randomUUID().toString());
 
-		Product product = new Product();
-		product.setName("Product2");
-		product.setShortDescription("product2 short description");
-		product.setLongDescription("product2 long description");
+            this.productRepository.save(defaultProduct);
+            this.productRepository.save(updateProduct);
+            this.productRepository.save(deleteProduct);
 
-		this.mockMvc
-				.perform(post("/product").contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-						.content(TestUtils.asJsonString(product)))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product2")))
-				.andExpect(jsonPath("$.shortDescription", equalTo("product2 short description")))
-				.andExpect(jsonPath("$.longDescription", equalTo("product2 long description")))
-				.andDo(document("product-save", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+            productCounter = 3;
 
-						requestFields(attributes(key("title").value(FieldDescription.REQUEST_FIELDS)),
-								fieldWithPath("productUuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
-								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
-								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
-								fieldWithPath("productId").description(FieldDescription.ID_DESCRIPTION),
-								fieldWithPath("name").description(FieldDescription.NAME_DESCRIPTION),
-								fieldWithPath("shortDescription").description(FieldDescription.SHORT_DESCRIPTION),
-								fieldWithPath("longDescription").description(FieldDescription.LONG_DESCRIPTION))));
+            setUpIsDone = true;
+        }
+    }
 
-		productCounter++;
-	}
+    @Test
+    public void test1SaveProduct() throws Exception {
 
-	@Test
-	public void test2GetProdut() throws Exception {
+        Product product = new Product();
+        product.setName("Product2");
+        product.setShortDescription("product2 short description");
+        product.setLongDescription("product2 long description");
 
-		Optional<Product> product = productRepository.findById(defaultProductId);
+        this.mockMvc
+                .perform(post("/product").contentType(
+                        org.springframework.http.MediaType.APPLICATION_JSON)
+                        .content(TestUtils.asJsonString(product)))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", equalTo("Product2")))
+                .andExpect(jsonPath("$.shortDescription",
+                        equalTo("product2 short description")))
+                .andExpect(jsonPath("$.longDescription",
+                        equalTo("product2 long description")))
+                .andDo(document("product-save",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
 
-		this.mockMvc.perform(get("/product/{uuid}", product.get().getProductUuid()).accept(MediaTypes.HAL_JSON))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.name", equalTo("Product1")))
-				.andExpect(jsonPath("$.shortDescription", equalTo("product1 short description")))
-				.andExpect(jsonPath("$.longDescription", equalTo("product1 long description")))
-				.andDo(document("product-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
-								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION)),
-						responseFields(attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
-								fieldWithPath("productUuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
-								fieldWithPath("creationDate").description(FieldDescription.CREATION_DATE_DESCRIPTION),
-								fieldWithPath("updateDate").description(FieldDescription.UPDATE_DATE_DESCRIPTION),
-								fieldWithPath("productId").description(FieldDescription.ID_DESCRIPTION),
-								fieldWithPath("name").description(FieldDescription.NAME_DESCRIPTION),
-								fieldWithPath("shortDescription").description(FieldDescription.SHORT_DESCRIPTION),
-								fieldWithPath("longDescription").description(FieldDescription.LONG_DESCRIPTION),
-								fieldWithPath("_links.next.href").description(FieldDescription.LINKS_DESCRIPTION))));
-	}
+                        requestFields(
+                                attributes(key("title").value(
+                                        FieldDescription.REQUEST_FIELDS)),
+                                fieldWithPath("productUuid").description(
+                                        FieldDescription.PRODUCT_UUID_DESCRIPTION),
+                                fieldWithPath("creationDate").description(
+                                        FieldDescription.CREATION_DATE_DESCRIPTION),
+                                fieldWithPath("updateDate").description(
+                                        FieldDescription.UPDATE_DATE_DESCRIPTION),
+                                fieldWithPath("productId").description(
+                                        FieldDescription.ID_DESCRIPTION),
+                                fieldWithPath("name").description(
+                                        FieldDescription.NAME_DESCRIPTION),
+                                fieldWithPath("shortDescription").description(
+                                        FieldDescription.SHORT_DESCRIPTION),
+                                fieldWithPath("longDescription").description(
+                                        FieldDescription.LONG_DESCRIPTION))));
 
-	@Test
-	public void test3UpdateProduct() throws Exception {
+        productCounter++;
+    }
 
-		Optional<Product> productOpt = productRepository.findById(updateProductId);
-		
-		assertTrue(productOpt.isPresent());
-		Product product= productOpt.get();
-		
-		product.setName("name updated");
-		product.setShortDescription("short description updated");
-		product.setLongDescription("long description updated");
+    @Test
+    public void test2GetProdut() throws Exception {
 
-		this.mockMvc
-				.perform(post("/product").contentType(org.springframework.http.MediaType.APPLICATION_JSON)
-						.content(TestUtils.asJsonString(product)))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.productUuid", equalTo(product.getProductUuid())))
-				.andExpect(jsonPath("$.name", equalTo("name updated")))
-				.andExpect(jsonPath("$.shortDescription", equalTo("short description updated")))
-				.andExpect(jsonPath("$.longDescription", equalTo("long description updated")));
-	}
+        Optional<Product> product = productRepository
+                .findById(defaultProductId);
 
-	@Test
-	public void test4DeleteProduct() throws Exception {
+        this.mockMvc
+                .perform(get("/product/{uuid}", product.get().getProductUuid())
+                        .accept(MediaTypes.HAL_JSON))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", equalTo("Product1")))
+                .andExpect(jsonPath("$.shortDescription",
+                        equalTo("product1 short description")))
+                .andExpect(jsonPath("$.longDescription",
+                        equalTo("product1 long description")))
+                .andDo(document("product-get", preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(attributes(key("title").value(
+                                FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+                                parameterWithName("uuid").description(
+                                        FieldDescription.PRODUCT_UUID_DESCRIPTION)),
+                        responseFields(attributes(key("title").value(
+                                FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
+                                fieldWithPath("productUuid").description(
+                                        FieldDescription.PRODUCT_UUID_DESCRIPTION),
+                                fieldWithPath("creationDate").description(
+                                        FieldDescription.CREATION_DATE_DESCRIPTION),
+                                fieldWithPath("updateDate").description(
+                                        FieldDescription.UPDATE_DATE_DESCRIPTION),
+                                fieldWithPath("productId").description(
+                                        FieldDescription.ID_DESCRIPTION),
+                                fieldWithPath("name").description(
+                                        FieldDescription.NAME_DESCRIPTION),
+                                fieldWithPath("shortDescription").description(
+                                        FieldDescription.SHORT_DESCRIPTION),
+                                fieldWithPath("longDescription").description(
+                                        FieldDescription.LONG_DESCRIPTION),
+                                fieldWithPath("_links.next.href").description(
+                                        FieldDescription.LINKS_DESCRIPTION))));
+    }
 
-		assertEquals("Check the product count before delete.", productCounter, productRepository.count());
+    @Test
+    public void test3UpdateProduct() throws Exception {
 
-		Optional<Product> productOpt = productRepository.findById(deleteProductId);
-		
-		assertTrue(productOpt.isPresent());
-	    Product product= productOpt.get();
+        Optional<Product> productOpt = productRepository
+                .findById(updateProductId);
 
-		this.mockMvc
-				.perform(delete("/product/{uuid}", product.getProductUuid())
-						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk()).andExpect(content().string(equalTo("1")))
-				.andDo(document("product-delete", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
-						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
-								parameterWithName("uuid").description(FieldDescription.PRODUCT_UUID_DESCRIPTION))
+        assertTrue(productOpt.isPresent());
+        Product product = productOpt.get();
 
-		));
+        product.setName("name updated");
+        product.setShortDescription("short description updated");
+        product.setLongDescription("long description updated");
 
-		productCounter--;
-		assertEquals("Check the product count after delete.", productCounter, productRepository.count());
-	}
+        this.mockMvc
+                .perform(post("/product").contentType(
+                        org.springframework.http.MediaType.APPLICATION_JSON)
+                        .content(TestUtils.asJsonString(product)))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.productUuid",
+                        equalTo(product.getProductUuid())))
+                .andExpect(jsonPath("$.name", equalTo("name updated")))
+                .andExpect(jsonPath("$.shortDescription",
+                        equalTo("short description updated")))
+                .andExpect(jsonPath("$.longDescription",
+                        equalTo("long description updated")));
+    }
 
-	@Test
-	public void test5GetProducts() throws Exception {
+    @Test
+    public void test4DeleteProduct() throws Exception {
 
-		this.mockMvc
-				.perform(get("/products/{page}/{size}", 0, 3)
-						.accept(org.springframework.http.MediaType.APPLICATION_JSON))
-				.andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content[*]", hasSize(3)))
-				.andExpect(jsonPath("$.content[0].name", equalTo("Product1")))
-				.andExpect(jsonPath("$.content[0].shortDescription", equalTo("product1 short description")))
-				.andExpect(jsonPath("$.content[0].longDescription", equalTo("product1 long description")))
-				.andDo(document("products-get", preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint()),
+        assertEquals("Check the product count before delete.", productCounter,
+                productRepository.count());
 
-						pathParameters(attributes(key("title").value(FieldDescription.REQUEST_PARAM_DESCRIPTION)),
-								parameterWithName("page").description(FieldDescription.PAGE_PARAM_DESCRIPTION),
-								parameterWithName("size").description(FieldDescription.SIZE_DESCRIPTION)),
-						responseFields(attributes(key("title").value(FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
-								fieldWithPath("content[].productUuid")
-										.description(FieldDescription.PRODUCT_UUID_DESCRIPTION),
-								fieldWithPath("content[].creationDate")
-										.description(FieldDescription.CREATION_DATE_DESCRIPTION),
-								fieldWithPath("content[].updateDate")
-										.description(FieldDescription.UPDATE_DATE_DESCRIPTION),
-								fieldWithPath("content[].productId").description(FieldDescription.ID_DESCRIPTION),
-								fieldWithPath("content[].name").description(FieldDescription.NAME_DESCRIPTION),
-								fieldWithPath("content[].shortDescription")
-										.description(FieldDescription.SHORT_DESCRIPTION),
-								fieldWithPath("content.[].longDescription")
-										.description(FieldDescription.LONG_DESCRIPTION),
-										
-								// ignore sorting		
-								subsectionWithPath("pageable").ignored(),
-								subsectionWithPath("sort").ignored(),
-								
-								// paging
-								fieldWithPath("totalPages").description(FieldDescription.TOTAL_PAGES_DESCRIPTION),
-                                fieldWithPath("totalElements").description(FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
-                                fieldWithPath("last").description(FieldDescription.LAST_DESCRIPTION),
-                                fieldWithPath("size").description(FieldDescription.SIZE_DESCRIPTION),
-                                fieldWithPath("number").description(FieldDescription.NUMBER_DESCRIPTION),
-                                fieldWithPath("sort").description(FieldDescription.SORT_DESCRIPTION),
-                                fieldWithPath("first").description(FieldDescription.FIRST_DESCRIPTION),
-                                fieldWithPath("numberOfElements")
-                                        .description(FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
-	}
+        Optional<Product> productOpt = productRepository
+                .findById(deleteProductId);
+
+        assertTrue(productOpt.isPresent());
+        Product product = productOpt.get();
+
+        this.mockMvc.perform(delete("/product/{uuid}", product.getProductUuid())
+                .accept(org.springframework.http.MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(equalTo("1")))
+                .andDo(document("product-delete",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        pathParameters(attributes(key("title").value(
+                                FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+                                parameterWithName("uuid").description(
+                                        FieldDescription.PRODUCT_UUID_DESCRIPTION))
+
+        ));
+
+        productCounter--;
+        assertEquals("Check the product count after delete.", productCounter,
+                productRepository.count());
+    }
+
+    @Test
+    public void test5GetProducts() throws Exception {
+
+        this.mockMvc
+                .perform(get("/products/{page}/{size}", 0, 3).accept(
+                        org.springframework.http.MediaType.APPLICATION_JSON))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[*]", hasSize(3)))
+                .andExpect(jsonPath("$.content[0].name", equalTo("Product1")))
+                .andExpect(jsonPath("$.content[0].shortDescription",
+                        equalTo("product1 short description")))
+                .andExpect(jsonPath("$.content[0].longDescription",
+                        equalTo("product1 long description")))
+                .andDo(document("products-get",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+
+                        pathParameters(attributes(key("title").value(
+                                FieldDescription.REQUEST_PARAM_DESCRIPTION)),
+                                parameterWithName("page").description(
+                                        FieldDescription.PAGE_PARAM_DESCRIPTION),
+                                parameterWithName("size").description(
+                                        FieldDescription.SIZE_DESCRIPTION)),
+                        responseFields(attributes(key("title").value(
+                                FieldDescription.RESPONSE_PARAM_DESCRIPTION)),
+                                fieldWithPath("content[].productUuid")
+                                        .description(
+                                                FieldDescription.PRODUCT_UUID_DESCRIPTION),
+                                fieldWithPath("content[].creationDate")
+                                        .description(
+                                                FieldDescription.CREATION_DATE_DESCRIPTION),
+                                fieldWithPath("content[].updateDate")
+                                        .description(
+                                                FieldDescription.UPDATE_DATE_DESCRIPTION),
+                                fieldWithPath("content[].productId")
+                                        .description(
+                                                FieldDescription.ID_DESCRIPTION),
+                                fieldWithPath("content[].name").description(
+                                        FieldDescription.NAME_DESCRIPTION),
+                                fieldWithPath("content[].shortDescription")
+                                        .description(
+                                                FieldDescription.SHORT_DESCRIPTION),
+                                fieldWithPath("content.[].longDescription")
+                                        .description(
+                                                FieldDescription.LONG_DESCRIPTION),
+
+                                // ignore sorting
+                                subsectionWithPath("pageable").ignored(),
+                                subsectionWithPath("sort").ignored(),
+
+                                // paging
+                                fieldWithPath("totalPages").description(
+                                        FieldDescription.TOTAL_PAGES_DESCRIPTION),
+                                fieldWithPath("totalElements").description(
+                                        FieldDescription.TOTAL_ELEMENTS_DESCRIPTION),
+                                fieldWithPath("last").description(
+                                        FieldDescription.LAST_DESCRIPTION),
+                                fieldWithPath("size").description(
+                                        FieldDescription.SIZE_DESCRIPTION),
+                                fieldWithPath("number").description(
+                                        FieldDescription.NUMBER_DESCRIPTION),
+                                fieldWithPath("sort").description(
+                                        FieldDescription.SORT_DESCRIPTION),
+                                fieldWithPath("first").description(
+                                        FieldDescription.FIRST_DESCRIPTION),
+                                fieldWithPath("empty").description(
+                                        FieldDescription.EMPTY_DESCRIPTION),
+                                fieldWithPath("numberOfElements").description(
+                                        FieldDescription.NUMBER_OF_ELEMENTS_DESCRIPTION))));
+    }
 
 }

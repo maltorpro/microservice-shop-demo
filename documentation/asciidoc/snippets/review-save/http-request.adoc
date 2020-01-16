@@ -2,22 +2,22 @@
 ----
 POST /review HTTP/1.1
 Content-Type: application/json
-Host: localhost:8080
 Content-Length: 549
+Host: localhost:8080
 
 {
-  "creationDate" : "2018-03-17 23:13 PM UTC",
-  "updateDate" : "2018-03-17 23:13 PM UTC",
+  "creationDate" : "2020-01-10 20:28 PM UTC",
+  "updateDate" : "2020-01-10 20:28 PM UTC",
   "reviewId" : null,
   "reviewUuid" : null,
   "author" : "Max Mustermann2",
   "rating" : 3,
   "reviewText" : "Nice product2",
   "product" : {
-    "creationDate" : "2018-03-17 23:13 PM UTC",
-    "updateDate" : "2018-03-17 23:13 PM UTC",
+    "creationDate" : "2020-01-10 20:28 PM UTC",
+    "updateDate" : "2020-01-10 20:28 PM UTC",
     "productId" : 1001,
-    "productUuid" : "86b290da-cf28-4b7b-ae87-87068a5099d5",
+    "productUuid" : "8c497c8d-da25-4577-bd4d-82200af4d433",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"

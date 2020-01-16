@@ -18,7 +18,7 @@ import de.maltorpro.shop.model.Product;
 import de.maltorpro.shop.model.Recommendation;
 import de.maltorpro.shop.model.Review;
 import de.maltorpro.shop.service.composite.product.model.ProductAggregated;
-import de.maltorpro.shop.util.ServiceUtils;
+import de.maltorpro.shop.utils.ServiceUtils;
 
 @RestController
 public class ProductCompositeRestController {

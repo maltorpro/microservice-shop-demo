@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/products/0/3' -i \
+$ curl 'http://localhost:8080/products/0/3' -i -X GET \
     -H 'Accept: application/json'
 ----

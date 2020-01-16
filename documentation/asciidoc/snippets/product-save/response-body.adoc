@@ -1,10 +1,10 @@
 [source,options="nowrap"]
 ----
 {
-  "creationDate" : "2018-03-17 23:12 PM UTC",
-  "updateDate" : "2018-03-17 23:12 PM UTC",
+  "creationDate" : "2020-01-10 20:06 PM UTC",
+  "updateDate" : "2020-01-10 20:06 PM UTC",
   "productId" : 1003,
-  "productUuid" : "ac23f5fb-ae41-4969-a12c-29ce6feffdc9",
+  "productUuid" : "707f4e7a-a338-42be-8f14-5a58d27d0bf6",
   "name" : "Product2",
   "shortDescription" : "product2 short description",
   "longDescription" : "product2 long description"

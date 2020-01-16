@@ -3,12 +3,17 @@
 "C:\Program Files\Java\jdk1.8.0_111\bin\keytool" -list -rfc --keystore jwt.jks
 "C:\OpenSSL-Win32\bin\openssl" x509 -pubkey -noout -in cert.pem  > pubkey.pem
 
+#Gerate ssl key store
+
+#Copy certificate from server
+scp maltor@docker-swarm:/home/maltor/maltor-certificate/cert.p12 ./ 
+
 #Visulizer
 http://maltor.de
 
 #Authorization request
-curl -XPOST "my-trusted-client:@localhost:9999/oauth/token" -d "grant_type=password&username=ben&password=benspassword"  | jq 
-curl -XPOST "my-trusted-client:@maltor.de/auth-server/oauth/token" -d "grant_type=password&username=ben&password=benspassword" | jq 
+curl -XPOST "my-trusted-client:secret@localhost:9999/oauth/token" -d "grant_type=password&username=ben&password=benspassword"  | jq 
+curl -XPOST "my-trusted-client:secret@maltor.de/auth-server/oauth/token" -d "grant_type=password&username=ben&password=benspassword" | jq 
 
 #Request with authorization token
 curl "http://localhost:8765/api/product/3 " -H  "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDMwNDUxNzIsInVzZXJfbmFtZSI6ImJlbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfTUFOQUdFUlMiLCJST0xFX0RFVkVMT1BFUlMiXSwianRpIjoiNzc4NjM0NzUtZjk1Ny00ZTQ2LWE4NTMtMTIyNGI4YTc1NTZiIiwiY2xpZW50X2lkIjoibXktdHJ1c3RlZC1jbGllbnQiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiLCJ0cnVzdCJdfQ.eNy0w57d5z3gPx9W2RBXVCzMKGdkAdyNrv0DC2teON07cekQ7kPSkHaQqIugR32EO-rIJUqfkmQ3HbTuhZdWrH1ymJZFB9JRUhqAAo1gzlIW-cLCDz8-Ekh1DBI80O3oHixRmBEK1bOYF7oLMx8n0PQER_vsCxwXw1ACXHWQSnD9_6d39UoQ88QsheLSv-Yt-LCV6VgTobFmGKadJZUW-VRQZ31T0rM-P92lAoqNxCjQLB5rrhbx_DJ9FWOh698OZa8lB3qOJh1iqGlr7c499aqFy5zk9iCwf-i-7qm6GhiYV9Q3ZeB-4o4AryQ5d9q095h1CWiXFx4RunTIUK4hAg" -s | jq .

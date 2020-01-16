@@ -1,18 +1,18 @@
 jar {
-    baseName = "review-service"
-    version = "0.0.1-SNAPSHOT"
+    archiveBaseName = "review-service"
+    archiveVersion = "0.0.1-SNAPSHOT"
 }
 
 dependencies {
+
+
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.boot:spring-boot-starter-hateoas")
+
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.postgresql:postgresql:42.2.1")
+
+	implementation project(":main-module")
 	
-	
-	compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-	compile("org.springframework.boot:spring-boot-starter-hateoas")
-	
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.postgresql:postgresql:42.2.1")		
-	
-	compile project(":main-module")
-	
-	testCompile project (":test-support")
+	testImplementation project (":test-support")
 }

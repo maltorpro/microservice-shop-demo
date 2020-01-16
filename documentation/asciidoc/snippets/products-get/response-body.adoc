@@ -2,26 +2,26 @@
 ----
 {
   "content" : [ {
-    "creationDate" : "2018-03-17 23:12 PM UTC",
-    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "creationDate" : "2020-01-10 20:06 PM UTC",
+    "updateDate" : "2020-01-10 20:06 PM UTC",
     "productId" : 1000,
-    "productUuid" : "2ef289e2-5d3c-4194-a0f5-3b0247ce6259",
+    "productUuid" : "4834e3db-1201-456e-bb4d-74c134d98f13",
     "name" : "Product1",
     "shortDescription" : "product1 short description",
     "longDescription" : "product1 long description"
   }, {
-    "creationDate" : "2018-03-17 23:12 PM UTC",
-    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "creationDate" : "2020-01-10 20:06 PM UTC",
+    "updateDate" : "2020-01-10 20:06 PM UTC",
     "productId" : 1003,
-    "productUuid" : "ac23f5fb-ae41-4969-a12c-29ce6feffdc9",
+    "productUuid" : "707f4e7a-a338-42be-8f14-5a58d27d0bf6",
     "name" : "Product2",
     "shortDescription" : "product2 short description",
     "longDescription" : "product2 long description"
   }, {
-    "creationDate" : "2018-03-17 23:12 PM UTC",
-    "updateDate" : "2018-03-17 23:12 PM UTC",
+    "creationDate" : "2020-01-10 20:06 PM UTC",
+    "updateDate" : "2020-01-10 20:06 PM UTC",
     "productId" : 1001,
-    "productUuid" : "34131b36-5c2d-4f9c-90c5-4b98cccc231b",
+    "productUuid" : "03c79a96-8bde-410c-8e70-5d3ab394f953",
     "name" : "name updated",
     "shortDescription" : "short description updated",
     "longDescription" : "long description updated"
@@ -29,11 +29,12 @@
   "pageable" : {
     "sort" : {
       "sorted" : false,
-      "unsorted" : true
+      "unsorted" : true,
+      "empty" : true
     },
     "offset" : 0,
-    "pageSize" : 3,
     "pageNumber" : 0,
+    "pageSize" : 3,
     "paged" : true,
     "unpaged" : false
   },
@@ -43,10 +44,12 @@
   "size" : 3,
   "number" : 0,
   "numberOfElements" : 3,
+  "first" : true,
   "sort" : {
     "sorted" : false,
-    "unsorted" : true
+    "unsorted" : true,
+    "empty" : true
   },
-  "first" : true
+  "empty" : false
 }
 ----

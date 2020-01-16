@@ -94,6 +94,8 @@ public final class FieldDescription {
 
     public static final String FIRST_DESCRIPTION = "Indicates whether the current page is the first one.";
 
+	public static final String EMPTY_DESCRIPTION = "Description not known.";
+
     public static final String NUMBER_OF_ELEMENTS_DESCRIPTION = "Number of elements currently on this page.";
 
 

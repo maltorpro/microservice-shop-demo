@@ -1,64 +1,68 @@
 |===
 |Path|Type|Description
 
-|`content[].productUuid`
-|`String`
+|`+content[].productUuid+`
+|`+String+`
 |The unique identifier of the product
 
-|`content[].creationDate`
-|`String`
+|`+content[].creationDate+`
+|`+String+`
 |Creation date ot the object
 
-|`content[].updateDate`
-|`String`
+|`+content[].updateDate+`
+|`+String+`
 |Update date of the object
 
-|`content[].productId`
-|`Number`
+|`+content[].productId+`
+|`+Number+`
 |Database primary key
 
-|`content[].name`
-|`String`
+|`+content[].name+`
+|`+String+`
 |Name of the product
 
-|`content[].shortDescription`
-|`String`
+|`+content[].shortDescription+`
+|`+String+`
 |Short product description
 
-|`content.[].longDescription`
-|`String`
+|`+content.[].longDescription+`
+|`+String+`
 |Long product description
 
-|`totalPages`
-|`Number`
+|`+totalPages+`
+|`+Number+`
 |Number of total pages.
 
-|`totalElements`
-|`Number`
+|`+totalElements+`
+|`+Number+`
 |Total amount of elements.
 
-|`last`
-|`Boolean`
+|`+last+`
+|`+Boolean+`
 |Indicates whether the current page is the last one.
 
-|`size`
-|`Number`
+|`+size+`
+|`+Number+`
 |Size of the page.
 
-|`number`
-|`Number`
+|`+number+`
+|`+Number+`
 |Number of the current page.
 
-|`sort`
-|`Object`
+|`+sort+`
+|`+Object+`
 |Sorting parameters for the page.
 
-|`first`
-|`Boolean`
+|`+first+`
+|`+Boolean+`
 |Indicates whether the current page is the first one.
 
-|`numberOfElements`
-|`Number`
+|`+empty+`
+|`+Boolean+`
+|Description not known.
+
+|`+numberOfElements+`
+|`+Number+`
 |Number of elements currently on this page.
 
 |===

@@ -1,6 +1,6 @@
 buildscript {
 	    ext {
-	        springBootVersion = "2.0.0.RC2"
+	        springBootVersion = "2.2.2.RELEASE"
 	    }
 	    repositories {
 	        mavenCentral()
@@ -12,21 +12,21 @@ buildscript {
 	        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 	        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.3"
 	        classpath "org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.16"
-	        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
+	        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7"
 	    }
 }
 
 apply plugin: "org.asciidoctor.convert"
 apply plugin: "org.sonarqube"
 
-
 asciidoctor {
-    	sourceDir "documentation/asciidoc"
-    	outputDir "documentation"
-    	attributes \
-      		'snippets': file("documentation/asciidoc/snippets")
-      	backends 'html5', 'pdf'
+    	sourceDir  "documentation/asciidoc"
+    	outputDir  "documentation"
+    	attributes "snippets": file("documentation/asciidoc/snippets")
+      	backends   "html5", "pdf"
 }
+
+
 
 //build.finalizedBy(asciidoctor)
 
@@ -46,31 +46,34 @@ subprojects {
     		mavenCentral()
     		jcenter()
     		maven { url "https://repo.spring.io/snapshot" }
-		maven { url "https://repo.spring.io/milestone" }
+			maven { url "https://repo.spring.io/milestone" }
 	}
 	
 	ext {
-		springCloudVersion = 'Finchley.M7'
+		springCloudVersion = 'Hoxton.SR1'
 	}
 
 	dependencies {
-	
-		compile("org.springframework.boot:spring-boot-starter-web") 
-    		compile("org.springframework.boot:spring-boot-starter-actuator")
-    		compile("org.springframework.cloud:spring-cloud-starter-config")
-    	
-   	 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
- 		compile ("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
-    	
-    		compile("net.logstash.logback:logstash-logback-encoder:4.9")
- 		compile("org.aspectj:aspectjweaver:1.8.10")
-		compile("org.springframework.boot:spring-boot-starter-aop")
-		
-	    testCompile("org.springframework.boot:spring-boot-starter-test")
-	    testCompile("org.springframework.restdocs:spring-restdocs-mockmvc")
+
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		implementation("org.springframework.boot:spring-boot-starter-actuator")
+		implementation("org.springframework.cloud:spring-cloud-starter-config")
+
+		implementation ("org.springframework.cloud:spring-cloud-starter-sleuth")
+		implementation ("org.springframework.cloud:spring-cloud-starter-stream-rabbit")
+
+		implementation("net.logstash.logback:logstash-logback-encoder:4.9")
+		implementation("org.aspectj:aspectjweaver:1.8.10")
+		implementation("org.springframework.boot:spring-boot-starter-aop")
+
+	    testImplementation("org.springframework.boot:spring-boot-starter-test")
+	    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 	   
 	}
 	
+	test {
+    	systemProperty "certificateCheck", System.getProperty("certificateCheck")
+	}
 	
 	dependencyManagement {
 		imports { 
@@ -88,6 +91,7 @@ subprojects {
 	task allDeps(type: DependencyReportTask) {}
 	
 	task wrapper(type: Wrapper) {
-		gradleVersion = "4.3.1"
+		gradleVersion = "6.0.1"
 	}
+	
 }

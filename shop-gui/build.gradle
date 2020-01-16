@@ -1,9 +1,11 @@
 jar {
-    baseName = "shop-gui"
-    version = "0.0.1-SNAPSHOT"
+    archiveBaseName = "shop-gui"
+    archiveVersion = "0.0.1-SNAPSHOT"
 }
 
-dependencies {	
-	
-	compile project(":main-module")
+dependencies {
+
+    implementation("org.apache.commons:commons-lang3:3.1")
+
+    implementation project(":main-module")
 }

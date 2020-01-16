@@ -1,4 +1,4 @@
-package de.maltorpro.shop.util;
+package de.maltorpro.shop.utils;
 
 import static net.logstash.logback.marker.Markers.append;
 

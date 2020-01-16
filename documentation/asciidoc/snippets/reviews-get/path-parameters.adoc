@@ -1,14 +1,14 @@
-./reviews/product/{uuid}/{page}/{size}
+.+/reviews/product/{uuid}/{page}/{size}+
 |===
 |Parameter|Description
 
-|`uuid`
+|`+uuid+`
 |The unique identifier of the product
 
-|`page`
+|`+page+`
 |Page of results
 
-|`size`
+|`+size+`
 |Size of the page.
 
 |===

@@ -1,4 +1,4 @@
-package de.maltorpro.shop.util;
+package de.maltorpro.shop.utils;
 
 
 import org.springframework.http.HttpStatus;

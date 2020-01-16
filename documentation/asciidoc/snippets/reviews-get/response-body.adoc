@@ -2,35 +2,35 @@
 ----
 {
   "content" : [ {
-    "creationDate" : "2018-03-17 23:13 PM UTC",
-    "updateDate" : "2018-03-17 23:13 PM UTC",
+    "creationDate" : "2020-01-10 20:28 PM UTC",
+    "updateDate" : "2020-01-10 20:28 PM UTC",
     "reviewId" : 1000,
-    "reviewUuid" : "80a3224b-e0be-4d73-9e19-925b892f1ee1",
+    "reviewUuid" : "9fe5bcf1-cbd4-4b14-a912-b0082babef6a",
     "author" : "Max Mustermann",
     "rating" : 5,
     "reviewText" : "Nice product",
     "product" : {
-      "creationDate" : "2018-03-17 23:13 PM UTC",
-      "updateDate" : "2018-03-17 23:13 PM UTC",
+      "creationDate" : "2020-01-10 20:28 PM UTC",
+      "updateDate" : "2020-01-10 20:28 PM UTC",
       "productId" : 1000,
-      "productUuid" : "596b5447-2654-4361-a31e-a73cb46be16c",
+      "productUuid" : "839d8697-b552-407b-8572-be2f85fbbe5a",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
     }
   }, {
-    "creationDate" : "2018-03-17 23:13 PM UTC",
-    "updateDate" : "2018-03-17 23:13 PM UTC",
+    "creationDate" : "2020-01-10 20:28 PM UTC",
+    "updateDate" : "2020-01-10 20:28 PM UTC",
     "reviewId" : 1001,
-    "reviewUuid" : "cd48df34-ed74-4bec-83e2-c3dbcb408111",
+    "reviewUuid" : "4f501bb0-9911-4cc2-a881-fc263031421a",
     "author" : "John Doe",
     "rating" : 1,
     "reviewText" : "Bad product",
     "product" : {
-      "creationDate" : "2018-03-17 23:13 PM UTC",
-      "updateDate" : "2018-03-17 23:13 PM UTC",
+      "creationDate" : "2020-01-10 20:28 PM UTC",
+      "updateDate" : "2020-01-10 20:28 PM UTC",
       "productId" : 1000,
-      "productUuid" : "596b5447-2654-4361-a31e-a73cb46be16c",
+      "productUuid" : "839d8697-b552-407b-8572-be2f85fbbe5a",
       "name" : "Product1",
       "shortDescription" : "product1 short description",
       "longDescription" : "product1 long description"
@@ -39,24 +39,27 @@
   "pageable" : {
     "sort" : {
       "sorted" : false,
-      "unsorted" : true
+      "unsorted" : true,
+      "empty" : true
     },
     "offset" : 0,
-    "pageSize" : 4,
     "pageNumber" : 0,
-    "paged" : true,
-    "unpaged" : false
+    "pageSize" : 4,
+    "unpaged" : false,
+    "paged" : true
   },
   "totalPages" : 1,
-  "totalElements" : 2,
   "last" : true,
+  "totalElements" : 2,
   "size" : 4,
   "number" : 0,
+  "numberOfElements" : 2,
+  "first" : true,
   "sort" : {
     "sorted" : false,
-    "unsorted" : true
+    "unsorted" : true,
+    "empty" : true
   },
-  "numberOfElements" : 2,
-  "first" : true
+  "empty" : false
 }
 ----

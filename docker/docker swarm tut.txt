@@ -1,3 +1,14 @@
+#Delete all docker containers
+docker rm $(docker ps -a -q)
+
+#Delete all docker images
+docker rmi -f $(docker images -q)
+
+#Remove the stack
+docker stack rm shopdemo
+
+#To discard the saved state use:
+VBoxManage discardstate "vmname"
 
 #create vms
 docker-machine create --driver virtualbox  --virtualbox-memory "1024" manager1
@@ -7,6 +18,10 @@ docker-machine create --driver virtualbox  --virtualbox-memory "4096" monitoring
 
 #Bash from docker container
 docker exec -it "9be2bdeba6ec" /bin/sh
+docker exec -it "9be2bdeba6ec" curl -k https://config-server:8888/product-service/default
+
+#Log files
+docker logs -f 9be2bdeba6ec
 
 #create swarm
 docker swarm leave -f
@@ -14,13 +29,12 @@ docker-machine ls
 
 
 docker-machine ssh manager1
-docker swarm init --advertise-addr 192.168.178.65
+docker swarm init --advertise-addr 192.168.99.104 #IP Address of the manager1 vm
 
- docker swarm join --token SWMTKN-1-1pmfqr6j25i61y8oxl4miaf7vjkzikx5u3ocyl1ryt676971hl-52f606fltwh91x93uhaosm6m9 192.168.178.65:2377
-
+   docker swarm join --token SWMTKN-1-2fki06c2rggqldk3pfx3wgah4uq2vkntb8rsrgalszxq7bcubd-cwblvkjchlsgicw5avptoch1t 192.168.99.104:2377
  
 #rebuild certs
-docker-machine regenerate-certs manager1 infrastructure1 services1
+docker-machine regenerate-certs manager1 infrastructure1 services1 monitoring1
  
 ##Docker swarm stack ##### 
  

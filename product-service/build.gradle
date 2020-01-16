@@ -1,19 +1,19 @@
 jar {
-    baseName = "product-service"
-    version = "0.0.1-SNAPSHOT"
+    archiveBaseName = "product-service"
+    archiveVersion = "0.0.1-SNAPSHOT"
 }
 
 dependencies {
 
-	compile("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-	compile("org.springframework.boot:spring-boot-starter-hateoas")
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.boot:spring-boot-starter-hateoas")
+
+	implementation("org.modelmapper:modelmapper:1.1.0")
+
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.postgresql:postgresql:42.2.1")
+
+	implementation project(":main-module")
 	
-	compile("org.modelmapper:modelmapper:1.1.0")
-	
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.postgresql:postgresql:42.2.1")	
-	
-	compile project(":main-module")
-	
-	testCompile project (":test-support")
+	testImplementation project (":test-support")
 }

@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-GET /reviews/product/596b5447-2654-4361-a31e-a73cb46be16c/0/4 HTTP/1.1
+GET /reviews/product/839d8697-b552-407b-8572-be2f85fbbe5a/0/4 HTTP/1.1
 Accept: application/json
 Host: localhost:8080
 

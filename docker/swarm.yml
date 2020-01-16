@@ -24,13 +24,18 @@ services:
   
   shop-db:
     image: postgres:10
-    restart: always
+    deploy:
+      placement:
+        constraints: [node.hostname == infrastructure1]
     environment:
         POSTGRES_USER: shop
         POSTGRES_PASSWORD: shop
         POSTGRES_DB: shop-db
+        MAX_CONNECTIONS: 500
     ports:
     - "5432:5432"
+    networks:
+    - shopnet  
   
   rabbitmq:
     image: rabbitmq:3.6-management
@@ -47,6 +52,7 @@ services:
     image: maltor/config-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]
@@ -61,7 +67,8 @@ services:
   discovery-server:
     image: maltor/discovery-server
     environment:
-      SPRING_PROFILES_ACTIVE: docker    
+      SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0    
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -77,6 +84,7 @@ services:
     image: maltor/auth-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -92,6 +100,7 @@ services:
     image: maltor/resource-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -107,6 +116,7 @@ services:
     image: maltor/edge-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]    
@@ -127,6 +137,7 @@ services:
     image: maltor/product-composite-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -140,6 +151,7 @@ services:
     image: maltor/product-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -153,6 +165,7 @@ services:
     image: maltor/recommendation-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -166,6 +179,7 @@ services:
     image: maltor/review-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == services1] 
@@ -229,6 +243,7 @@ services:
     image: maltor/turbine-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]    
@@ -244,6 +259,7 @@ services:
     image: maltor/monitor-dashboard
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]    
@@ -253,8 +269,7 @@ services:
     ports:
      - "7979:7979"
     networks:
-     - shopnet
-            
+     - shopnet          
       
 networks:
   shopnet:

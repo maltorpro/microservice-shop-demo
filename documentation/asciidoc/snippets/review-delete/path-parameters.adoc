@@ -1,8 +1,8 @@
-./review/{uuid}
+.+/review/{uuid}+
 |===
 |Parameter|Description
 
-|`uuid`
+|`+uuid+`
 |The unique identifier of the review
 
 |===

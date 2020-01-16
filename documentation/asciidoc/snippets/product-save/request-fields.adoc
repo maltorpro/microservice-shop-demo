@@ -1,32 +1,32 @@
 |===
 |Path|Type|Description
 
-|`productUuid`
-|`Null`
+|`+productUuid+`
+|`+Null+`
 |The unique identifier of the product
 
-|`creationDate`
-|`String`
+|`+creationDate+`
+|`+String+`
 |Creation date ot the object
 
-|`updateDate`
-|`String`
+|`+updateDate+`
+|`+String+`
 |Update date of the object
 
-|`productId`
-|`Null`
+|`+productId+`
+|`+Null+`
 |Database primary key
 
-|`name`
-|`String`
+|`+name+`
+|`+String+`
 |Name of the product
 
-|`shortDescription`
-|`String`
+|`+shortDescription+`
+|`+String+`
 |Short product description
 
-|`longDescription`
-|`String`
+|`+longDescription+`
+|`+String+`
 |Long product description
 
 |===

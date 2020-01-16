@@ -22,9 +22,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,6 +57,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.maltorpro.shop.service.composite.product.ProductCompositeServiceApplication;
 import de.maltorpro.shop.service.test.support.FieldDescription;
+import de.maltorpro.shop.utils.SSLUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ProductCompositeServiceApplication.class, properties = {
@@ -78,6 +83,18 @@ public class ApplicationTest {
 
     private static final String PRODUCT_UUID = "82a66bde-03d5-4c67-9be3-f83557eb2917";
 
+    @BeforeClass
+    public static void turnOffSslChecking()
+            throws KeyManagementException, NoSuchAlgorithmException {
+        String certificateCheck = System.getProperty("certificateCheck");
+
+        if (StringUtils.equals(certificateCheck, "false")
+                || StringUtils.equals(certificateCheck, "0")) {
+
+            SSLUtils.turnOffSslChecking();
+        }
+    }
+
     @Before
     public void setup() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext)
@@ -102,20 +119,20 @@ public class ApplicationTest {
         // product-service
         mockServer
                 .expect(manyTimes(), requestToUriTemplate(
-                        "http://product-service/product/{uuid}", PRODUCT_UUID))
+                        "https://product-service/product/{uuid}", PRODUCT_UUID))
                 .andExpect(method(HttpMethod.GET)).andRespond(withSuccess(
                         jsonResource("product"), MediaType.APPLICATION_JSON));
 
         // recommendation-service
         mockServer.expect(manyTimes(), requestToUriTemplate(
-                "http://recommendation-service/recommendation/product/{uuid}",
+                "https://recommendation-service/recommendation/product/{uuid}",
                 PRODUCT_UUID)).andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("recommendation"),
                         MediaType.APPLICATION_JSON));
 
         // review-service
         mockServer.expect(manyTimes(), requestToUriTemplate(
-                "http://review-service/reviews/product/{uuid}/{page}/{size}",
+                "https://review-service/reviews/product/{uuid}/{page}/{size}",
                 PRODUCT_UUID, 0, 10)).andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(jsonResource("review"),
                         MediaType.APPLICATION_JSON));

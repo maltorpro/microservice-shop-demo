@@ -1,11 +1,11 @@
-./products/{page}/{size}
+.+/products/{page}/{size}+
 |===
 |Parameter|Description
 
-|`page`
+|`+page+`
 |Page of results
 
-|`size`
+|`+size+`
 |Size of the page.
 
 |===

@@ -1,36 +1,36 @@
 |===
 |Path|Type|Description
 
-|`creationDate`
-|`String`
+|`+creationDate+`
+|`+String+`
 |Creation date ot the object
 
-|`updateDate`
-|`String`
+|`+updateDate+`
+|`+String+`
 |Update date of the object
 
-|`reviewId`
-|`Null`
+|`+reviewId+`
+|`+Null+`
 |Database primary key
 
-|`reviewUuid`
-|`Null`
+|`+reviewUuid+`
+|`+Null+`
 |The unique identifier of the review
 
-|`author`
-|`String`
+|`+author+`
+|`+String+`
 |Author of the rating
 
-|`rating`
-|`Number`
+|`+rating+`
+|`+Number+`
 |Evaluation of the product in a value range from 1 to 5 stars
 
-|`reviewText`
-|`String`
+|`+reviewText+`
+|`+String+`
 |Review text written by the author
 
-|`product`
-|`Object`
+|`+product+`
+|`+Object+`
 |Rated product
 
 |===

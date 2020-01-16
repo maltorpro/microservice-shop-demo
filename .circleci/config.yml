@@ -9,7 +9,7 @@ defaults: &defaults
     - image: circleci/openjdk:8-jdk
   environment:
       TERM: dumb
-      _JAVA_OPTIONS: "-Xmx512m"
+      _JAVA_OPTIONS: "-Xmx1024m"
 
 test_defaults: &test_defaults
   working_directory: ~/workspace 
@@ -21,13 +21,13 @@ test_defaults: &test_defaults
     - image: maltor/config-server
       environment:
         SPRING_PROFILES_ACTIVE: test
-        JAVA_OPTS: -Xmx128m
+        JAVA_OPTS: -Xmx128m -DcertificateCheck=false
       ports:
       - "8888:8888"      
     - image: maltor/discovery-server
       environment:
         SPRING_PROFILES_ACTIVE: default
-        JAVA_OPTS: -Xmx128m
+        JAVA_OPTS: -Xmx128m -DcertificateCheck=false
       ports:
       - "8761:8761"
     - image: postgres:10
@@ -42,7 +42,7 @@ test_defaults: &test_defaults
       _JAVA_OPTIONS: "-Xmx512m"
 
       
-cache_key : &cache_key v7-microservice-shop-demo-dependencies-{{ checksum "build.gradle" }}       
+cache_key : &cache_key v17-microservice-shop-demo-dependencies-{{ .Branch }}-{{ checksum "build.gradle" }}
   
 version: 2
 jobs:
@@ -63,7 +63,7 @@ jobs:
             - ~/.m2
           key: *cache_key
 
-      - run: gradle build -x test
+      - run: gradle build -DcertificateCheck=false -x test
            
       - persist_to_workspace:
           root: .
@@ -77,20 +77,20 @@ jobs:
           at: ~/workspace
       - restore_cache:
           key: *cache_key
-      - run: gradle asciidoctor    
+      - run: gradle asciidoctor -DcertificateCheck=false    
       - persist_to_workspace:
           root: .
           paths:
             - documentation  
     
   sonarqube:
-    <<: *test_defaults
+    <<: *defaults
     steps:
       - attach_workspace:
           at: ~/workspace
       - restore_cache:
           key: *cache_key    
-      - run: gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN
+      - run: gradle sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.login=$SONAR_LOGIN -x test
   
   test_product_service:
     <<: *test_defaults
@@ -103,7 +103,7 @@ jobs:
           name: Run tests 
           command: |
               cd product-service
-              gradle test
+              gradle test -DcertificateCheck=false
       - run:
           name: Save test results 
           command: |
@@ -131,7 +131,7 @@ jobs:
           name: Run tests 
           command: |
               cd recommendation-service
-              gradle test
+              gradle test -DcertificateCheck=false
       - run:
           name: Save test results 
           command: |
@@ -159,7 +159,7 @@ jobs:
           name: Run tests 
           command: |
               cd review-service
-              gradle test
+              gradle test -DcertificateCheck=false
       - run:
           name: Save test results 
           command: |
@@ -187,7 +187,7 @@ jobs:
           name: Run tests 
           command: |
               cd product-composite-service
-              gradle test
+              gradle test -DcertificateCheck=false
       - run:
           name: Save test results 
           command: |
@@ -223,6 +223,7 @@ jobs:
           name: Push Docker images
           command: |
             #TAG="0.1.${CIRCLE_BUILD_NUM}"
+            #TAG="CIRCLE_BRANCH"
             TAG="latest"
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             
