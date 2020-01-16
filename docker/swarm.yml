@@ -4,11 +4,13 @@ services:
   #######################################
   #####       manager1               ####
   #######################################
-    
+
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
       - "8080:8080"
+    environment:
+      CTX_ROOT: /visualizer
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
@@ -16,38 +18,38 @@ services:
         constraints: [node.role == manager]
     networks:
       - shopnet
-  
-  
+
+
   #######################################
   #####    infrastructure1           ####
   #######################################
-  
+
   shop-db:
     image: postgres:10
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]
     environment:
-        POSTGRES_USER: shop
-        POSTGRES_PASSWORD: shop
-        POSTGRES_DB: shop-db
-        MAX_CONNECTIONS: 500
+      POSTGRES_USER: shop
+      POSTGRES_PASSWORD: shop
+      POSTGRES_DB: shop-db
+      MAX_CONNECTIONS: 500
     ports:
-    - "5432:5432"
+      - "5432:5432"
     networks:
-    - shopnet  
-  
+      - shopnet
+
   rabbitmq:
     image: rabbitmq:3.6-management
     deploy:
       placement:
         constraints: [node.hostname == infrastructure1]
     ports:
-     - "15672:15672"
+      - "15672:15672"
     networks:
-     - shopnet  
-  
-  #server 
+      - shopnet
+
+  #server
   config-server:
     image: maltor/config-server
     environment:
@@ -60,26 +62,26 @@ services:
         limits:
           memory: 256M
     ports:
-     - "8888:8888"
+      - "8888:8888"
     networks:
-     - shopnet
-  
+      - shopnet
+
   discovery-server:
     image: maltor/discovery-server
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      CERTIFICATE_CHECK: 0    
+      CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == infrastructure1]    
+        constraints: [node.hostname == infrastructure1]
       resources:
         limits:
           memory: 256M
     ports:
-     - "8761:8761"
+      - "8761:8761"
     networks:
-     - shopnet
-      
+      - shopnet
+
   auth-server:
     image: maltor/auth-server
     environment:
@@ -87,15 +89,15 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == infrastructure1]    
+        constraints: [node.hostname == infrastructure1]
       resources:
         limits:
           memory: 128M
     ports:
-     - "9999:9999"
+      - "9999:9999"
     networks:
-     - shopnet
-       
+      - shopnet
+
   resource-server:
     image: maltor/resource-server
     environment:
@@ -103,14 +105,14 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == infrastructure1]    
+        constraints: [node.hostname == infrastructure1]
       resources:
-       limits:
-         memory: 128M
+        limits:
+          memory: 128M
     ports:
-     - "9090:9090"
+      - "9090:9090"
     networks:
-     - shopnet   
+      - shopnet
 
   edge-server:
     image: maltor/edge-server
@@ -119,20 +121,20 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == infrastructure1]    
+        constraints: [node.hostname == infrastructure1]
       resources:
         limits:
           memory: 256M
     ports:
-     - "8765:8765"
+      - "8765:8765"
     networks:
-     - shopnet
-     
-     
+      - shopnet
+
+
   #######################################
   #####         services1            ####
-  #######################################             
-  
+  #######################################
+
   product-composite-service:
     image: maltor/product-composite-service
     environment:
@@ -140,13 +142,13 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == services1] 
+        constraints: [node.hostname == services1]
       resources:
         limits:
           memory: 256M
     networks:
       - shopnet
-  
+
   product-service:
     image: maltor/product-service
     environment:
@@ -154,13 +156,13 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == services1] 
+        constraints: [node.hostname == services1]
       resources:
         limits:
           memory: 256M
     networks:
-    - shopnet   
-   
+      - shopnet
+
   recommendation-service:
     image: maltor/recommendation-service
     environment:
@@ -168,12 +170,12 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == services1] 
+        constraints: [node.hostname == services1]
       resources:
         limits:
           memory: 256M
     networks:
-     - shopnet
+      - shopnet
 
   review-service:
     image: maltor/review-service
@@ -182,18 +184,18 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == services1] 
+        constraints: [node.hostname == services1]
       resources:
         limits:
           memory: 256M
     networks:
-     - shopnet
-     
+      - shopnet
+
 
   #######################################
   #####    monitoring1               ####
   #######################################
-  
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
     environment:
@@ -201,25 +203,25 @@ services:
       - discovery.type=single-node
     deploy:
       placement:
-        constraints: [node.hostname == monitoring1]  
+        constraints: [node.hostname == monitoring1]
     ports:
-     - 9200:9200
-     - 9300:9300
+      - 9200:9200
+      - 9300:9300
     networks:
       - shopnet
-  
+
   kibana:
     image: docker.elastic.co/kibana/kibana:6.2.2
     deploy:
       placement:
         constraints: [node.hostname == monitoring1]
     ports:
-     - 5601:5601
+      - 5601:5601
     environment:
-     - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
     networks:
       - shopnet
-  
+
   logstash:
     image: docker.elastic.co/logstash/logstash:6.2.2
     deploy:
@@ -229,16 +231,16 @@ services:
         limits:
           memory: 256M
     ports:
-    - 12201:12201
-    - 5000:5000
+      - 12201:12201
+      - 5000:5000
     networks:
       - shopnet
     command: logstash -e 'input { tcp { port => 5000 codec => "json" } } output { elasticsearch { hosts => ["elasticsearch"] index => "micro-%{service}"} }'
- 
-  
-     
+
+
+
   #monitoring
-  
+
   turbine-server:
     image: maltor/turbine-server
     environment:
@@ -246,14 +248,14 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == monitoring1]    
+        constraints: [node.hostname == monitoring1]
       resources:
         limits:
           memory: 128M
     ports:
-       - "8989:8989"
+      - "8989:8989"
     networks:
-     - shopnet
+      - shopnet
 
   monitor-dashboard:
     image: maltor/monitor-dashboard
@@ -262,14 +264,14 @@ services:
       CERTIFICATE_CHECK: 0
     deploy:
       placement:
-        constraints: [node.hostname == monitoring1]    
+        constraints: [node.hostname == monitoring1]
       resources:
         limits:
           memory: 128M
     ports:
-     - "7979:7979"
+      - "7979:7979"
     networks:
-     - shopnet          
-      
+      - shopnet
+
 networks:
   shopnet:
